@@ -13,20 +13,22 @@ function Navbar() {
       <header className="navbar">
         <div className={!view ? "navbar-content-mobile" : "navbar-content"}>
           <img src={logo} />
-          {!view && (
+          {!view ? (
             <Burger
               opened={isOpened}
               onClick={() => setIsOpened(!isOpened)}
               title="Nav"
-              color="white"
+              color="black"
+              size="sm"
             />
+          ) : (
+            <ul>
+              <li>Home</li>
+              <li>Weddings</li>
+              <li>Catering</li>
+              <li>Contact</li>
+            </ul>
           )}
-          <ul>
-            <li>Home</li>
-            <li>Weddings</li>
-            <li>Catering</li>
-            <li>Contact</li>
-          </ul>
         </div>
       </header>
       <AppDrawer
