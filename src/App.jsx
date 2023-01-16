@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import ScrollTop from "./components/ScrollTop";
 import NoMatch from "./pages/NoMatch";
+import Catering from "./pages/Catering";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/catering" element={<Catering />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
         <Footer />

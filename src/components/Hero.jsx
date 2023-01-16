@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Button from "./Button";
 
@@ -15,7 +16,9 @@ function Hero() {
               Maneely's is a highly reputable wedding venue in South Windsor,
               CT.
             </p>
-            <Button name={"Get Started"} />
+            <Link to={"/contact"}>
+              <Button name={"Get Started"} />
+            </Link>
           </div>
         </div>
       </div>
