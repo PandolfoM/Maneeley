@@ -179,7 +179,8 @@ body {
 
 // Notice
 .notice {
-  padding: $spacing-xl 1rem;
+  padding: 0 1rem;
+  padding-top: $spacing-xl;
   color: $white;
   p {
     color: $white;
@@ -201,7 +202,8 @@ body {
 
 // Services
 .services {
-  padding: $spacing-xl 1rem;
+  padding: 0 1rem;
+  padding-top: $spacing-xl;
   color: $white;
 
   // https://codepen.io/hexagoncircle/pen/XWbWKwL?editors=1100
