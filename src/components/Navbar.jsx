@@ -18,7 +18,7 @@ function Navbar() {
               opened={isOpened}
               onClick={() => setIsOpened(!isOpened)}
               title="Nav"
-              color="black"
+              color="white"
               size="sm"
             />
           ) : (

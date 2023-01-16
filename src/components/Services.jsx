@@ -52,7 +52,7 @@ const cardData = [
 function Services() {
   return (
     <section className="services">
-      <h3>
+      <h3 className="separator">
         <hr />
         Services
         <hr />
