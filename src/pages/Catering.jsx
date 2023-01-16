@@ -18,7 +18,8 @@ function Catering() {
       <p>
         At Maneeley’s Catering, we offer menus for a variety of celebrations and
         events. If you are looking to have an event catered at your place of
-        business or to simply order lunch for your staff please view below.
+        business or to simply order lunch for your staff please view our menus
+        below.
       </p>
       <p>
         For any questions on our catering menu, please{" "}
