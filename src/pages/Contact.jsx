@@ -1,61 +1,90 @@
 import { Textarea, TextInput } from "@mantine/core";
-
+import { useForm, yupResolver } from "@mantine/form";
 import React from "react";
 import * as Yup from "yup";
 
 import Button from "../components/Button";
-import Form from "../components/Form";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
     .min(2, "Too Short")
     .max(50, "Too Long")
-    .required()
+    .required("Required")
     .label("First Name"),
   last: Yup.string()
     .min(2, "Too Short")
     .max(50, "Too Long")
-    .required()
+    .required("Required")
     .label("Last Name"),
-  email: Yup.string().email("Invalid email").required().label("Email"),
-  phone: Yup.number().max(10, "Too Long").label("Phone Number"),
-  message: Yup.string().min(10, "Too Short").required().label("Message"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Required")
+    .label("Email"),
+  phone: Yup.number().typeError("Invalid number").label("Phone Number"),
+  message: Yup.string()
+    .min(10, "Too Short")
+    .required("Required")
+    .label("Message"),
 });
 
 function Contact() {
+  const form = useForm({
+    initialValues: {
+      first: "",
+      last: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+
+    validate: yupResolver(validationSchema),
+  });
+
   return (
     <div className="contact">
-      {/* <h3 className="separator">
-        <hr />
-        Contact
-        <hr />
-      </h3> */}
-      <div className="contact-form">
-        <Form
-          initialValues={{
-            first: "",
-            last: "",
-            email: "",
-            phone: "",
-            message: "",
-          }}
-          validationSchema={validationSchema}>
-          <div className="form-name">
-            <TextInput variant="unstyled" label="First Name" withAsterisk />
-            <TextInput variant="unstyled" label="Last Name" withAsterisk />
-          </div>
-          <TextInput variant="unstyled" label="Email" withAsterisk />
-          <TextInput variant="unstyled" label="Phone" />
-          <Textarea
+      <form
+        onSubmit={form.onSubmit((values) => console.log(values))}
+        className="contact-form">
+        <div className="form-name">
+          <TextInput
             variant="unstyled"
-            label="Message"
+            name="first"
+            label="First Name"
             withAsterisk
-            minRows={5}
-            maxRows={5}
+            {...form.getInputProps("first")}
           />
-          <Button name={"Submit"} />
-        </Form>
-      </div>
+          <TextInput
+            variant="unstyled"
+            name="last"
+            label="Last Name"
+            withAsterisk
+            {...form.getInputProps("last")}
+          />
+        </div>
+        <TextInput
+          variant="unstyled"
+          name="email"
+          label="Email"
+          withAsterisk
+          {...form.getInputProps("email")}
+        />
+        <TextInput
+          variant="unstyled"
+          name="phone"
+          label="Phone"
+          {...form.getInputProps("phone")}
+        />
+        <Textarea
+          name="message"
+          variant="unstyled"
+          label="Message"
+          withAsterisk
+          minRows={5}
+          maxRows={5}
+          {...form.getInputProps("message")}
+        />
+        <Button name={"Submit"} type="submit" />
+      </form>
       <div className="contact-job">
         <h3 className="separator">
           <hr />
