@@ -86,18 +86,41 @@ function Contact() {
         />
         <Button name={"Submit"} type="submit" />
       </form>
-      <div className="contact-job">
-        <Separator title={"Employment"} />
-        <p>
-          We are always looking for the right people. Feel free to download and
-          fill out our{" "}
-          <a
-            href="http://maneeleys.com/wp-content/uploads/2015/05/Employment-Application.pdf"
-            target="_blank">
-            application for employment.
-          </a>
-        </p>
-      </div>
+      <aside className="contact-aside">
+        <div className="employment">
+          <Separator title={"Employment"} />
+          <p>
+            We are always looking for the right people. Feel free to download
+            and fill out our{" "}
+            <a
+              href="http://maneeleys.com/wp-content/uploads/2015/05/Employment-Application.pdf"
+              target="_blank">
+              application for employment.
+            </a>
+          </p>
+        </div>
+        <div className="socials">
+          <Separator title={"Socials"} />
+          <p>
+            Phone: <a href="tel:8605286622">(860) 528-6622</a>
+          </p>
+          <p>
+            Fax: <a href="tel:8602919362">(860) 291-9362</a>
+          </p>
+          <p>
+            Address:{" "}
+            <a href="https://goo.gl/maps/MdJ6XHXDynkjjzQj9" target="_blank">
+              65 Rye Street, South Windsor, CT 06074
+            </a>
+          </p>
+          <p>
+            Facebook:{" "}
+            <a href="https://www.facebook.com/Maneeleys" target="_blank">
+              Maneeley's Banquet and Catering
+            </a>
+          </p>
+        </div>
+      </aside>
     </div>
   );
 }

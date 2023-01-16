@@ -1,7 +1,6 @@
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faFax, faSquarePhone } from "@fortawesome/free-solid-svg-icons";
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { faPhone, faPrint } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ActionIcon } from "@mantine/core";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -12,13 +11,10 @@ function Footer() {
       <div className="footer-content">
         <div className="icons">
           <a href="tel:8605286622">
-            <FontAwesomeIcon icon={faSquarePhone} size="xl" title="Phone" />
-          </a>
-          <a href="tel:8602919362">
-            <FontAwesomeIcon icon={faFax} size="lg" title="Fax" />
+            <FontAwesomeIcon icon={faPhone} size="lg" title="Phone" />
           </a>
           <a href="https://www.facebook.com/Maneeleys" target="_blank">
-            <FontAwesomeIcon icon={faFacebook} size="lg" title="Facebook" />
+            <FontAwesomeIcon icon={faFacebookF} size="lg" title="Facebook" />
           </a>
         </div>
         <h6>Helpful Links</h6>

@@ -333,6 +333,10 @@ body {
       background-color: #2e2e2e80;
       border: 1px solid $dark;
     }
+
+    a {
+      background-image: linear-gradient(to bottom, #2a2a2a85, #000000ba);
+    }
   }
 }
 // About END
@@ -389,7 +393,11 @@ body {
       }
     }
   }
-  &-job {
+  &-aside {
+    .socials {
+      padding-top: $spacing-sm;
+    }
+
     a {
       background: linear-gradient(0deg, $primary 0%, $secondary 60%);
       -webkit-background-clip: text;
