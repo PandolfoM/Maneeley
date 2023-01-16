@@ -346,6 +346,33 @@ body {
       -webkit-text-fill-color: transparent;
     }
   }
+
+  &-menus {
+    max-width: 75%;
+    margin: auto;
+    padding-top: $spacing-sm;
+    .mantine-Accordion-chevron,
+    .mantine-Accordion-label {
+      color: $white;
+    }
+
+    .mantine-Accordion-content {
+      color: $light;
+    }
+
+    .mantine-Accordion-control {
+      &:hover {
+        background-color: #2e2e2e80;
+      }
+    }
+
+    .mantine-Accordion-item {
+      overflow: hidden;
+      &[data-active] {
+        background-color: #2e2e2e80;
+      }
+    }
+  }
 }
 // Catering END
 
