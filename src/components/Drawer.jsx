@@ -5,7 +5,7 @@ function AppDrawer({
   opened = false,
   setIsOpened,
   position = "right",
-  size = "sm",
+  size = "xs",
   children,
   ...otherProps
 }) {
