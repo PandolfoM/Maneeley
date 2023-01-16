@@ -1,5 +1,6 @@
-import { Button } from "@mantine/core";
 import React from "react";
+
+import AppButton from "./Button";
 
 function Hero() {
   return (
@@ -14,13 +15,7 @@ function Hero() {
               Maneely's is a highly reputable wedding venue in South Windsor,
               CT.
             </p>
-            <Button
-              variant="gradient"
-              gradient={{ from: "#b57d09", to: "#fdbb2d", deg: 360 }}
-              radius={"xl"}
-              uppercase>
-              Get Started
-            </Button>
+            <AppButton name={"Get Started"} />
           </div>
         </div>
       </div>

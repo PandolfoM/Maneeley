@@ -2,7 +2,7 @@ $primary: #b57d09;
 $black: #000000;
 $white: #fffcf1;
 $light: #bbb;
-$dark: #555555;
+$dark: #2e2e2e;
 $danger: #f53434;
 $success: #5ecd74;
 $font-hero: 3rem;
@@ -21,7 +21,7 @@ $mobile: 600px;
 html,
 body {
   box-sizing: border-box;
-  background-image: linear-gradient(to top, #2a2a2aa0, #000000ba);
+  background-image: linear-gradient(to top, #2a2a2a8c, #000000ba);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -311,6 +311,60 @@ body {
   }
 }
 // Services END
+
+// Contact
+.contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5rem;
+  padding: 0 1rem;
+  padding-top: $spacing-xl;
+  color: $white;
+  &-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: $white;
+    .form-name {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1rem;
+      div {
+        width: 100%;
+      }
+    }
+
+    .mantine-InputWrapper-label {
+      color: $white;
+    }
+
+    textarea,
+    input {
+      color: $white;
+      border: 1px solid $light;
+      background-color: $dark;
+      padding: 0.5rem;
+
+      &:focus,
+      &:focus-within {
+        border-width: 1px;
+        border-style: solid;
+        border-image: linear-gradient(0deg, #b57d09 0%, #fdbb2d 60%) 1;
+      }
+    }
+  }
+  &-job {
+    a {
+      background: linear-gradient(0deg, #b57d09 0%, #fdbb2d 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+// Contact END
 
 // Footer
 .footer {
