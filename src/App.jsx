@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -6,12 +7,16 @@ import Home from "./pages/Home";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Home />
-      <Footer />
-      <ScrollTop />
-    </>
+    <Router>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+        </Routes>
+        <Footer />
+        <ScrollTop />
+      </div>
+    </Router>
   );
 }
 

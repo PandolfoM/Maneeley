@@ -335,11 +335,8 @@ body {
     padding-bottom: $spacing-sm;
 
     .icons {
-      a {
-        color: inherit;
-        &:nth-child(even) {
-          padding: 0 0.8rem;
-        }
+      a:nth-child(even) {
+        padding: 0 0.8rem;
       }
     }
 
@@ -441,5 +438,10 @@ body {
       transition-duration: 0s;
     }
   }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 // Utilities END

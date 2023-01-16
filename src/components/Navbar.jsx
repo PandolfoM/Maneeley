@@ -1,6 +1,7 @@
 import { Burger } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/maneeley-logo.png";
 import AppDrawer from "./Drawer";
 
@@ -23,10 +24,18 @@ function Navbar() {
             />
           ) : (
             <ul>
-              <li>Home</li>
-              <li>Weddings</li>
-              <li>Catering</li>
-              <li>Contact</li>
+              <li>
+                <Link to={"/"}>Home</Link>
+              </li>
+              <li>
+                <Link to={"/weddings"}>Weddings</Link>
+              </li>
+              <li>
+                <Link to={"/catering"}>Catering</Link>
+              </li>
+              <li>
+                <Link to={"/contact"}>Contact</Link>
+              </li>
             </ul>
           )}
         </div>
