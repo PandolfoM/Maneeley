@@ -1,6 +1,6 @@
 import React from "react";
 
-import AppButton from "./Button";
+import Button from "./Button";
 
 function Hero() {
   return (
@@ -15,7 +15,7 @@ function Hero() {
               Maneely's is a highly reputable wedding venue in South Windsor,
               CT.
             </p>
-            <AppButton name={"Get Started"} />
+            <Button name={"Get Started"} />
           </div>
         </div>
       </div>

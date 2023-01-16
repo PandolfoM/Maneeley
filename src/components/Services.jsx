@@ -1,5 +1,5 @@
 import React from "react";
-import AppCard from "../components/AppCard";
+import Card from "../components/Card";
 import wedding from "../assets/wedding.jpg";
 import banquet from "../assets/banquet.jpg";
 import catering from "../assets/catering.jpg";
@@ -59,7 +59,7 @@ function Services() {
       </h3>
       <div className="services-cards">
         {cardData.map((i) => (
-          <AppCard
+          <Card
             key={i.id}
             title={i.title}
             subtitle={i.subtite}
