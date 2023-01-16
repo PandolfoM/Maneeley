@@ -1,6 +1,9 @@
 import { Accordion, createStyles } from "@mantine/core";
 import React from "react";
 import { Link } from "react-router-dom";
+import CateringMenus from "../components/CateringMenus";
+import CorpMenus from "../components/CorpMenus";
+import HolidayMenus from "../components/HolidayMenus";
 import Separator from "../components/Separator";
 
 function Catering() {
@@ -32,15 +35,21 @@ function Catering() {
         <Accordion variant="filled">
           <Accordion.Item value="cateringMenus">
             <Accordion.Control>Catering Menus</Accordion.Control>
-            <Accordion.Panel>Catering Menus Data</Accordion.Panel>
+            <Accordion.Panel>
+              <CateringMenus />
+            </Accordion.Panel>
           </Accordion.Item>
           <Accordion.Item value="corporateMenus">
             <Accordion.Control>Corporate Catering Menus</Accordion.Control>
-            <Accordion.Panel>Corporate Catering Menus Data</Accordion.Panel>
+            <Accordion.Panel>
+              <CorpMenus />
+            </Accordion.Panel>
           </Accordion.Item>
           <Accordion.Item value="holidayMenus">
             <Accordion.Control>Holiday Catering Menus</Accordion.Control>
-            <Accordion.Panel>Holiday Catering Menus Data</Accordion.Panel>
+            <Accordion.Panel>
+              <HolidayMenus />
+            </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
       </div>
