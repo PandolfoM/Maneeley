@@ -334,12 +334,25 @@ body {
 
 // Catering
 .catering {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5rem;
   padding: 0 1rem;
   padding-top: $spacing-xl;
   color: $white;
+  font-weight: bold;
+
+  @media screen and (min-width: $mobile) {
+    flex-wrap: nowrap;
+  }
+
   p {
     font-size: $font-title;
     font-weight: bold;
+    font-size: 0.8rem;
+    line-height: 1rem;
     a {
       background: linear-gradient(0deg, $primary 0%, $secondary 60%);
       -webkit-background-clip: text;
@@ -348,9 +361,13 @@ body {
   }
 
   &-menus {
-    max-width: 75%;
-    margin: auto;
-    padding-top: $spacing-sm;
+    width: 100%;
+
+    @media screen and (min-width: $mobile) {
+      min-width: 30rem;
+      max-width: 30rem;
+    }
+
     .mantine-Accordion-chevron,
     .mantine-Accordion-label {
       color: $white;
@@ -441,6 +458,7 @@ body {
     }
   }
   &-aside {
+    max-width: 30rem;
     .socials {
       padding-top: $spacing-sm;
     }

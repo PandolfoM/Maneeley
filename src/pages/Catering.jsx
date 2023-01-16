@@ -8,7 +8,6 @@ import Separator from "../components/Separator";
 function Catering() {
   return (
     <div className="catering">
-      <Separator title={"Catering"} />
       <div>
         <p>
           Whatever the occasion, Maneeley’s Catering executes each event with
@@ -30,7 +29,8 @@ function Catering() {
           <Link to="/contact">contact us today.</Link>
         </p>
       </div>
-      <div className="catering-menus">
+      <aside className="catering-menus">
+        <Separator title={"Menus"} />
         <Accordion
           variant="filled"
           defaultValue="cateringMenus"
@@ -54,7 +54,7 @@ function Catering() {
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
-      </div>
+      </aside>
     </div>
   );
 }
