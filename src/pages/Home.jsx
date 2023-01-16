@@ -4,6 +4,8 @@ import AppCard from "../components/AppCard";
 import wedding from "../assets/wedding.jpg";
 import banquet from "../assets/banquet.jpg";
 import catering from "../assets/catering.jpg";
+import hero from "../assets/hero.jpg";
+import svg from "../assets/svg.svg";
 
 const cardData = [
   {
@@ -57,8 +59,12 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="services">
-        <h3>Services</h3>
+      <section className="services" style={{ backgroundImage: `url(${svg})` }}>
+        <h3>
+          <hr />
+          Services
+          <hr />
+        </h3>
         <div className="services-cards">
           {cardData.map((i) => (
             <AppCard
