@@ -318,10 +318,16 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 5rem;
   padding: 0 1rem;
   padding-top: $spacing-xl;
   color: $white;
+
+  @media screen and (min-width: $mobile) {
+    flex-wrap: nowrap;
+  }
+
   &-form {
     width: 100%;
     display: flex;
