@@ -21,7 +21,7 @@ $mobile: 600px;
 html,
 body {
   box-sizing: border-box;
-  background-image: linear-gradient(to top, #2a2a2a85, #000000ba);
+  background-image: linear-gradient(to top, #2a2a2aa0, #000000ba);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -334,9 +334,12 @@ body {
     padding-top: $spacing-sm;
     padding-bottom: $spacing-sm;
 
-    .footer-icons {
-      svg:nth-child(even) {
-        padding: 0 0.8rem;
+    .icons {
+      a {
+        color: inherit;
+        &:nth-child(even) {
+          padding: 0 0.8rem;
+        }
       }
     }
 
