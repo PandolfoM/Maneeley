@@ -1,10 +1,9 @@
 import React from "react";
 import AppCard from "../components/AppCard";
-import svg from "../assets/svg.svg";
-import Hero from "../components/Hero";
 import wedding from "../assets/wedding.jpg";
 import banquet from "../assets/banquet.jpg";
 import catering from "../assets/catering.jpg";
+import venue from "../assets/venue.jpg";
 
 const cardData = [
   {
@@ -31,11 +30,19 @@ const cardData = [
     button: "Learn More",
     image: catering,
   },
+  {
+    id: 3,
+    title: "Grand Lodge",
+    subtite:
+      "The Grand Lodge is nestled in five acres of woods in South Windsor, Connecticut, only minutes away from Hartford. It offers an elegant setting – and delectable cuisine for your wedding, banquet or other special event.",
+    button: "Learn More",
+    image: venue,
+  },
 ];
 
 function Services() {
   return (
-    <section className="services" style={{ backgroundImage: `url(${svg})` }}>
+    <section className="services">
       <h3>
         <hr />
         Services

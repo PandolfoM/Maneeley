@@ -20,7 +20,11 @@ $mobile: 600px;
 html,
 body {
   box-sizing: border-box;
-  background-color: $white;
+  background-image: linear-gradient(to top, #2a2a2a85, #000000ba);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: $black;
 }
 
 // Navigation
@@ -172,10 +176,6 @@ body {
 }
 
 .services {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: $black;
   padding: $spacing-xl 1rem;
   color: $white;
   position: relative;
@@ -198,7 +198,7 @@ body {
   &-cards {
     display: grid;
     gap: 1rem;
-    max-width: 850px;
+    max-width: 1024px;
     margin: 0 auto;
 
     @media screen and (min-width: $mobile) {
@@ -206,7 +206,7 @@ body {
     }
 
     @media screen and (min-width: $tablet) {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .card {
