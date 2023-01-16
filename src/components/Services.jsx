@@ -5,6 +5,7 @@ import banquet from "../assets/banquet.jpg";
 import catering from "../assets/catering.jpg";
 import venue from "../assets/venue.jpg";
 import brochure from "../assets/brochure.jpg";
+import Separator from "./Separator";
 
 const cardData = [
   {
@@ -52,11 +53,7 @@ const cardData = [
 function Services() {
   return (
     <section className="services">
-      <h3 className="separator">
-        <hr />
-        Services
-        <hr />
-      </h3>
+      <Separator title={"Services"} />
       <div className="services-cards">
         {cardData.map((i) => (
           <Card

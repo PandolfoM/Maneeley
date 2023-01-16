@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import "./App.scss";
+import About from "./components/About";
+import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import ScrollTop from "./components/ScrollTop";
-import Contact from "./pages/Contact";
-import Home from "./pages/Home";
 
 function App() {
   return (

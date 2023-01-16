@@ -1,13 +1,10 @@
 import React from "react";
+import Separator from "./Separator";
 
 function Notice() {
   return (
     <div className="notice">
-      <h3 className="separator">
-        <hr />
-        Notice
-        <hr />
-      </h3>
+      <Separator title={"Notice"} />
       <p>
         Due to rising increase in food, beverage & labor cost, our pricing has
         increased and may not match the pricing you may see on our website.

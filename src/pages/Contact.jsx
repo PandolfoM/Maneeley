@@ -4,6 +4,7 @@ import React from "react";
 import * as Yup from "yup";
 
 import Button from "../components/Button";
+import Separator from "../components/Separator";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -86,11 +87,7 @@ function Contact() {
         <Button name={"Submit"} type="submit" />
       </form>
       <div className="contact-job">
-        <h3 className="separator">
-          <hr />
-          Employment
-          <hr />
-        </h3>
+        <Separator title={"Employment"} />
         <p>
           We are always looking for the right people. Feel free to download and
           fill out our{" "}

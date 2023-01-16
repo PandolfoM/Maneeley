@@ -15,26 +15,24 @@ function ScrollTop() {
   const [scroll, scrollTo] = useWindowScroll();
   return (
     <>
-      {scroll.y > 700 && (
-        <Transition
-          mounted={scroll.y > 800}
-          transition={scaleCustom}
-          duration={600}
-          timingFunction="ease">
-          {(styles) => (
-            <ActionIcon
-              style={styles}
-              className="scrollTop"
-              size={"xl"}
-              radius="xl"
-              variant="gradient"
-              gradient={{ from: "#b57d09", to: "#fdbb2d", deg: 360 }}
-              onClick={() => scrollTo({ y: 0 })}>
-              <FontAwesomeIcon icon={faChevronUp} size="xl" color="white" />
-            </ActionIcon>
-          )}
-        </Transition>
-      )}
+      <Transition
+        mounted={scroll.y > 800}
+        transition={scaleCustom}
+        duration={400}
+        timingFunction="ease">
+        {(styles) => (
+          <ActionIcon
+            style={styles}
+            className="scrollTop"
+            size={"xl"}
+            radius="xl"
+            variant="gradient"
+            gradient={{ from: "#b57d09", to: "#fdbb2d", deg: 360 }}
+            onClick={() => scrollTo({ y: 0 })}>
+            <FontAwesomeIcon icon={faChevronUp} size="xl" color="white" />
+          </ActionIcon>
+        )}
+      </Transition>
     </>
   );
 }

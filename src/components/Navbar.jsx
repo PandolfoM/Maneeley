@@ -28,9 +28,6 @@ function Navbar() {
                 <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <Link to={"/about"}>About</Link>
-              </li>
-              <li>
                 <Link to={"/catering"}>Catering</Link>
               </li>
               <li>
@@ -47,10 +44,15 @@ function Navbar() {
         title="Maneeley's"
         padding="xs">
         <ul>
-          <li>Home</li>
-          <li>Weddings</li>
-          <li>Catering</li>
-          <li>Contact</li>
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link to={"/catering"}>Catering</Link>
+          </li>
+          <li>
+            <Link to={"/contact"}>Contact</Link>
+          </li>
         </ul>
       </AppDrawer>
     </>
