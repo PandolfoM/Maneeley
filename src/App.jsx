@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import ScrollTop from "./components/ScrollTop";
+import NoMatch from "./pages/NoMatch";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/contact" element={<Contact />} />
+          <Route path="*" element={<NoMatch />} />
         </Routes>
         <Footer />
         <ScrollTop />

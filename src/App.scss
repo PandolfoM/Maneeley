@@ -539,4 +539,39 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.NoMatch {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  box-sizing: border-box;
+
+  &-content {
+    color: $white;
+    font-size: $font-hero;
+    font-weight: bold;
+
+    h1 {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      color: $dark;
+      font-size: $font-section;
+      margin: 0;
+    }
+
+    a {
+      font-size: $font-title;
+      background: $primary;
+      background: linear-gradient(0deg, $primary 0%, $secondary 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0px 0px 15px #000000c1);
+    }
+  }
+}
 // Utilities END
