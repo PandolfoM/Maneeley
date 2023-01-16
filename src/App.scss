@@ -359,6 +359,18 @@ body {
 }
 // Footer END
 
+// Scroll Top
+.scrollTop {
+  position: fixed;
+  background-color: $primary;
+  // width: 20px;
+  // height: 20px;
+  right: 0;
+  bottom: 0;
+  margin: 1rem;
+}
+// Scroll Top END
+
 // Utilities
 .spacer {
   margin-top: $spacing-xl;

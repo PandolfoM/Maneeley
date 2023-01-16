@@ -1,6 +1,7 @@
 import "./App.scss";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import ScrollTop from "./components/ScrollTop";
 import Home from "./pages/Home";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <Navbar />
       <Home />
       <Footer />
+      <ScrollTop />
     </>
   );
 }
