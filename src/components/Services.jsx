@@ -4,6 +4,7 @@ import wedding from "../assets/wedding.jpg";
 import banquet from "../assets/banquet.jpg";
 import catering from "../assets/catering.jpg";
 import venue from "../assets/venue.jpg";
+import brochure from "../assets/brochure.jpg";
 
 const cardData = [
   {
@@ -26,7 +27,7 @@ const cardData = [
     id: 2,
     title: "Catering",
     subtite:
-      "Maneeley’s is dedicated to making your next working breakfast, lunch, dinner or business meeting a success. Our team of sales professionals will assist you in planning your special menu. Maneeley’s has been providing catering services for over 25 years for many of the most prominent and successful companies in Connecticut.",
+      "Maneeley’s is dedicated to making your next working breakfast, lunch, dinner or business meeting a success. Our team of sales professionals will assist you in planning your special menu",
     button: "Learn More",
     image: catering,
   },
@@ -37,6 +38,14 @@ const cardData = [
       "The Grand Lodge is nestled in five acres of woods in South Windsor, Connecticut, only minutes away from Hartford. It offers an elegant setting – and delectable cuisine for your wedding, banquet or other special event.",
     button: "Learn More",
     image: venue,
+  },
+  {
+    id: 4,
+    title: "Brochure",
+    subtite:
+      "Our 2020 Bridal Brochure showcases photos of our facility, wedding package details, a list of our preferred vendors and much more!",
+    button: "View Now",
+    image: brochure,
   },
 ];
 
