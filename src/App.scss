@@ -79,8 +79,8 @@ body {
 }
 // Navigation END
 
-// Home
-.home {
+// Hero
+.hero {
   height: 100vh;
   display: flex;
   justify-content: flex-start;
@@ -92,8 +92,6 @@ body {
     min-height: 300px;
     background-image: linear-gradient(to bottom, #2a2a2a85, #000000ba),
       url("./assets/hero.jpg");
-    // background-image: linear-gradient(to bottom, #55555585, #000000ba),
-    //   url("./assets/hero.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -103,15 +101,22 @@ body {
     display: flex;
     align-items: center;
     .landing {
-      @media screen and (min-width: $tablet) {
+      display: flex;
+      justify-content: center;
+      @media screen and (min-width: $mobile) {
         display: flex;
         justify-content: space-between;
+        padding-left: 2rem;
       }
-      padding-left: 2rem;
+
       div {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        @media screen and (min-width: $mobile) {
+          align-items: flex-start;
+        }
+
         h1 {
           font-size: $font-hero;
           font-weight: 900;
@@ -133,6 +138,10 @@ body {
           font-size: $font-title;
           font-weight: 700;
           color: $light;
+          text-align: center;
+          @media screen and (min-width: $mobile) {
+            text-align: left;
+          }
         }
 
         button {
@@ -167,9 +176,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-color: $black;
-  padding-top: $spacing-xl;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: $spacing-xl 1rem;
   color: $white;
   position: relative;
   h3 {
@@ -277,7 +284,6 @@ body {
         }
 
         .title {
-          // line-height: 0rem;
           font-size: $font-title;
           font-weight: bold;
         }
@@ -291,7 +297,7 @@ body {
     }
   }
 }
-// Home END
+// Hero END
 
 // Footer
 .footer {
