@@ -1,24 +1,39 @@
-import React from "react";
+import { Loader } from "@mantine/core";
+import { doc, onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { db } from "../../firebase";
 
-function HolidayMenus() {
+function CorpMenus() {
+  const [menus, setMenus] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "menus", "holiday"), (doc) => {
+      setMenus(doc.data().holiday);
+      setLoading(false);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
   return (
     <div className="cateringMenus">
-      <div className="cateringMenus-item">
-        <a
-          href="https://maneeleys.com/wp-content/uploads/2022/10/2022-Holiday-Corp-Catering.pdf"
-          target="_blank">
-          Holiday Corporate Catering Menu
-        </a>
-      </div>
-      <div className="cateringMenus-item">
-        <a
-          href="https://maneeleys.com/wp-content/uploads/2022/12/2022-Express-Holiday-Catering-Pick-up-and-enhancements-002.pdf"
-          target="_blank">
-          Holiday Catering Menu
-        </a>
-      </div>
+      {loading && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Loader />
+        </div>
+      )}
+      {menus.map((i) => (
+        <div key={i.link} className="cateringMenus-item">
+          <a href={i.link} target="_blank">
+            {i.name}
+          </a>
+        </div>
+      ))}
     </div>
   );
 }
 
-export default HolidayMenus;
+export default CorpMenus;

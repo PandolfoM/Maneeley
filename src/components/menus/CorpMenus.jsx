@@ -1,36 +1,37 @@
-import React from "react";
+import { Loader } from "@mantine/core";
+import { doc, onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { db } from "../../firebase";
 
 function CorpMenus() {
+  const [menus, setMenus] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "menus", "corporate"), (doc) => {
+      setMenus(doc.data().corporate);
+      setLoading(false);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
   return (
     <div className="cateringMenus">
-      <div className="cateringMenus-item">
-        <a
-          href="https://maneeleys.com/wp-content/uploads/2021/11/2021-Corporate-Breakfast-11.11.21.pdf"
-          target="_blank">
-          Corporate Breakfast Menu
-        </a>
-      </div>
-      <div className="cateringMenus-item">
-        <a
-          href="https://maneeleys.com/wp-content/uploads/2021/02/2021-Corporate-Hot-Lunch.pdf"
-          target="_blank">
-          Corporate Hot Lunch Menu
-        </a>
-      </div>
-      <div className="cateringMenus-item">
-        <a
-          href="https://maneeleys.com/wp-content/uploads/2021/04/2021-Power-Lunch-Menu.pdf"
-          target="_blank">
-          2021 Power Lunch Menu
-        </a>
-      </div>
-      <div className="cateringMenus-item">
-        <a
-          href="https://maneeleys.com/wp-content/uploads/2021/02/Boxed-Lunch.pdf"
-          target="_blank">
-          Boxed Lunch Menu
-        </a>
-      </div>
+      {loading && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Loader />
+        </div>
+      )}
+      {menus.map((i) => (
+        <div key={i.link} className="cateringMenus-item">
+          <a href={i.link} target="_blank">
+            {i.name}
+          </a>
+        </div>
+      ))}
     </div>
   );
 }
