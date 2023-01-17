@@ -1,14 +1,7 @@
 import { Accordion, createStyles } from "@mantine/core";
-import {
-  collection,
-  doc,
-  getDocs,
-  onSnapshot,
-  query,
-} from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { CateringMenus, CorpMenus, HolidayMenus } from "../components/menus";
 
 import Separator from "../components/Separator";
 import { db } from "../firebase";
@@ -31,13 +24,6 @@ function Catering() {
       unsub();
     };
   }, []);
-
-  useEffect(() => {
-    console.log(menus);
-    menus.map((i) => {
-      console.log(i);
-    });
-  }, [menus]);
 
   return (
     <div className="catering">
