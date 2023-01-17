@@ -13,7 +13,7 @@ import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <Router basename="/Maneeley">
+    <Router basename="/Maneeley/">
       <div>
         <Navbar />
         <Routes>
