@@ -1,11 +1,44 @@
 import { Accordion, createStyles } from "@mantine/core";
-import React from "react";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CateringMenus, CorpMenus, HolidayMenus } from "../components/menus";
 
 import Separator from "../components/Separator";
+import { db } from "../firebase";
 
 function Catering() {
+  const [menus, setMenus] = useState([]);
+
+  useEffect(() => {
+    const unsub = async () => {
+      setMenus([]);
+      const q = query(collection(db, "menus"));
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc) => {
+        setMenus((current) => [...current, doc.data()]);
+      });
+    };
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(menus);
+    menus.map((i) => {
+      console.log(i);
+    });
+  }, [menus]);
+
   return (
     <div className="catering">
       <div>
@@ -31,17 +64,24 @@ function Catering() {
       </div>
       <aside className="catering-menus">
         <Separator title={"Menus"} />
-        <Accordion
-          variant="filled"
-          defaultValue="cateringMenus"
-          transitionDuration={300}>
-          <Accordion.Item value="cateringMenus">
-            <Accordion.Control>Catering Menus</Accordion.Control>
-            <Accordion.Panel>
-              <CateringMenus />
-            </Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="corporateMenus">
+        <Accordion variant="filled" transitionDuration={300}>
+          {menus.map((m) => (
+            <Accordion.Item value={m.name} key={m.id}>
+              <Accordion.Control>{m.name} Menus</Accordion.Control>
+              <Accordion.Panel>
+                <div className="cateringMenus">
+                  {m.items.map((i) => (
+                    <div key={i.link} className="cateringMenus-item">
+                      <a href={i.link} target="_blank">
+                        {i.name}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </Accordion.Panel>
+            </Accordion.Item>
+          ))}
+          {/* <Accordion.Item value="corporateMenus">
             <Accordion.Control>Corporate Catering Menus</Accordion.Control>
             <Accordion.Panel>
               <CorpMenus />
@@ -52,7 +92,7 @@ function Catering() {
             <Accordion.Panel>
               <HolidayMenus />
             </Accordion.Panel>
-          </Accordion.Item>
+          </Accordion.Item> */}
         </Accordion>
       </aside>
     </div>
