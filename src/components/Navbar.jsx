@@ -106,6 +106,18 @@ function Navbar() {
               Contact
             </NavLink>
           </li>
+          {currentUser && (
+            <li>
+              <NavLink
+                to="/dashboard"
+                onClick={() => setIsOpened(false)}
+                className={({ isActive }) =>
+                  isActive ? "activeLink" : undefined
+                }>
+                Dashboard
+              </NavLink>
+            </li>
+          )}
         </ul>
       </Drawer>
     </>
