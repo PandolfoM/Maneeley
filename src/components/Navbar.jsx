@@ -1,12 +1,14 @@
 import { Burger } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import logo from "../assets/maneeley-logo.png";
+import { AuthContext } from "../auth/context";
 import Drawer from "./Drawer";
 
 function Navbar() {
+  const { currentUser } = useContext(AuthContext);
   const [isOpened, setIsOpened] = useState(false);
   const view = useMediaQuery("(min-width: 900px)");
 
@@ -52,6 +54,17 @@ function Navbar() {
                   Contact
                 </NavLink>
               </li>
+              {currentUser && (
+                <li>
+                  <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                      isActive ? "activeLink" : undefined
+                    }>
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
             </ul>
           )}
         </div>

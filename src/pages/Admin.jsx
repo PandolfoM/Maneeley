@@ -1,9 +1,10 @@
 import { PasswordInput, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { AuthContext } from "../auth/context";
 
 import Button from "../components/Button";
 import Page from "../components/Page";
@@ -19,6 +20,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function Admin() {
+  const { setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const form = useForm({
     initialValues: {
@@ -29,9 +31,10 @@ function Admin() {
     validate: yupResolver(validationSchema),
   });
 
-  const handleSubmit = async ({ email, password }) => {
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+  const handleSubmit = ({ email, password }) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        setCurrentUser(user.user);
         navigate("/dashboard");
       })
       .catch((e) => {
@@ -41,7 +44,7 @@ function Admin() {
 
   return (
     <Page>
-      <Separator title={"Admin Panel"} />
+      <Separator title={"Admin Login"} />
       <form
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className="contact-form">
