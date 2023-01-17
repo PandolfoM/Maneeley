@@ -1,7 +1,7 @@
+import * as Yup from "yup";
 import { Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React from "react";
-import * as Yup from "yup";
 
 import Button from "../components/Button";
 import Separator from "../components/Separator";
