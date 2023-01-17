@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar";
 import ScrollTop from "./components/ScrollTop";
 import NoMatch from "./pages/NoMatch";
 import Catering from "./pages/Catering";
+import Admin from "./pages/Admin";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/catering" element={<Catering />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
         <Footer />
