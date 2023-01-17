@@ -11,7 +11,7 @@ import Catering from "./pages/Catering";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Maneeley">
       <div>
         <Navbar />
         <Routes>
