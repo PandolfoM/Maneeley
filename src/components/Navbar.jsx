@@ -1,7 +1,7 @@
 import { Burger } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import logo from "../assets/maneeley-logo.png";
 import Drawer from "./Drawer";
@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <>
       <header className="navbar">
-        <div className={!view ? "navbar-content-mobile" : "navbar-content"}>
+        <div className={"navbar-content"}>
           <img src={logo} />
           {!view ? (
             <Burger
@@ -26,13 +26,31 @@ function Navbar() {
           ) : (
             <ul>
               <li>
-                <Link to={"/"}>Home</Link>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "activeLink" : undefined
+                  }>
+                  Home
+                </NavLink>
               </li>
               <li>
-                <Link to={"/catering"}>Catering</Link>
+                <NavLink
+                  to="/catering"
+                  className={({ isActive }) =>
+                    isActive ? "activeLink" : undefined
+                  }>
+                  Catering
+                </NavLink>
               </li>
               <li>
-                <Link to={"/contact"}>Contact</Link>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive ? "activeLink" : undefined
+                  }>
+                  Contact
+                </NavLink>
               </li>
             </ul>
           )}
@@ -46,19 +64,34 @@ function Navbar() {
         padding="xs">
         <ul>
           <li>
-            <Link to={"/"} onClick={() => setIsOpened(false)}>
+            <NavLink
+              to={"/"}
+              onClick={() => setIsOpened(false)}
+              className={({ isActive }) =>
+                isActive ? "activeLink" : undefined
+              }>
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to={"/catering"} onClick={() => setIsOpened(false)}>
+            <NavLink
+              to={"/catering"}
+              onClick={() => setIsOpened(false)}
+              className={({ isActive }) =>
+                isActive ? "activeLink" : undefined
+              }>
               Catering
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to={"/contact"} onClick={() => setIsOpened(false)}>
+            <NavLink
+              to={"/contact"}
+              onClick={() => setIsOpened(false)}
+              className={({ isActive }) =>
+                isActive ? "activeLink" : undefined
+              }>
               Contact
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </Drawer>

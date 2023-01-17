@@ -43,33 +43,34 @@ body {
   &-content {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    @media screen and (min-width: $tablet) {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
     img {
-      width: 7em;
+      width: 5rem;
+      @media screen and (min-width: $mobile) {
+        width: 7rem;
+      }
     }
     ul {
       padding: 0;
       display: flex;
+
       li {
         list-style: none;
         padding: 0 0.5rem;
         font-weight: bold;
+
+        &:hover {
+          color: $light;
+        }
       }
       li:first-of-type {
         padding-left: 0;
       }
-    }
-  }
-
-  &-content-mobile {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem;
-
-    img {
-      width: 10rem;
-      height: auto;
     }
   }
 }
@@ -646,5 +647,13 @@ a {
       filter: drop-shadow(0px 0px 15px #000000c1);
     }
   }
+}
+
+.activeLink {
+  color: red;
+  background: $primary;
+  background: linear-gradient(0deg, $primary 0%, $secondary 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 // Utilities END
