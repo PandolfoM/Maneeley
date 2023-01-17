@@ -432,7 +432,7 @@ body {
   }
 
   &-form {
-    width: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -489,6 +489,36 @@ body {
   }
 }
 // Contact END
+
+// Dashboard
+.dashboard {
+  color: $white;
+  padding: 0 1rem;
+  padding-top: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  &-nav {
+    gap: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 2px solid $dark;
+    padding-bottom: 1rem;
+    width: 100%;
+  }
+
+  &-content {
+    background-color: dodgerblue;
+  }
+
+  @media screen and (min-width: $mobile) {
+    flex-wrap: nowrap;
+  }
+}
+// Dashboard END
 
 // Footer
 .footer {
@@ -660,7 +690,6 @@ a {
 }
 
 .activeLink {
-  color: red;
   background: $primary;
   background: linear-gradient(0deg, $primary 0%, $secondary 60%);
   -webkit-background-clip: text;
