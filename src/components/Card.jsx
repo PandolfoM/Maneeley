@@ -1,8 +1,11 @@
 import { Box } from "@mantine/core";
 import React from "react";
+import { Link } from "react-router-dom";
 import AppButton from "./Button";
 
-function AppCard({ title, subtitle, button, image }) {
+function AppCard({ title, subtitle, button, image, route }) {
+  const link = route.includes("http");
+
   return (
     // https://codepen.io/hexagoncircle/pen/XWbWKwL?editors=1100
     <Box
@@ -11,7 +14,15 @@ function AppCard({ title, subtitle, button, image }) {
       <div className="card-content">
         <h4 className="title">{title}</h4>
         <p className="subtitle">{subtitle}</p>
-        <AppButton className="btn" name={button} />
+        {link ? (
+          <a href={route} target="_blank">
+            <AppButton className="btn" name={button} />
+          </a>
+        ) : (
+          <Link to={route}>
+            <AppButton className="btn" name={button} />
+          </Link>
+        )}
       </div>
     </Box>
   );

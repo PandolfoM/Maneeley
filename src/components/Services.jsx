@@ -15,6 +15,7 @@ const cardData = [
       "We invite you to arrange a consultation and tour our Grand Lodge and to consider one of our beautifully-landscaped ceremony sites as a setting for exchanging your vows. We have a full complement of wedding services that will help you with the details of planning your day.",
     button: "Learn More",
     image: wedding,
+    route: "/contact",
   },
   {
     id: 1,
@@ -23,6 +24,7 @@ const cardData = [
       "Consider the Grand Lodge for all celebrations: Sweet 16 ~ Quinceanera’s ~ Birthdays ~ Anniversary’s ~ Reunions ~ Showers ~ as well as all Social and Corporate Events.",
     button: "Learn More",
     image: banquet,
+    route: "/contact",
   },
   {
     id: 2,
@@ -31,6 +33,7 @@ const cardData = [
       "Maneeley’s is dedicated to making your next working breakfast, lunch, dinner or business meeting a success. Our team of sales professionals will assist you in planning your special menu",
     button: "Learn More",
     image: catering,
+    route: "/catering",
   },
   {
     id: 3,
@@ -39,6 +42,7 @@ const cardData = [
       "The Grand Lodge is nestled in five acres of woods in South Windsor, Connecticut, only minutes away from Hartford. It offers an elegant setting – and delectable cuisine for your wedding, banquet or other special event.",
     button: "Learn More",
     image: venue,
+    route: "/contact",
   },
   {
     id: 4,
@@ -47,6 +51,7 @@ const cardData = [
       "Our 2020 Bridal Brochure showcases photos of our facility, wedding package details, a list of our preferred vendors and much more!",
     button: "View Now",
     image: brochure,
+    route: "http://custompromotionsinc.com/flipbooks/Maneeleys/html5/#",
   },
 ];
 
@@ -62,6 +67,7 @@ function Services() {
             subtitle={i.subtite}
             button={i.button}
             image={i.image}
+            route={i.route}
           />
         ))}
       </div>

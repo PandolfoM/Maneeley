@@ -2,8 +2,9 @@ import { Burger } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import logo from "../assets/maneeley-logo.png";
-import AppDrawer from "./Drawer";
+import Drawer from "./Drawer";
 
 function Navbar() {
   const [isOpened, setIsOpened] = useState(false);
@@ -37,7 +38,7 @@ function Navbar() {
           )}
         </div>
       </header>
-      <AppDrawer
+      <Drawer
         className="drawer"
         opened={isOpened}
         setIsOpened={setIsOpened}
@@ -45,16 +46,22 @@ function Navbar() {
         padding="xs">
         <ul>
           <li>
-            <Link to={"/"}>Home</Link>
+            <Link to={"/"} onClick={() => setIsOpened(false)}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={"/catering"}>Catering</Link>
+            <Link to={"/catering"} onClick={() => setIsOpened(false)}>
+              Catering
+            </Link>
           </li>
           <li>
-            <Link to={"/contact"}>Contact</Link>
+            <Link to={"/contact"} onClick={() => setIsOpened(false)}>
+              Contact
+            </Link>
           </li>
         </ul>
-      </AppDrawer>
+      </Drawer>
     </>
   );
 }

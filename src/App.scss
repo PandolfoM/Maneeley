@@ -355,8 +355,12 @@ body {
   p {
     font-size: $font-title;
     font-weight: bold;
-    font-size: 0.8rem;
-    line-height: 1rem;
+
+    @media screen and (max-width: $mobile) {
+      font-size: 0.8rem;
+      line-height: 1rem;
+    }
+
     a {
       background: linear-gradient(0deg, $primary 0%, $secondary 60%);
       -webkit-background-clip: text;
