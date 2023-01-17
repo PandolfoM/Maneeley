@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 import "./App.scss";
 import Contact from "./pages/Contact";
@@ -11,7 +16,20 @@ import Catering from "./pages/Catering";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
 
+import { useContext } from "react";
+import { AuthContext } from "./auth/context";
+
 function App() {
+  const { currentUser } = useContext(AuthContext);
+
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/" />;
+    }
+
+    return children;
+  };
+
   return (
     <Router basename="/Maneeley/">
       <div>
@@ -21,7 +39,14 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/catering" element={<Catering />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NoMatch />} />
         </Routes>
         <Footer />
