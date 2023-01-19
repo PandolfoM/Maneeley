@@ -75,32 +75,64 @@ export default function useMenus() {
     setMenus((current) => [...current, { name, items: [], id }]);
   };
 
-  const editMenuItem = async (menu, file, currentMenu) => {
-    await updateDoc(doc(db, "menus", currentMenu.doc), {
-      items: arrayRemove({ name: currentMenu.menu, file: currentMenu.file }),
+  const editMenuItem = async ({ name, file }, menu, item) => {
+    await updateDoc(doc(db, "menus", menu.name), {
+      items: arrayRemove(item),
     });
 
     if (file) {
       const storageRef = ref(storage, file.name);
 
       // Delete previous file
-      await deleteObject(ref(storage, currentMenu.file));
+      await deleteObject(ref(storage, item.file));
 
       await uploadBytes(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            await updateDoc(doc(db, "menus", currentMenu.doc), {
-              items: arrayUnion({ name: menu, file: downloadURL }),
+            await updateDoc(doc(db, "menus", menu.name), {
+              items: arrayUnion({
+                name: name,
+                file: downloadURL,
+                id: item.id,
+              }),
             });
+
+            let newArr = [...menus];
+            const menuIndex = menus.findIndex((i) => i.id === menu.id);
+            const itemIndex = newArr[menuIndex].items.findIndex(
+              (i) => i.id === item.id
+            );
+            newArr[menuIndex].items[itemIndex] = {
+              name,
+              file: downloadURL,
+              id: item.id,
+            };
+            setMenus(newArr);
           } catch (e) {
             console.log(e);
           }
         });
       });
     } else {
-      await updateDoc(doc(db, "menus", currentMenu.doc), {
-        items: arrayUnion({ name: menu, file: currentMenu.file }),
+      await updateDoc(doc(db, "menus", menu.name), {
+        items: arrayUnion({
+          name: name,
+          file: item.file,
+          id: item.id,
+        }),
       });
+
+      let newArr = [...menus];
+      const menuIndex = menus.findIndex((i) => i.id === menu.id);
+      const itemIndex = newArr[menuIndex].items.findIndex(
+        (i) => i.id === item.id
+      );
+      newArr[menuIndex].items[itemIndex] = {
+        name,
+        id: item.id,
+        file: item.file,
+      };
+      setMenus(newArr);
     }
   };
 
