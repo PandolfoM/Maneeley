@@ -368,49 +368,6 @@ body {
       -webkit-text-fill-color: transparent;
     }
   }
-
-  &-menus {
-    width: 100%;
-
-    @media screen and (min-width: $mobile) {
-      min-width: 30rem;
-      max-width: 30rem;
-    }
-
-    .mantine-Accordion-chevron,
-    .mantine-Accordion-label {
-      color: $white;
-    }
-
-    .mantine-Accordion-content {
-      color: $light;
-    }
-
-    .mantine-Accordion-control {
-      &:hover {
-        background-color: #2e2e2e80;
-      }
-    }
-
-    .mantine-Accordion-item {
-      overflow: hidden;
-      &[data-active] {
-        background-color: #2e2e2e80;
-      }
-    }
-
-    .cateringMenus {
-      &-item {
-        line-height: 2rem;
-        a {
-          font-size: 1rem;
-          background: linear-gradient(0deg, $primary 0%, $secondary 60%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-      }
-    }
-  }
 }
 // Catering END
 
@@ -517,62 +474,6 @@ body {
     border-bottom: 2px solid $dark;
     padding-bottom: 1rem;
     width: 100%;
-  }
-
-  .cateringMenus-item {
-    display: flex;
-    justify-content: space-between;
-
-    a {
-      cursor: pointer;
-    }
-  }
-
-  .cateringMenus-controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: $dark 2px solid;
-    padding-bottom: 2px;
-    div {
-      display: flex;
-      gap: 1rem;
-
-      .mantine-InputWrapper-label {
-        color: $white;
-      }
-
-      .mantine-Input-wrapper {
-        border: 1px solid $dark;
-        background-color: #2e2e2e80;
-
-        input,
-        textarea {
-          color: $white;
-          padding: 0.5rem;
-        }
-
-        .mantine-PasswordInput-visibilityToggle {
-          &:hover {
-            background-color: transparent;
-          }
-        }
-
-        &:focus,
-        &:focus-within {
-          border-width: 1px;
-          border-style: solid;
-          border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
-        }
-      }
-    }
-    a {
-      cursor: pointer;
-      font-size: 1rem;
-      background: linear-gradient(0deg, $primary 0%, $secondary 60%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
   }
 }
 // Dashboard END
@@ -757,5 +658,177 @@ a {
   padding: 0 1rem;
   padding-top: $spacing-xl;
   color: $white;
+}
+
+.catering-menus {
+  width: 100%;
+
+  @media screen and (min-width: $mobile) {
+    min-width: 30rem;
+    max-width: 30rem;
+  }
+
+  .mantine-Accordion-chevron,
+  .mantine-Accordion-label {
+    color: $white;
+  }
+
+  .mantine-Accordion-content {
+    color: $light;
+  }
+
+  .mantine-Accordion-control {
+    &:hover {
+      background-color: #2e2e2e80;
+    }
+  }
+
+  .mantine-Accordion-item {
+    overflow: hidden;
+    &[data-active] {
+      background-color: #2e2e2e80;
+    }
+  }
+
+  .cateringMenus {
+    &-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: $dark 2px solid;
+      padding-bottom: 2px;
+
+      .submit-button {
+        color: $secondary;
+      }
+
+      div {
+        display: flex;
+        gap: 2px;
+
+        .mantine-InputWrapper-label {
+          color: $white;
+        }
+
+        .mantine-Input-wrapper {
+          border: 1px solid $dark;
+          background-color: #2e2e2e80;
+
+          input,
+          textarea {
+            width: 10rem;
+            color: $white;
+            padding: 0.5rem;
+          }
+
+          button {
+            width: 10rem;
+            color: $white;
+          }
+
+          .mantine-PasswordInput-visibilityToggle {
+            &:hover {
+              background-color: transparent;
+            }
+          }
+
+          &:focus,
+          &:focus-within {
+            border-width: 1px;
+            border-style: solid;
+            border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
+          }
+        }
+      }
+      a {
+        cursor: pointer;
+        font-size: 1rem;
+        background: linear-gradient(0deg, $primary 0%, $secondary 60%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      line-height: 2rem;
+      a {
+        cursor: pointer;
+      }
+
+      &-func {
+        display: flex;
+        gap: 1rem;
+
+        .edit {
+          color: $secondary;
+        }
+
+        .delete {
+          color: $danger;
+        }
+      }
+
+      &-link {
+        font-size: 1rem;
+        background: linear-gradient(0deg, $primary 0%, $secondary 60%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+}
+
+.modal {
+  .mantine-Modal-modal {
+    background-color: $black;
+    color: $white;
+
+    .mantine-ActionIcon-root {
+      &:hover {
+        background-color: transparent;
+        color: $white;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mantine-InputWrapper-label {
+      color: $white;
+    }
+
+    .mantine-Input-wrapper {
+      border: 1px solid $dark;
+      background-color: #2e2e2e80;
+
+      input,
+      textarea {
+        color: $white;
+        padding: 0.5rem;
+      }
+
+      button {
+        color: $white;
+      }
+
+      .mantine-PasswordInput-visibilityToggle {
+        &:hover {
+          background-color: transparent;
+        }
+      }
+
+      &:focus,
+      &:focus-within {
+        border-width: 1px;
+        border-style: solid;
+        border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
+      }
+    }
+  }
 }
 // Utilities END

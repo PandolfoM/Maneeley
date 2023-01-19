@@ -57,8 +57,11 @@ function Catering() {
               <Accordion.Panel>
                 <div className="cateringMenus">
                   {m.items.map((i) => (
-                    <div key={i.link} className="cateringMenus-item">
-                      <a href={i.link} target="_blank">
+                    <div key={i.file} className="cateringMenus-item">
+                      <a
+                        href={i.file}
+                        target="_blank"
+                        className="cateringMenus-item-link">
                         {i.name}
                       </a>
                     </div>

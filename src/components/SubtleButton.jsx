@@ -5,15 +5,13 @@ import React from "react";
 const SubtleBtn = styled(Button)`
   background: transparent;
   color: #bbb;
+  padding: 0;
 
   &:hover {
     color: "#fffcf1";
     background: transparent;
   }
 `;
-
-// -webkit-background-clip: text;
-// -webkit-text-fill-color: transparent;
 
 function SubtleButton({ name, onClick, isActive, ...otherProps }) {
   return (

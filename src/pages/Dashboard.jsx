@@ -1,4 +1,12 @@
-import { Accordion, TextInput } from "@mantine/core";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  Accordion,
+  FileButton,
+  FileInput,
+  Modal,
+  TextInput,
+} from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { signOut } from "firebase/auth";
@@ -7,27 +15,28 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../auth/context";
+import AppModal from "../components/Modal";
 import SubtleButton from "../components/SubtleButton";
 import { db } from "../firebase";
 import useMenus from "../hooks/useMenus";
 
 function Dashboard() {
-  const { deleteMenuItem, addMenuItem } = useMenus();
+  const { deleteMenuItem, addMenuItem, editMenuItem } = useMenus();
   const mobile = useMediaQuery("(max-width: 900px)");
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [menus, setMenus] = useState([]);
   const [currentDash, setCurrentDash] = useState("menus");
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState({});
 
   const form = useForm({
     initialValues: {
       menu: "",
-      link: "",
+      file: null,
     },
 
     validate: {
       menu: isNotEmpty(),
-      link: isNotEmpty(),
+      file: isNotEmpty(),
     },
   });
 
@@ -56,6 +65,14 @@ function Dashboard() {
 
   return (
     <>
+      {isModalOpen && (
+        <AppModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          currentMenu={currentMenu}
+          title="Edit"
+        />
+      )}
       <div className="dashboard">
         {mobile ? (
           <h1 className="dashboard-notavailable">
@@ -93,26 +110,53 @@ function Dashboard() {
                               <TextInput
                                 variant="unstyled"
                                 size="xs"
-                                placeholder="Menu"
+                                placeholder="Menu Name"
                                 withAsterisk
                                 {...form.getInputProps("menu")}
                               />
-                              <TextInput
+                              <FileInput
                                 variant="unstyled"
                                 size="xs"
-                                placeholder="Link"
+                                placeholder="Choose menu"
+                                accept="application/pdf"
+                                icon={<FontAwesomeIcon icon={faUpload} />}
                                 withAsterisk
-                                {...form.getInputProps("link")}
+                                {...form.getInputProps("file")}
                               />
                             </div>
-                            <SubtleButton type="submit" name={"Add"} />
+                            <SubtleButton
+                              className="submit-button"
+                              type="submit"
+                              name={"Add"}
+                            />
                           </form>
                           {m.items.map((i) => (
-                            <div key={i.link} className="cateringMenus-item">
-                              <a href={i.link} target="_blank">
+                            <div key={i.file} className="cateringMenus-item">
+                              <a
+                                href={i.file}
+                                target="_blank"
+                                className="cateringMenus-item-link">
                                 {i.name}
                               </a>
-                              <a onClick={() => deleteMenuItem(i, m)}>Delete</a>
+                              <div className="cateringMenus-item-func">
+                                <SubtleButton
+                                  className="edit"
+                                  onClick={() => {
+                                    setCurrentMenu({
+                                      menu: i.name,
+                                      file: i.file,
+                                      doc: m.name,
+                                    });
+                                    setIsModalOpen(true);
+                                  }}
+                                  name={"Edit"}
+                                />
+                                <SubtleButton
+                                  className="delete"
+                                  onClick={() => deleteMenuItem(i, m)}
+                                  name={"Delete"}
+                                />
+                              </div>
                             </div>
                           ))}
                         </div>
