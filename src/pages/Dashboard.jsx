@@ -1,17 +1,9 @@
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Accordion, FileInput, TextInput } from "@mantine/core";
-import { isNotEmpty, useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
-import { collection, getDocs, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import DashboardMenus from "../components/DashboardMenus";
+import React, { useState } from "react";
 
+import DashboardMenus from "../components/DashboardMenus";
 import AppModal from "../components/Modal";
-import Separator from "../components/Separator";
 import SubtleButton from "../components/SubtleButton";
-import { db } from "../firebase";
-import useMenus from "../hooks/useMenus";
 
 function Dashboard() {
   const tablet = useMediaQuery("(max-width: 900px)");
