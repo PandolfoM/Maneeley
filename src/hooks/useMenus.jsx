@@ -3,7 +3,6 @@ import {
   arrayRemove,
   arrayUnion,
   deleteDoc,
-  deleteField,
   doc,
   setDoc,
   updateDoc,
@@ -14,9 +13,13 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+import { useContext } from "react";
 import { db, storage } from "../firebase";
+import { MenuContext } from "../context/MenuContext";
 
 export default function useMenus() {
+  const { menus, setMenus } = useContext(MenuContext);
+
   const deleteMenuItem = async (item, menu) => {
     await updateDoc(doc(db, "menus", menu.name), {
       items: arrayRemove(item),

@@ -1,29 +1,13 @@
-import { Accordion, createStyles } from "@mantine/core";
-import { collection, getDocs, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { Accordion } from "@mantine/core";
+import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Separator from "../components/Separator";
-import { db } from "../firebase";
+import { MenuContext } from "../context/MenuContext";
 
 function Catering() {
-  const [menus, setMenus] = useState([]);
-
-  useEffect(() => {
-    const unsub = async () => {
-      setMenus([]);
-      const q = query(collection(db, "menus"));
-      const querySnapshot = await getDocs(q);
-
-      querySnapshot.forEach((doc) => {
-        setMenus((current) => [...current, doc.data()]);
-      });
-    };
-
-    return () => {
-      unsub();
-    };
-  }, []);
+  const { menus } = useContext(MenuContext);
 
   return (
     <div className="catering">
