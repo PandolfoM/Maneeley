@@ -10,23 +10,24 @@ import useMenus from "../hooks/useMenus";
 import AppButton from "./Button";
 
 function AppModal({ isModalOpen, setIsModalOpen, title, currentMenu }) {
+  const { item, menu } = currentMenu;
   const { editMenuItem } = useMenus();
   const [loading, setLoading] = useState(false);
-  const httpRef = ref(storage, currentMenu.file);
+  const httpRef = ref(storage, item.file);
   const form = useForm({
     initialValues: {
-      menu: currentMenu.menu,
+      name: item.name,
       file: null,
     },
 
     validate: {
-      menu: isNotEmpty(),
+      name: isNotEmpty(),
     },
   });
 
-  const handleSubmit = async ({ menu, file }) => {
+  const handleSubmit = async ({ name, file }) => {
     setLoading(true);
-    await editMenuItem(menu, file, currentMenu);
+    await editMenuItem({ name, file }, menu, item);
     setLoading(false);
     setIsModalOpen(false);
   };
@@ -43,7 +44,7 @@ function AppModal({ isModalOpen, setIsModalOpen, title, currentMenu }) {
           size="xs"
           placeholder="Menu Name"
           withAsterisk
-          {...form.getInputProps("menu")}
+          {...form.getInputProps("name")}
         />
         <FileInput
           variant="unstyled"

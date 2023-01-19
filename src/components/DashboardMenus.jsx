@@ -3,16 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Accordion, FileInput, Table, TextInput } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import React from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { MenuContext } from "../context/MenuContext";
 import useMenus from "../hooks/useMenus";
+import AppModal from "./Modal";
 import Separator from "./Separator";
 import SubtleButton from "./SubtleButton";
 
 function DashboardMenus() {
+  const { menus } = useContext(MenuContext);
   const { deleteMenuItem, addMenuItem, addMenuCategory, deleteCategory } =
     useMenus();
-  const { menus } = useContext(MenuContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState({});
 
   const form = useForm({
     initialValues: {
@@ -38,6 +42,14 @@ function DashboardMenus() {
 
   return (
     <>
+      {isModalOpen && (
+        <AppModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          currentMenu={currentMenu}
+          title="Edit"
+        />
+      )}
       <div className="catering-menus">
         <Accordion variant="filled" transitionDuration={300}>
           {menus.map((m) => (
@@ -76,7 +88,7 @@ function DashboardMenus() {
                     />
                   </form>
                   {m.items.map((i) => (
-                    <div key={i.file} className="cateringMenus-item">
+                    <div key={i.id} className="cateringMenus-item">
                       <a
                         href={i.file}
                         target="_blank"
@@ -87,11 +99,7 @@ function DashboardMenus() {
                         <SubtleButton
                           className="edit"
                           onClick={() => {
-                            setCurrentMenu({
-                              menu: i.name,
-                              file: i.file,
-                              doc: m.name,
-                            });
+                            setCurrentMenu({ menu: m, item: i });
                             setIsModalOpen(true);
                           }}
                           name={"Edit"}

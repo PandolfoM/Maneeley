@@ -8,19 +8,9 @@ import SubtleButton from "../components/SubtleButton";
 function Dashboard() {
   const tablet = useMediaQuery("(max-width: 900px)");
   const [currentDash, setCurrentDash] = useState("menus");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentMenu, setCurrentMenu] = useState({});
 
   return (
     <>
-      {isModalOpen && (
-        <AppModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          currentMenu={currentMenu}
-          title="Edit"
-        />
-      )}
       <div className="dashboard">
         {tablet ? (
           <h1 className="dashboard-notavailable">
