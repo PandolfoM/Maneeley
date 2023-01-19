@@ -2,9 +2,9 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Accordion, FileInput, Table, TextInput } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { collection, getDocs, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
+import React from "react";
+import { useContext } from "react";
+import { MenuContext } from "../context/MenuContext";
 import useMenus from "../hooks/useMenus";
 import Separator from "./Separator";
 import SubtleButton from "./SubtleButton";
@@ -12,7 +12,7 @@ import SubtleButton from "./SubtleButton";
 function DashboardMenus() {
   const { deleteMenuItem, addMenuItem, addMenuCategory, deleteCategory } =
     useMenus();
-  const [menus, setMenus] = useState([]);
+  const { menus } = useContext(MenuContext);
 
   const form = useForm({
     initialValues: {
@@ -35,22 +35,6 @@ function DashboardMenus() {
       name: isNotEmpty(),
     },
   });
-
-  useEffect(() => {
-    const unsub = async () => {
-      setMenus([]);
-      const q = query(collection(db, "menus"));
-      const querySnapshot = await getDocs(q);
-
-      querySnapshot.forEach((doc) => {
-        setMenus((current) => [...current, doc.data()]);
-      });
-    };
-
-    return () => {
-      unsub();
-    };
-  }, []);
 
   return (
     <>
