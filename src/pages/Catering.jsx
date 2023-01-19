@@ -67,18 +67,6 @@ function Catering() {
               </Accordion.Panel>
             </Accordion.Item>
           ))}
-          {/* <Accordion.Item value="corporateMenus">
-            <Accordion.Control>Corporate Catering Menus</Accordion.Control>
-            <Accordion.Panel>
-              <CorpMenus />
-            </Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="holidayMenus">
-            <Accordion.Control>Holiday Catering Menus</Accordion.Control>
-            <Accordion.Panel>
-              <HolidayMenus />
-            </Accordion.Panel>
-          </Accordion.Item> */}
         </Accordion>
       </aside>
     </div>

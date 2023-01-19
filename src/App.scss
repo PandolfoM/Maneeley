@@ -492,6 +492,7 @@ body {
 
 // Dashboard
 .dashboard {
+  height: 100vh;
   color: $white;
   padding: 0 1rem;
   padding-top: $spacing-sm;
@@ -499,6 +500,14 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+
+  @media screen and (max-width: $tablet) {
+    justify-content: center;
+  }
+
+  &-notavailable {
+    text-align: center;
+  }
 
   &-nav {
     gap: 2rem;
@@ -510,12 +519,60 @@ body {
     width: 100%;
   }
 
-  &-content {
-    background-color: dodgerblue;
+  .cateringMenus-item {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      cursor: pointer;
+    }
   }
 
-  @media screen and (min-width: $mobile) {
-    flex-wrap: nowrap;
+  .cateringMenus-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: $dark 2px solid;
+    padding-bottom: 2px;
+    div {
+      display: flex;
+      gap: 1rem;
+
+      .mantine-InputWrapper-label {
+        color: $white;
+      }
+
+      .mantine-Input-wrapper {
+        border: 1px solid $dark;
+        background-color: #2e2e2e80;
+
+        input,
+        textarea {
+          color: $white;
+          padding: 0.5rem;
+        }
+
+        .mantine-PasswordInput-visibilityToggle {
+          &:hover {
+            background-color: transparent;
+          }
+        }
+
+        &:focus,
+        &:focus-within {
+          border-width: 1px;
+          border-style: solid;
+          border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
+        }
+      }
+    }
+    a {
+      cursor: pointer;
+      font-size: 1rem;
+      background: linear-gradient(0deg, $primary 0%, $secondary 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 }
 // Dashboard END
