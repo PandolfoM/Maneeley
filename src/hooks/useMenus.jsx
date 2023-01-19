@@ -5,7 +5,12 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 import { db, storage } from "../firebase";
 
 export default function useMenus() {
@@ -37,6 +42,10 @@ export default function useMenus() {
 
     if (file) {
       const storageRef = ref(storage, file.name);
+
+      // Delete previous file
+      await deleteObject(ref(storage, currentMenu.file));
+
       await uploadBytes(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
