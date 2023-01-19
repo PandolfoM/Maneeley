@@ -19,6 +19,7 @@ import { MenuContext } from "../context/MenuContext";
 
 export default function useMenus() {
   const { menus, setMenus } = useContext(MenuContext);
+  console.log(menus);
 
   const deleteMenuItem = async (item, menu) => {
     await updateDoc(doc(db, "menus", menu.name), {
@@ -46,11 +47,14 @@ export default function useMenus() {
   };
 
   const addMenuCategory = async ({ name }) => {
+    let id = uuidv4();
     await setDoc(doc(db, "menus", name), {
-      id: uuidv4(),
+      id,
       items: [],
       name,
     });
+
+    setMenus((current) => [...current, { name, items: [], id }]);
   };
 
   const editMenuItem = async (menu, file, currentMenu) => {
