@@ -114,8 +114,8 @@ function DashboardMenus() {
         <Separator title={"Categories"} />
         <form
           className="add-category"
-          onSubmit={categoryForm.onSubmit((values) => {
-            addMenuCategory(values);
+          onSubmit={categoryForm.onSubmit(async (values) => {
+            await addMenuCategory(values);
             form.reset();
           })}>
           <TextInput

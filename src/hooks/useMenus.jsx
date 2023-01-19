@@ -24,6 +24,14 @@ export default function useMenus() {
     await updateDoc(doc(db, "menus", menu.name), {
       items: arrayRemove(item),
     });
+
+    let newArr = [...menus];
+    const menuIndex = menus.findIndex((i) => i.id === menu.id);
+    const itemIndex = newArr[menuIndex].items.findIndex(
+      (i) => i.id === item.id
+    );
+    newArr[menuIndex].items.splice(itemIndex, 1);
+    setMenus(newArr);
   };
 
   const deleteCategory = async ({ name, id }) => {
@@ -37,12 +45,18 @@ export default function useMenus() {
 
   const addMenuItem = async ({ menu, file }, i) => {
     const storageRef = ref(storage, file.name);
+    const id = uuidv4();
     await uploadBytes(storageRef, file).then(() => {
       getDownloadURL(storageRef).then(async (downloadURL) => {
         try {
           await updateDoc(doc(db, "menus", i.name), {
-            items: arrayUnion({ name: menu, file: downloadURL }),
+            items: arrayUnion({ name: menu, file: downloadURL, id }),
           });
+
+          let newArr = [...menus];
+          const menuIndex = menus.findIndex((item) => item.id === i.id);
+          newArr[menuIndex].items.push({ name: menu, file: downloadURL, id });
+          setMenus(newArr);
         } catch (e) {
           console.log(e);
         }
