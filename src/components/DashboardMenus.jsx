@@ -136,7 +136,7 @@ function DashboardMenus() {
                   <td className="delete-btn">
                     <SubtleButton
                       className="delete"
-                      onClick={() => deleteCategory(m.name)}
+                      onClick={() => deleteCategory(m)}
                       name={"Delete"}
                     />
                   </td>
