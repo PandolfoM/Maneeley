@@ -4,12 +4,14 @@ import { FileInput, Modal, TextInput } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { ref } from "firebase/storage";
 import React from "react";
+import { useState } from "react";
 import { storage } from "../firebase";
 import useMenus from "../hooks/useMenus";
 import AppButton from "./Button";
 
 function AppModal({ isModalOpen, setIsModalOpen, title, currentMenu }) {
   const { editMenuItem } = useMenus();
+  const [loading, setLoading] = useState(false);
   const httpRef = ref(storage, currentMenu.file);
   const form = useForm({
     initialValues: {
@@ -23,7 +25,9 @@ function AppModal({ isModalOpen, setIsModalOpen, title, currentMenu }) {
   });
 
   const handleSubmit = async ({ menu, file }) => {
+    setLoading(true);
     await editMenuItem(menu, file, currentMenu);
+    setLoading(false);
     setIsModalOpen(false);
   };
 
@@ -50,7 +54,7 @@ function AppModal({ isModalOpen, setIsModalOpen, title, currentMenu }) {
           withAsterisk
           {...form.getInputProps("file")}
         />
-        <AppButton type="submit" name={"Save"} />
+        <AppButton type="submit" name={"Save"} loading={loading} />
       </form>
     </Modal>
   );

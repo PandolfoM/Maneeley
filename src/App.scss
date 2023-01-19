@@ -475,6 +475,83 @@ body {
     padding-bottom: 1rem;
     width: 100%;
   }
+
+  &-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5rem;
+
+    .dashboard-aside {
+      width: 30rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .add-category {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        .mantine-InputWrapper-label {
+          color: $white;
+        }
+
+        .mantine-InputWrapper-root {
+          width: 100%;
+        }
+
+        .mantine-Input-wrapper {
+          border: 1px solid $dark;
+          background-color: #2e2e2e80;
+
+          input {
+            color: $white;
+            padding: 0.5rem;
+          }
+
+          .mantine-PasswordInput-visibilityToggle {
+            &:hover {
+              background-color: transparent;
+            }
+          }
+
+          &:focus,
+          &:focus-within {
+            border-width: 1px;
+            border-style: solid;
+            border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
+          }
+        }
+
+        .submit-button {
+          color: $secondary;
+        }
+      }
+      .all-categories {
+        tr {
+          &:nth-of-type(odd) {
+            background-color: #2e2e2e80;
+          }
+
+          &:hover {
+            background-color: $dark;
+          }
+        }
+
+        td {
+          border-top-color: $dark;
+          color: $white;
+        }
+
+        .delete-btn {
+          text-align: right;
+          .delete {
+            color: $danger;
+          }
+        }
+      }
+    }
+  }
 }
 // Dashboard END
 
@@ -663,6 +740,10 @@ a {
 .catering-menus {
   width: 100%;
 
+  .submit-button {
+    color: $secondary;
+  }
+
   @media screen and (min-width: $mobile) {
     min-width: 30rem;
     max-width: 30rem;
@@ -697,10 +778,6 @@ a {
       justify-content: space-between;
       border-bottom: $dark 2px solid;
       padding-bottom: 2px;
-
-      .submit-button {
-        color: $secondary;
-      }
 
       div {
         display: flex;

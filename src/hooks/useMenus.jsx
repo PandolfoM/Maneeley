@@ -1,8 +1,11 @@
+import { uuidv4 } from "@firebase/util";
 import {
   arrayRemove,
   arrayUnion,
+  deleteDoc,
   deleteField,
   doc,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import {
@@ -15,9 +18,13 @@ import { db, storage } from "../firebase";
 
 export default function useMenus() {
   const deleteMenuItem = async (item, menu) => {
-    await updateDoc(doc(db, "menus", menu.name.toLowerCase()), {
+    await updateDoc(doc(db, "menus", menu.name), {
       items: arrayRemove(item),
     });
+  };
+
+  const deleteCategory = async (name) => {
+    await deleteDoc(doc(db, "menus", name));
   };
 
   const addMenuItem = async ({ menu, file }, i) => {
@@ -25,7 +32,7 @@ export default function useMenus() {
     await uploadBytes(storageRef, file).then(() => {
       getDownloadURL(storageRef).then(async (downloadURL) => {
         try {
-          await updateDoc(doc(db, "menus", i.name.toLowerCase()), {
+          await updateDoc(doc(db, "menus", i.name), {
             items: arrayUnion({ name: menu, file: downloadURL }),
           });
         } catch (e) {
@@ -35,8 +42,16 @@ export default function useMenus() {
     });
   };
 
+  const addMenuCategory = async ({ name }) => {
+    await setDoc(doc(db, "menus", name), {
+      id: uuidv4(),
+      items: [],
+      name,
+    });
+  };
+
   const editMenuItem = async (menu, file, currentMenu) => {
-    await updateDoc(doc(db, "menus", currentMenu.doc.toLowerCase()), {
+    await updateDoc(doc(db, "menus", currentMenu.doc), {
       items: arrayRemove({ name: currentMenu.menu, file: currentMenu.file }),
     });
 
@@ -49,7 +64,7 @@ export default function useMenus() {
       await uploadBytes(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            await updateDoc(doc(db, "menus", currentMenu.doc.toLowerCase()), {
+            await updateDoc(doc(db, "menus", currentMenu.doc), {
               items: arrayUnion({ name: menu, file: downloadURL }),
             });
           } catch (e) {
@@ -58,16 +73,17 @@ export default function useMenus() {
         });
       });
     } else {
-      await updateDoc(doc(db, "menus", currentMenu.doc.toLowerCase()), {
+      await updateDoc(doc(db, "menus", currentMenu.doc), {
         items: arrayUnion({ name: menu, file: currentMenu.file }),
       });
     }
-
-    // await updateDoc(doc(db, "menus", currentMenu.doc)),
-    //   {
-    //     items: arrayUnion({ name: menu, file: file }),
-    //   };
   };
 
-  return { deleteMenuItem, addMenuItem, editMenuItem };
+  return {
+    deleteMenuItem,
+    addMenuItem,
+    editMenuItem,
+    addMenuCategory,
+    deleteCategory,
+  };
 }
