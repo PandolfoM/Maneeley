@@ -449,14 +449,15 @@ body {
 
 // Dashboard
 .dashboard {
-  height: 100vh;
-  color: $white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5rem;
   padding: 0 1rem;
   padding-top: $spacing-sm;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  color: $white;
+  box-sizing: border-box;
 
   @media screen and (max-width: $tablet) {
     justify-content: center;
@@ -479,14 +480,40 @@ body {
   &-content {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 5rem;
+    flex: 1;
+
+    .dashboard-display {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      flex-direction: column;
+
+      .separator {
+        width: 100%;
+      }
+
+      &-inner {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+
+        @media screen and (max-width: 1007px) {
+          flex-direction: column-reverse;
+          width: 100%;
+        }
+
+        .catering-menus {
+          max-width: 100%;
+        }
+      }
+    }
 
     .dashboard-aside {
-      width: 30rem;
-      display: flex;
-      flex-direction: column;
+      flex: 1;
       gap: 1rem;
+      min-width: 30rem;
       .add-category {
         display: flex;
         justify-content: center;
@@ -738,7 +765,7 @@ a {
 }
 
 .catering-menus {
-  width: 100%;
+  // width: 100%;
 
   .submit-button {
     color: $secondary;
@@ -759,12 +786,14 @@ a {
   }
 
   .mantine-Accordion-control {
+    background-color: #2e2e2e80;
     &:hover {
-      background-color: #2e2e2e80;
+      background-color: $dark;
     }
   }
 
   .mantine-Accordion-item {
+    margin-bottom: 0.5rem;
     overflow: hidden;
     &[data-active] {
       background-color: #2e2e2e80;
