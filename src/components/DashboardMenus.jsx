@@ -8,7 +8,6 @@ import { useContext } from "react";
 import { MenuContext } from "../context/MenuContext";
 import useMenus from "../hooks/useMenus";
 import AppModal from "./Modal";
-import Separator from "./Separator";
 import SubtleButton from "./SubtleButton";
 
 function DashboardMenus() {
@@ -119,7 +118,6 @@ function DashboardMenus() {
         </Accordion>
       </div>
       <aside className="dashboard-aside">
-        <Separator title={"Categories"} />
         <form
           className="add-category"
           onSubmit={categoryForm.onSubmit(async (values) => {
