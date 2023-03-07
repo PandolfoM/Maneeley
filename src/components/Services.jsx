@@ -37,15 +37,6 @@ const cardData = [
   },
   {
     id: 3,
-    title: "Grand Lodge",
-    subtite:
-      "The Grand Lodge is nestled in five acres of woods in South Windsor, Connecticut, only minutes away from Hartford. It offers an elegant setting – and delectable cuisine for your wedding, banquet or other special event.",
-    button: "Learn More",
-    image: venue,
-    route: "/contact",
-  },
-  {
-    id: 4,
     title: "Brochure",
     subtite:
       "Our 2020 Bridal Brochure showcases photos of our facility, wedding package details, a list of our preferred vendors and much more!",
