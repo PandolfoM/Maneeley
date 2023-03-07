@@ -32,7 +32,7 @@ function DashboardGallery({ classes, name }) {
                 <a
                   // href={i.file}
                   target="_blank"
-                  className="item-item-link">
+                  className="activeLink">
                   {"i.name"}
                 </a>
                 <div className="item-item-func">

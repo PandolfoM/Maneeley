@@ -116,10 +116,7 @@ function DashboardMenus() {
                   </form>
                   {m.items.map((i) => (
                     <div key={i.id} className="item-item">
-                      <a
-                        href={i.file}
-                        target="_blank"
-                        className="item-item-link">
+                      <a href={i.file} target="_blank" className="activeLink">
                         {i.name}
                       </a>
                       <div className="item-item-func">

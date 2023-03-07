@@ -37,7 +37,7 @@ function Menus({ menus }) {
               <div className="item">
                 {m.items.map((i) => (
                   <div key={i.file} className="item-item">
-                    <a href={i.file} target="_blank" className="item-item-link">
+                    <a href={i.file} target="_blank" className="activeLink">
                       {i.name}
                     </a>
                   </div>
