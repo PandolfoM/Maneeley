@@ -15,7 +15,7 @@ function Navbar() {
   return (
     <>
       <header className="navbar">
-        <div className={"navbar-content"}>
+        <div className="navbar-content">
           <img src={logo} />
           {!view ? (
             <Burger
