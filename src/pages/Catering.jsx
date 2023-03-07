@@ -1,16 +1,16 @@
-import { Accordion } from "@mantine/core";
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import Menus from "../components/Menus";
+import Page from "../components/Page";
 
-import Separator from "../components/Separator";
 import { MenuContext } from "../context/MenuContext";
 
 function Catering() {
   const { menus } = useContext(MenuContext);
 
   return (
-    <div className="catering">
+    <Page flex>
       <div>
         <p>
           Whatever the occasion, Maneeley’s Catering executes each event with
@@ -29,34 +29,13 @@ function Catering() {
         </p>
         <p>
           For any questions on our catering menu, please{" "}
-          <Link to="/contact">contact us today.</Link>
+          <Link to="/contact" className="activeLink">
+            contact us today.
+          </Link>
         </p>
       </div>
-      <aside className="catering-menus">
-        <Separator title={"Menus"} />
-        <Accordion variant="filled" transitionDuration={300}>
-          {menus.map((m) => (
-            <Accordion.Item value={m.name} key={m.id}>
-              <Accordion.Control>{m.name} Menus</Accordion.Control>
-              <Accordion.Panel>
-                <div className="cateringMenus">
-                  {m.items.map((i) => (
-                    <div key={i.file} className="cateringMenus-item">
-                      <a
-                        href={i.file}
-                        target="_blank"
-                        className="cateringMenus-item-link">
-                        {i.name}
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </Accordion.Panel>
-            </Accordion.Item>
-          ))}
-        </Accordion>
-      </aside>
-    </div>
+      <Menus menus={menus} />
+    </Page>
   );
 }
 

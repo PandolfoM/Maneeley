@@ -18,6 +18,7 @@ import Dashboard from "./pages/Dashboard";
 
 import { useContext } from "react";
 import { AuthContext } from "./auth/context";
+import Banquets from "./pages/Banquets";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -38,6 +39,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/catering" element={<Catering />} />
+          <Route path="/banquets" element={<Banquets />} />
           <Route path="/admin" element={<Admin />} />
           <Route
             path="/dashboard"
