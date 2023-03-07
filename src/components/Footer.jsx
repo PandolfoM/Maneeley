@@ -8,7 +8,7 @@ function Footer() {
   return (
     <div className="footer">
       <hr />
-      <div className="footer-content">
+      <div className="footer-content dark">
         <div className="icons">
           <a href="tel:8605286622">
             <FontAwesomeIcon icon={faPhone} size="lg" title="Phone" />

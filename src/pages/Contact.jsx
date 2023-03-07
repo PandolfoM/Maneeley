@@ -5,6 +5,8 @@ import React from "react";
 
 import Button from "../components/Button";
 import Separator from "../components/Separator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -93,6 +95,7 @@ function Contact() {
             We are always looking for the right people. Feel free to download
             and fill out our{" "}
             <a
+              className="activeLink"
               href="http://maneeleys.com/wp-content/uploads/2015/05/Employment-Application.pdf"
               target="_blank">
               application for employment.
@@ -102,23 +105,43 @@ function Contact() {
         <div className="socials">
           <Separator title={"Socials"} />
           <p>
-            Phone: <a href="tel:8605286622">(860) 528-6622</a>
+            Phone:{" "}
+            <a className="activeLink" href="tel:8605286622">
+              (860) 528-6622
+            </a>
           </p>
           <p>
-            Fax: <a href="tel:8602919362">(860) 291-9362</a>
+            Fax:{" "}
+            <a className="activeLink" href="tel:8602919362">
+              (860) 291-9362
+            </a>
           </p>
           <p>
-            Address:{" "}
-            <a href="https://goo.gl/maps/MdJ6XHXDynkjjzQj9" target="_blank">
+            Lodge:{" "}
+            <a
+              className="activeLink"
+              href="https://goo.gl/maps/MdJ6XHXDynkjjzQj9"
+              target="_blank">
               65 Rye Street, South Windsor, CT 06074
             </a>
           </p>
           <p>
-            Facebook:{" "}
-            <a href="https://www.facebook.com/Maneeleys" target="_blank">
-              Maneeley's Banquet and Catering
+            Office:{" "}
+            <a
+              className="activeLink"
+              href="https://goo.gl/maps/MdJ6XHXDynkjjzQj9"
+              target="_blank">
+              65 Rye Street, South Windsor, CT 06074
             </a>
           </p>
+          <div className="dark">
+            <a href="https://www.facebook.com/Maneeleys" target="_blank">
+              <FontAwesomeIcon icon={faFacebookF} size="lg" title="Facebook" />
+            </a>
+            <a href="https://www.instagram.com/maneeleys/" target="_blank">
+              <FontAwesomeIcon icon={faInstagram} size="lg" title="Facebook" />
+            </a>
+          </div>
         </div>
       </aside>
     </div>
