@@ -80,11 +80,7 @@ function DashboardMenus() {
                         {...form.getInputProps("file")}
                       />
                     </div>
-                    <SubtleButton
-                      className="submit-button"
-                      type="submit"
-                      name={"Add"}
-                    />
+                    <SubtleButton type="submit" name="Add" />
                   </form>
                   {m.items.map((i) => (
                     <div key={i.id} className="cateringMenus-item">
@@ -96,7 +92,6 @@ function DashboardMenus() {
                       </a>
                       <div className="cateringMenus-item-func">
                         <SubtleButton
-                          className="edit"
                           onClick={() => {
                             setCurrentMenu({ menu: m, item: i });
                             setIsModalOpen(true);
@@ -131,7 +126,7 @@ function DashboardMenus() {
             withAsterisk
             {...categoryForm.getInputProps("name")}
           />
-          <SubtleButton className="submit-button" type="submit" name={"Add"} />
+          <SubtleButton type="submit" name={"Add"} />
         </form>
         <div className="all-categories">
           <Table striped highlightOnHover>

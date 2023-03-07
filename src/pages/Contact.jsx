@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import Separator from "../components/Separator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import SubtleButton from "../components/SubtleButton";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -94,45 +95,34 @@ function Contact() {
           <p>
             We are always looking for the right people. Feel free to download
             and fill out our{" "}
-            <a
-              className="activeLink"
+            <SubtleButton
+              name={"application for employment."}
               href="http://maneeleys.com/wp-content/uploads/2015/05/Employment-Application.pdf"
-              target="_blank">
-              application for employment.
-            </a>
+            />
           </p>
         </div>
         <div className="socials">
           <Separator title={"Socials"} />
           <p>
             Phone:{" "}
-            <a className="activeLink" href="tel:8605286622">
-              (860) 528-6622
-            </a>
+            <SubtleButton name={"(860) 528-6622"} href="tel:8605286622" />
           </p>
           <p>
-            Fax:{" "}
-            <a className="activeLink" href="tel:8602919362">
-              (860) 291-9362
-            </a>
+            Fax: <SubtleButton name="(860) 291-9362" href="tel:8602919362" />
           </p>
           <p>
             Lodge:{" "}
-            <a
-              className="activeLink"
+            <SubtleButton
+              name="65 Rye Street, South Windsor, CT 06074"
               href="https://goo.gl/maps/MdJ6XHXDynkjjzQj9"
-              target="_blank">
-              65 Rye Street, South Windsor, CT 06074
-            </a>
+            />
           </p>
           <p>
             Office:{" "}
-            <a
-              className="activeLink"
+            <SubtleButton
+              name="65 Rye Street, South Windsor, CT 06074"
               href="https://goo.gl/maps/MdJ6XHXDynkjjzQj9"
-              target="_blank">
-              65 Rye Street, South Windsor, CT 06074
-            </a>
+            />
           </p>
           <div className="dark">
             <a href="https://www.facebook.com/Maneeleys" target="_blank">

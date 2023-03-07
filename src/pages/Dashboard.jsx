@@ -1,15 +1,11 @@
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../auth/context";
-import AppButton from "../components/Button";
 
 import DashboardMenus from "../components/DashboardMenus";
 import Separator from "../components/Separator";
 import SubtleButton from "../components/SubtleButton";
 
 function Dashboard() {
-  const { currentUser } = useContext(AuthContext);
   const tablet = useMediaQuery("(max-width: 900px)");
   const [currentDash, setCurrentDash] = useState("menus");
 
@@ -25,12 +21,12 @@ function Dashboard() {
             <div className="dashboard-nav">
               <SubtleButton
                 name={"Menus"}
-                isActive={currentDash === "menus"}
+                className={currentDash === "menus" && "activeLink"}
                 onClick={() => setCurrentDash("menus")}
               />
               <SubtleButton
                 name={"Users"}
-                isActive={currentDash === "users"}
+                className={currentDash === "users" && "activeLink"}
                 onClick={() => setCurrentDash("users")}
               />
             </div>
