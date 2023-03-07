@@ -326,53 +326,8 @@ body {
 }
 // About END
 
-// Catering
-.catering {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 5rem;
-  padding: 0 1rem;
-  padding-top: $spacing-xl;
-  color: $white;
-  font-weight: bold;
-
-  @media screen and (min-width: $mobile) {
-    flex-wrap: nowrap;
-  }
-
-  p {
-    font-size: $font-title;
-    font-weight: bold;
-
-    @media screen and (max-width: $mobile) {
-      font-size: 0.8rem;
-      line-height: 1rem;
-    }
-
-    a {
-      background: linear-gradient(0deg, $primary 0%, $secondary 60%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  }
-}
-// Catering END
-
 // Contact
 .contact {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 5rem;
-  padding: 0 1rem;
-  padding-top: $spacing-xl;
-  color: $white;
-  font-size: 1.2rem;
-  font-weight: bold;
-
   @media screen and (min-width: $mobile) {
     flex-wrap: nowrap;
   }
@@ -440,129 +395,111 @@ body {
 // Contact END
 
 // Dashboard
-.dashboard {
+
+.dashboard-notavailable {
+  text-align: center;
+}
+
+.dashboard-nav {
+  gap: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 5rem;
-  padding: 0 1rem;
-  padding-top: $spacing-md;
-  color: $white;
-  box-sizing: border-box;
+  justify-content: space-around;
+  border-bottom: 2px solid $dark;
+  padding-bottom: 1rem;
+  width: 100%;
+}
 
-  @media screen and (max-width: $tablet) {
-    justify-content: center;
-  }
+.dashboard-content {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  flex: 1;
 
-  &-notavailable {
-    text-align: center;
-  }
-
-  &-nav {
-    gap: 2rem;
+  .dashboard-display {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border-bottom: 2px solid $dark;
-    padding-bottom: 1rem;
-    width: 100%;
-  }
-
-  &-content {
-    display: flex;
-    justify-content: center;
     flex: 1;
+    align-items: center;
+    flex-direction: column;
 
-    .dashboard-display {
+    .separator {
+      width: 100%;
+    }
+
+    &-inner {
       display: flex;
-      flex: 1;
-      align-items: center;
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
 
-      .separator {
+      @media screen and (max-width: 1007px) {
+        flex-direction: column-reverse;
+        width: 100%;
+      }
+    }
+  }
+
+  .dashboard-aside {
+    flex: 1;
+    gap: 1rem;
+    min-width: 30rem;
+    .add-category {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      .mantine-InputWrapper-label {
+        color: $white;
+      }
+
+      .mantine-InputWrapper-root {
         width: 100%;
       }
 
-      &-inner {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
+      .mantine-Input-wrapper {
+        border: 1px solid $dark;
+        background-color: #2e2e2e80;
 
-        @media screen and (max-width: 1007px) {
-          flex-direction: column-reverse;
-          width: 100%;
+        input {
+          color: $white;
+          padding: 0.5rem;
         }
 
-        .catering-menus {
-          max-width: 100%;
+        .mantine-PasswordInput-visibilityToggle {
+          &:hover {
+            background-color: transparent;
+          }
+        }
+
+        &:focus,
+        &:focus-within {
+          border-width: 1px;
+          border-style: solid;
+          border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
         }
       }
     }
-
-    .dashboard-aside {
-      flex: 1;
-      gap: 1rem;
-      min-width: 30rem;
-      .add-category {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-
-        .mantine-InputWrapper-label {
-          color: $white;
-        }
-
-        .mantine-InputWrapper-root {
-          width: 100%;
-        }
-
-        .mantine-Input-wrapper {
-          border: 1px solid $dark;
+    .all-categories {
+      tr {
+        &:nth-of-type(odd) {
           background-color: #2e2e2e80;
+        }
 
-          input {
-            color: $white;
-            padding: 0.5rem;
-          }
-
-          .mantine-PasswordInput-visibilityToggle {
-            &:hover {
-              background-color: transparent;
-            }
-          }
-
-          &:focus,
-          &:focus-within {
-            border-width: 1px;
-            border-style: solid;
-            border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
-          }
+        &:hover {
+          background-color: $dark;
         }
       }
-      .all-categories {
-        tr {
-          &:nth-of-type(odd) {
-            background-color: #2e2e2e80;
-          }
 
-          &:hover {
-            background-color: $dark;
-          }
-        }
+      td {
+        border-top-color: $dark;
+        color: $white;
+      }
 
-        td {
-          border-top-color: $dark;
-          color: $white;
-        }
-
-        .delete-btn {
-          text-align: right;
-          .delete {
-            color: $danger;
-          }
+      .delete-btn {
+        text-align: right;
+        .delete {
+          color: $danger;
         }
       }
     }
@@ -747,29 +684,33 @@ a {
 
     a {
       font-size: $font-title;
-      background: $primary;
-      background: linear-gradient(0deg, $primary 0%, $secondary 60%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0px 0px 15px #000000c1);
     }
   }
 }
 
 .newPage {
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5rem;
   padding: 0 1rem;
   padding-top: $spacing-xl;
   color: $white;
+  font-weight: bold;
+  box-sizing: border-box;
+
+  @media screen and (min-width: $tablet) {
+    flex-wrap: nowrap;
+  }
+
+  &-sub {
+    min-width: 20rem;
+  }
 }
 
 .catering-menus {
-  // width: 100%;
-
-  .submit-button {
-    color: $secondary;
-  }
-
-  @media screen and (min-width: $mobile) {
+  width: 100%;
+  @media screen and (min-width: $tablet) {
     min-width: 30rem;
     max-width: 30rem;
   }

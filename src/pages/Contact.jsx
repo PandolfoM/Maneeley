@@ -8,6 +8,7 @@ import Separator from "../components/Separator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import SubtleButton from "../components/SubtleButton";
+import Page from "../components/Page";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -45,10 +46,10 @@ function Contact() {
   });
 
   return (
-    <div className="contact">
+    <Page flex>
       <form
         onSubmit={form.onSubmit((values) => console.log(values))}
-        className="contact-form">
+        className="contact-form newPage-sub">
         <div className="form-name">
           <TextInput
             variant="unstyled"
@@ -134,7 +135,7 @@ function Contact() {
           </div>
         </div>
       </aside>
-    </div>
+    </Page>
   );
 }
 
