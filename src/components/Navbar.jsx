@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/maneeley-logo.png";
 import { AuthContext } from "../auth/context";
 import Drawer from "./Drawer";
+import NavLinks from "./NavLinks";
 
 function Navbar() {
   const { currentUser } = useContext(AuthContext);
@@ -26,46 +27,7 @@ function Navbar() {
               size="sm"
             />
           ) : (
-            <ul>
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive ? "activeLink" : undefined
-                  }>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/catering"
-                  className={({ isActive }) =>
-                    isActive ? "activeLink" : undefined
-                  }>
-                  Catering
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/contact"
-                  className={({ isActive }) =>
-                    isActive ? "activeLink" : undefined
-                  }>
-                  Contact
-                </NavLink>
-              </li>
-              {currentUser && (
-                <li>
-                  <NavLink
-                    to="/dashboard"
-                    className={({ isActive }) =>
-                      isActive ? "activeLink" : undefined
-                    }>
-                    Dashboard
-                  </NavLink>
-                </li>
-              )}
-            </ul>
+            <NavLinks currentUser={currentUser} />
           )}
         </div>
       </header>
@@ -75,50 +37,7 @@ function Navbar() {
         setIsOpened={setIsOpened}
         title="Maneeley's"
         padding="xs">
-        <ul>
-          <li>
-            <NavLink
-              to={"/"}
-              onClick={() => setIsOpened(false)}
-              className={({ isActive }) =>
-                isActive ? "activeLink" : undefined
-              }>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/catering"}
-              onClick={() => setIsOpened(false)}
-              className={({ isActive }) =>
-                isActive ? "activeLink" : undefined
-              }>
-              Catering
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/contact"}
-              onClick={() => setIsOpened(false)}
-              className={({ isActive }) =>
-                isActive ? "activeLink" : undefined
-              }>
-              Contact
-            </NavLink>
-          </li>
-          {currentUser && (
-            <li>
-              <NavLink
-                to="/dashboard"
-                onClick={() => setIsOpened(false)}
-                className={({ isActive }) =>
-                  isActive ? "activeLink" : undefined
-                }>
-                Dashboard
-              </NavLink>
-            </li>
-          )}
-        </ul>
+        <NavLinks currentUser={currentUser} />
       </Drawer>
     </>
   );
