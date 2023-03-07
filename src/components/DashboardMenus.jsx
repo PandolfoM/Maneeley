@@ -1,6 +1,12 @@
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Accordion, FileInput, Table, TextInput } from "@mantine/core";
+import {
+  Accordion,
+  createStyles,
+  FileInput,
+  Table,
+  TextInput,
+} from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import React from "react";
 import { useState } from "react";
@@ -10,7 +16,30 @@ import useMenus from "../hooks/useMenus";
 import AppModal from "./Modal";
 import SubtleButton from "./SubtleButton";
 
+const useStyles = createStyles((theme, params, getRef) => ({
+  chevron: {
+    color: "white",
+  },
+  label: {
+    color: "#bbb",
+  },
+  control: {
+    backgroundColor: "#2e2e2e80",
+    "&:hover": {
+      backgroundColor: "#3c3c3c",
+    },
+  },
+  item: {
+    marginBottom: "0.5rem",
+    overflow: "hidden",
+    "&[data-active]": {
+      backgroundColor: "#2e2e2e80",
+    },
+  },
+}));
+
 function DashboardMenus() {
+  const { classes } = useStyles();
   const { menus } = useContext(MenuContext);
   const { deleteMenuItem, addMenuItem, addMenuCategory, deleteCategory } =
     useMenus();
@@ -50,14 +79,17 @@ function DashboardMenus() {
         />
       )}
       <div className="catering-menus">
-        <Accordion variant="filled" transitionDuration={300}>
+        <Accordion
+          variant="filled"
+          transitionDuration={300}
+          classNames={classes}>
           {menus.map((m) => (
             <Accordion.Item value={m.name} key={m.id}>
               <Accordion.Control>{m.name} Menus</Accordion.Control>
               <Accordion.Panel>
-                <div className="cateringMenus">
+                <div className="item">
                   <form
-                    className="cateringMenus-controls"
+                    className="item-controls"
                     onSubmit={form.onSubmit((values) => {
                       addMenuItem(values, m);
                       form.reset();
@@ -83,14 +115,14 @@ function DashboardMenus() {
                     <SubtleButton type="submit" name="Add" />
                   </form>
                   {m.items.map((i) => (
-                    <div key={i.id} className="cateringMenus-item">
+                    <div key={i.id} className="item-item">
                       <a
                         href={i.file}
                         target="_blank"
-                        className="cateringMenus-item-link">
+                        className="item-item-link">
                         {i.name}
                       </a>
-                      <div className="cateringMenus-item-func">
+                      <div className="item-item-func">
                         <SubtleButton
                           onClick={() => {
                             setCurrentMenu({ menu: m, item: i });
