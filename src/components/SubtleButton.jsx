@@ -13,21 +13,24 @@ const SubtleBtn = styled(Button)`
   }
 `;
 
-function SubtleButton({ name, onClick, isActive, ...otherProps }) {
+function SubtleButton({ name, ...otherProps }) {
   return (
-    <SubtleBtn
-      onClick={onClick}
-      sx={
-        isActive && {
-          background:
-            "linear-gradient(0deg, #b57d09 0%, #fdbb2d 60%) !important",
-          WebkitBackgroundClip: "text !important",
-          WebkitTextFillColor: "transparent",
-        }
-      }
-      {...otherProps}>
+    // <SubtleBtn
+    //   onClick={onClick}
+    //   sx={
+    //     isActive && {
+    //       background:
+    //         "linear-gradient(0deg, #b57d09 0%, #fdbb2d 60%) !important",
+    //       WebkitBackgroundClip: "text !important",
+    //       WebkitTextFillColor: "transparent",
+    //     }
+    //   }
+    //   {...otherProps}>
+    //   {name}
+    // </SubtleBtn>
+    <a className="activeLink" target="_blank" {...otherProps}>
       {name}
-    </SubtleBtn>
+    </a>
   );
 }
 

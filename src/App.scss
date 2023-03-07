@@ -5,11 +5,13 @@ $white: #fffcf1;
 $light: #bbb;
 $dark: #3c3c3c;
 $danger: #f53434;
+$darkDanger: #b50909;
 $success: #5ecd74;
 $font-hero: 3rem;
 $font-section: 2rem;
 $font-title: 1.3rem;
 $spacing-sm: 4rem;
+$spacing-md: 8rem;
 $spacing-xl: 10rem;
 $tablet: 900px;
 $mobile: 600px;
@@ -445,7 +447,7 @@ body {
   flex-wrap: wrap;
   gap: 5rem;
   padding: 0 1rem;
-  padding-top: $spacing-sm;
+  padding-top: $spacing-md;
   color: $white;
   box-sizing: border-box;
 
@@ -538,10 +540,6 @@ body {
             border-style: solid;
             border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
           }
-        }
-
-        .submit-button {
-          color: $secondary;
         }
       }
       .all-categories {
@@ -656,6 +654,25 @@ body {
   color: $dark;
 }
 
+.activeLink {
+  background: $primary;
+  background: linear-gradient(0deg, $primary 0%, $secondary 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.delete {
+  background: $danger;
+  background: linear-gradient(0deg, $darkDanger 0%, $danger 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 @media (hover: hover) and (min-width: $mobile) {
   .card:after {
     transform: translateY(0);
@@ -704,11 +721,6 @@ body {
   }
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .NoMatch {
   height: 100vh;
   display: flex;
@@ -742,13 +754,6 @@ a {
       filter: drop-shadow(0px 0px 15px #000000c1);
     }
   }
-}
-
-.activeLink {
-  background: $primary;
-  background: linear-gradient(0deg, $primary 0%, $secondary 60%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .newPage {
@@ -859,14 +864,6 @@ a {
       &-func {
         display: flex;
         gap: 1rem;
-
-        .edit {
-          color: $secondary;
-        }
-
-        .delete {
-          color: $danger;
-        }
       }
 
       &-link {
