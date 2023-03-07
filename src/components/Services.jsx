@@ -3,7 +3,6 @@ import Card from "../components/Card";
 import wedding from "../assets/wedding.jpg";
 import banquet from "../assets/banquet.jpg";
 import catering from "../assets/catering.jpg";
-import venue from "../assets/venue.jpg";
 import brochure from "../assets/brochure.jpg";
 import Separator from "./Separator";
 
@@ -15,7 +14,7 @@ const cardData = [
       "We invite you to arrange a consultation and tour our Grand Lodge and to consider one of our beautifully-landscaped ceremony sites as a setting for exchanging your vows. We have a full complement of wedding services that will help you with the details of planning your day.",
     button: "Learn More",
     image: wedding,
-    route: "/contact",
+    route: "/weddings",
   },
   {
     id: 1,

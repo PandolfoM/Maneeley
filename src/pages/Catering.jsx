@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
-
 import { MenuContext } from "../context/MenuContext";
 
 function Catering() {
