@@ -2,7 +2,6 @@ import { Carousel } from "@mantine/carousel";
 import { Image } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
-import Separator from "./Separator";
 
 const awards = [
   {
@@ -62,34 +61,25 @@ const awards = [
   },
 ];
 
-function About() {
+function Awards() {
   const mobile = useMediaQuery("(max-width: 600px)");
 
   return (
     <div className="about">
-      <Separator title={"About"} />
-      <p>
-        Maneeleys is one of the leaders in the wedding industry in CT, creating
-        amazing memories for many people over the last 25 years. We will assist
-        you with every detail during the planning process of your wedding day
-        and our amazing staff will attend to your every need on the day of your
-        wedding. Chef Edgardo along with his staff will prepare a mouthwatering
-        menu for you and your guests to experience.
-      </p>
       {mobile ? (
         <Carousel
           className="awards"
           dragFree
           slideSize={"25%"}
           slideGap="sm"
-          height={150}
+          height={120}
           initialSlide={3}>
           {awards.map((i) => (
             <Carousel.Slide key={i.image}>
               <a>
                 <Image
-                  width={150}
-                  height={150}
+                  width={120}
+                  height={120}
                   src={i.image}
                   alt={i.title}
                   withPlaceholder
@@ -120,4 +110,4 @@ function About() {
   );
 }
 
-export default About;
+export default Awards;
