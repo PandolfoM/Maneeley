@@ -3,7 +3,7 @@ $secondary: #fdbb2d;
 $black: #000000;
 $white: #fffcf1;
 $light: #bbb;
-$dark: #2e2e2e;
+$dark: #3c3c3c;
 $danger: #f53434;
 $success: #5ecd74;
 $font-hero: 3rem;
@@ -423,12 +423,15 @@ body {
     max-width: 30rem;
     .socials {
       padding-top: $spacing-sm;
-    }
 
-    a {
-      background: linear-gradient(0deg, $primary 0%, $secondary 60%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      div {
+        display: flex;
+        justify-content: center;
+
+        a:nth-child(even) {
+          padding: 0 0.8rem;
+        }
+      }
     }
   }
 }
@@ -587,7 +590,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    color: $dark;
     padding-top: $spacing-sm;
     padding-bottom: $spacing-sm;
 
@@ -648,6 +650,10 @@ body {
       margin-left: 1rem;
     }
   }
+}
+
+.dark {
+  color: $dark;
 }
 
 @media (hover: hover) and (min-width: $mobile) {

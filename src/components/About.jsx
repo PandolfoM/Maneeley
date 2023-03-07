@@ -55,6 +55,11 @@ const awards = [
     image:
       "https://cdn1.weddingwire.com/img/badges/2022/badge-weddingawards_en_US.png",
   },
+  {
+    title: "2023 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2023/badge-weddingawards_en_US.png",
+  },
 ];
 
 function About() {
