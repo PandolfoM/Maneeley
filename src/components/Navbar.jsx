@@ -1,7 +1,6 @@
 import { Burger } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
 
 import logo from "../assets/maneeley-logo.png";
 import { AuthContext } from "../auth/context";
