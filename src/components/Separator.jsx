@@ -1,8 +1,8 @@
 import React from "react";
 
-function Separator({ title }) {
+function Separator({ title, ...props }) {
   return (
-    <h3 className="separator">
+    <h3 className="separator" {...props}>
       <hr />
       {title}
       <hr />

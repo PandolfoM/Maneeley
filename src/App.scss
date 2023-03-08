@@ -430,10 +430,6 @@ body {
     align-items: center;
     flex-direction: column;
 
-    .separator {
-      width: 100%;
-    }
-
     &-inner {
       display: flex;
       flex-direction: row;
@@ -567,8 +563,6 @@ body {
 .scrollTop {
   position: fixed;
   background-color: $primary;
-  // width: 20px;
-  // height: 20px;
   right: 0;
   bottom: 0;
   margin: 1rem;
@@ -621,6 +615,10 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+p {
+  font-size: 1.2rem;
 }
 
 @media (hover: hover) and (min-width: $mobile) {

@@ -63,7 +63,6 @@ function Weddings() {
 
   return (
     <Page>
-      <Separator title="Weddings" />
       <Carousel
         maw={"75%"}
         mx="auto"
@@ -83,6 +82,22 @@ function Weddings() {
           </Carousel.Slide>
         ))}
       </Carousel>
+      <Separator title="Weddings" style={{ marginTop: "4rem" }} />
+      <p>
+        The Grand Lodge at Maneeley’s is a full service wedding & event venue in
+        South Windsor, CT. Five acres of manicured grounds are a picture-perfect
+        backdrop for your celebration. Maneeleys exemplifies rustic romantic
+        charm, with wooden walls and exposed beam ceilings. We can accommodate
+        100 – 200 guests, with space available in the Grand Lodge, as well as
+        the connecting Grand Tent. Maneeleys is a top leader in the CT wedding
+        industry, creating amazing memories for thousands of couples over the
+        last 25 years. We will assist you with every detail during the planning
+        process of your wedding day. Our top tier staff will attend to your
+        guests, and our bridal attendant will give you their undivided
+        attention. Our team of expert chefs, lead by our Executive Chef Edgardo,
+        will prepare a custom, mouthwatering menu for you and your guests to
+        experience.
+      </p>
     </Page>
   );
 }
