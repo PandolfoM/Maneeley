@@ -3,11 +3,10 @@ import {
   arrayRemove,
   arrayUnion,
   collection,
-  deleteDoc,
   doc,
+  getDoc,
   getDocs,
   query,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import {
@@ -23,13 +22,28 @@ import { MenuContext } from "../context/MenuContext";
 export default function useImages() {
   const { images, setImages } = useContext(MenuContext);
 
-  const getImages = async () => {
-    const q = query(collection(db, "images"));
-    const querySnapshot = await getDocs(q);
+  const getImages = async (category) => {
+    if (category) {
+      const docRef = doc(db, "images", category);
+      const docSnap = await getDoc(docRef);
 
-    querySnapshot.forEach((doc) => {
-      setImages((current) => [...current, doc.data()]);
-    });
+      if (docSnap.exists()) {
+        setImages(docSnap.data());
+      } else {
+        console.log("No document");
+      }
+    } else {
+      try {
+        setImages([]);
+        const q = query(collection(db, "images"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setImages((current) => [...current, doc.data()]);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   const deleteImage = async (category, item) => {
