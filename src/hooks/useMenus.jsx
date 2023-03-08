@@ -21,6 +21,7 @@ export default function useMenus() {
   const { menus, setMenus } = useContext(MenuContext);
 
   const deleteMenuItem = async (item, menu) => {
+    await deleteObject(ref(storage, item.id));
     await updateDoc(doc(db, "menus", menu.name), {
       items: arrayRemove(item),
     });
@@ -44,8 +45,8 @@ export default function useMenus() {
   };
 
   const addMenuItem = async ({ menu, file }, i) => {
-    const storageRef = ref(storage, file.name);
     const id = uuidv4();
+    const storageRef = ref(storage, id);
     await uploadBytes(storageRef, file).then(() => {
       getDownloadURL(storageRef).then(async (downloadURL) => {
         try {
