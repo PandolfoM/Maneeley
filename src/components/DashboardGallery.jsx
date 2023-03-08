@@ -28,7 +28,6 @@ function DashboardGallery({ classes, name, data }) {
               <form
                 className="item-controls"
                 onSubmit={form.onSubmit((values) => {
-                  console.log(values);
                   addImage(values, name);
                   form.reset();
                 })}>
