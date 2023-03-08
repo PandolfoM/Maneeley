@@ -12,25 +12,21 @@ function Catering() {
     <Page flex>
       <div>
         <p>
-          Whatever the occasion, Maneeley’s Catering executes each event with
-          skill, pride and professionalism.
+          Whether you’re looking for a full service dinner at an event venue of
+          your choice, a cocktail party at work, or back yard cook out,
+          Maneeley’s Catering is always ready to assist.
         </p>
         <p>
-          Whether you’re looking for a full service dinner, cocktail party or
-          back yard cook out, Maneeley’s Catering is always ready to assist in
-          planning that special day!
-        </p>
-        <p>
-          At Maneeley’s Catering, we offer menus for a variety of celebrations
-          and events. If you are looking to have an event catered at your place
-          of business or to simply order lunch for your staff please view our
-          menus below.
-        </p>
-        <p>
-          For any questions on our catering menu, please{" "}
+          We have a wide variety of menus for every occasion and are happy to
+          help you customize them to fit your needs. Pick up Express Trays of
+          food are also available! If you are looking to have an event catered
+          with food brought to you, have a party at home, or to simply order
+          lunch for your workplace, please view our Catering Menus and
           <Link to="/contact" className="activeLink">
-            contact us today.
+            {" "}
+            contact{" "}
           </Link>
+          our team today!
         </p>
       </div>
       <Menus menus={menus} />
