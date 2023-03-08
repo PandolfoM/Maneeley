@@ -1,6 +1,7 @@
 import { Burger } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import logo from "../assets/maneeley-logo.png";
 import { AuthContext } from "../auth/context";
@@ -16,7 +17,9 @@ function Navbar() {
     <>
       <header className="navbar">
         <div className="navbar-content">
-          <img src={logo} />
+          <Link to={"/"}>
+            <img src={logo} />
+          </Link>
           {!view ? (
             <Burger
               opened={isOpened}
