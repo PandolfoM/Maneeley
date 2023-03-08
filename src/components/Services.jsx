@@ -23,7 +23,7 @@ const cardData = [
       "Consider the Grand Lodge for all celebrations: Sweet 16 ~ Quinceanera’s ~ Birthdays ~ Anniversary’s ~ Reunions ~ Showers ~ as well as all Social and Corporate Events.",
     button: "Learn More",
     image: banquet,
-    route: "/contact",
+    route: "/banquets",
   },
   {
     id: 2,
