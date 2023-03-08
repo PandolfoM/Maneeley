@@ -1,4 +1,7 @@
 import { createStyles } from "@mantine/core";
+import { useContext, useEffect } from "react";
+import { MenuContext } from "../context/MenuContext";
+import useImages from "../hooks/useImages";
 import DashboardGallery from "./DashboardGallery";
 
 const useStyles = createStyles((theme, params, getRef) => ({
@@ -24,12 +27,22 @@ const useStyles = createStyles((theme, params, getRef) => ({
 }));
 
 function DashboardImages() {
+  const { images } = useContext(MenuContext);
+  const { getImages } = useImages();
   const { classes } = useStyles();
+
+  useEffect(() => {
+    const get = async () => {
+      await getImages();
+    };
+
+    get();
+  }, []);
 
   return (
     <>
-      <DashboardGallery classes={classes} name="Gallery" />
-      <DashboardGallery classes={classes} name="Slideshow" />
+      <DashboardGallery classes={classes} name="Gallery" data={images[0]} />
+      <DashboardGallery classes={classes} name="Slideshow" data={images[1]} />
     </>
   );
 }

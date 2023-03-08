@@ -26,6 +26,7 @@ const useStyles = createStyles((theme, params, getRef) => ({
 
 function Menus({ menus }) {
   const { classes } = useStyles();
+
   return (
     <aside className="catering-menus">
       <Separator title={"Menus"} />

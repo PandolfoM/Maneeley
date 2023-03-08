@@ -1,15 +1,3 @@
-import {
-  AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
-  Burger,
-  useMantineTheme,
-} from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
 import DashboardImages from "../components/DashboardImages";
 import DashboardMenus from "../components/DashboardMenus";
@@ -18,10 +6,7 @@ import Separator from "../components/Separator";
 import SubtleButton from "../components/SubtleButton";
 
 function Dashboard() {
-  const tablet = useMediaQuery("(max-width: 900px)");
   const [currentDash, setCurrentDash] = useState("menus");
-  const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
 
   return (
     <Page flex>
