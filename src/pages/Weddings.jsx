@@ -1,5 +1,6 @@
 import { Carousel } from "@mantine/carousel";
 import { createStyles, Image } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -41,13 +42,13 @@ const useStyles = createStyles((theme, params, getRef) => ({
 
 function Weddings() {
   const { slideshow, setSlideshow } = useContext(MenuContext);
-  const { getImages } = useImages();
   const { classes } = useStyles();
   const autoplay = useRef(Autoplay({ delay: 5000 }));
+  const tablet = useMediaQuery("(min-width: 900px)");
+  const mobile = useMediaQuery("(min-width: 600px)");
 
   useEffect(() => {
     const get = async () => {
-      console.log("ran");
       const docRef = doc(db, "images", "slideshow");
       const docSnap = await getDoc(docRef);
 
@@ -64,10 +65,10 @@ function Weddings() {
   return (
     <Page>
       <Carousel
-        maw={"75%"}
+        maw={"100%"}
         mx="auto"
         withIndicators
-        height={500}
+        height={tablet ? 500 : mobile ? 400 : 300}
         plugins={[autoplay.current]}
         onMouseEnter={autoplay.current.stop}
         onMouseLeave={autoplay.current.reset}

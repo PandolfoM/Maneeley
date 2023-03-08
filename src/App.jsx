@@ -20,6 +20,7 @@ import { useContext } from "react";
 import { AuthContext } from "./auth/context";
 import Banquets from "./pages/Banquets";
 import Weddings from "./pages/Weddings";
+import ImageGallery from "./pages/Gallery";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -42,6 +43,7 @@ function App() {
           <Route path="/catering" element={<Catering />} />
           <Route path="/banquets" element={<Banquets />} />
           <Route path="/weddings" element={<Weddings />} />
+          <Route path="/gallery" element={<ImageGallery />} />
           <Route path="/admin" element={<Admin />} />
           <Route
             path="/dashboard"

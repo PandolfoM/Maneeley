@@ -10,6 +10,7 @@ export const MenuContextProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
   const [images, setImages] = useState([]);
   const [slideshow, setSlideshow] = useState([]);
+  const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
     const unsub = async () => {
@@ -26,7 +27,16 @@ export const MenuContextProvider = ({ children }) => {
 
   return (
     <MenuContext.Provider
-      value={{ menus, setMenus, images, setImages, slideshow, setSlideshow }}>
+      value={{
+        menus,
+        setMenus,
+        images,
+        setImages,
+        slideshow,
+        setSlideshow,
+        gallery,
+        setGallery,
+      }}>
       {children}
     </MenuContext.Provider>
   );
