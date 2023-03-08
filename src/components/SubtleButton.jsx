@@ -13,11 +13,23 @@ const SubtleBtn = styled(Button)`
   }
 `;
 
-function SubtleButton({ name, ...otherProps }) {
+function SubtleButton({ name, style, type, ...otherProps }) {
   return (
-    <a className="activeLink" target="_blank" {...otherProps}>
-      {name}
-    </a>
+    <>
+      {!type ? (
+        <a className="activeLink" target="_blank" style={style} {...otherProps}>
+          {name}
+        </a>
+      ) : (
+        <button
+          className="activeLink"
+          type={type}
+          style={style}
+          {...otherProps}>
+          {name}
+        </button>
+      )}
+    </>
   );
 }
 

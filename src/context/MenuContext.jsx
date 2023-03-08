@@ -8,6 +8,7 @@ export const MenuContext = createContext();
 
 export const MenuContextProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const unsub = async () => {
@@ -23,7 +24,7 @@ export const MenuContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <MenuContext.Provider value={{ menus, setMenus }}>
+    <MenuContext.Provider value={{ menus, setMenus, images, setImages }}>
       {children}
     </MenuContext.Provider>
   );

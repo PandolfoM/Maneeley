@@ -602,6 +602,9 @@ body {
 }
 
 .activeLink {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
   background: $primary;
   background: linear-gradient(0deg, $primary 0%, $secondary 60%);
   -webkit-background-clip: text;
@@ -738,10 +741,6 @@ a {
       div {
         display: flex;
         gap: 2px;
-
-        .mantine-InputWrapper-label {
-          color: $white;
-        }
 
         .mantine-Input-wrapper {
           border: 1px solid $dark;
