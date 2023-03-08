@@ -20,6 +20,13 @@ function NavLinks({ currentUser }) {
       </li>
       <li>
         <NavLink
+          to="/gallery"
+          className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
+          Gallery
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/contact"
           className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
           Contact
