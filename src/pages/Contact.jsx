@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { Textarea, TextInput } from "@mantine/core";
+import { createStyles, Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect } from "react";
 
@@ -32,7 +32,36 @@ const validationSchema = Yup.object().shape({
     .label("Message"),
 });
 
+const useStyles = createStyles(() => ({
+  label: {
+    color: "#fffcf1",
+  },
+  wrapper: {
+    border: "1px solid #3c3c3c",
+    backgroundColor: "#2e2e2e80",
+
+    "&:focus": {
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+    },
+    "&:focus-within": {
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+    },
+  },
+
+  visibilityToggle: {
+    "&:hover": {
+      background: "transparent",
+    },
+  },
+}));
+
 function Contact() {
+  const { classes } = useStyles();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -54,8 +83,9 @@ function Contact() {
       <form
         onSubmit={form.onSubmit((values) => console.log(values))}
         className="contact-form newPage-sub">
-        <div className="form-name">
+        <div className={`form-name ${classes}`}>
           <TextInput
+            classNames={classes}
             variant="unstyled"
             name="first"
             label="First Name"
@@ -63,6 +93,7 @@ function Contact() {
             {...form.getInputProps("first")}
           />
           <TextInput
+            classNames={classes}
             variant="unstyled"
             name="last"
             label="Last Name"
@@ -71,6 +102,7 @@ function Contact() {
           />
         </div>
         <TextInput
+          classNames={classes}
           variant="unstyled"
           name="email"
           label="Email"
@@ -78,12 +110,14 @@ function Contact() {
           {...form.getInputProps("email")}
         />
         <TextInput
+          classNames={classes}
           variant="unstyled"
           name="phone"
           label="Phone"
           {...form.getInputProps("phone")}
         />
         <Textarea
+          classNames={classes}
           name="message"
           variant="unstyled"
           label="Message"

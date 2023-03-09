@@ -299,101 +299,46 @@ body {
 }
 // Services END
 
-// About
-.about {
-  padding: 0 1rem;
-  padding-top: $spacing-xl;
-  color: $white;
+// Contact
+.contact-form {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 2rem;
-
-  .awards {
-    justify-content: flex-start;
+  gap: 1rem;
+  color: $white;
+  .form-name {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 1rem;
-    flex-wrap: wrap;
-    .mantine-Image-placeholder {
-      background-color: #2e2e2e80;
-      border: 1px solid $dark;
-    }
-
-    a {
-      background-image: linear-gradient(to bottom, #2a2a2a85, #000000ba);
+    div {
+      width: 100%;
     }
   }
-}
-// About END
 
-// Contact
-.contact {
-  @media screen and (min-width: $mobile) {
-    flex-wrap: nowrap;
-  }
-
-  &-form {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  input,
+  textarea {
     color: $white;
-    .form-name {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 1rem;
-      div {
-        width: 100%;
-      }
-    }
-
-    .mantine-InputWrapper-label {
-      color: $white;
-    }
-
-    .mantine-Input-wrapper {
-      border: 1px solid $dark;
-      background-color: #2e2e2e80;
-
-      input,
-      textarea {
-        color: $white;
-        padding: 0.5rem;
-      }
-
-      .mantine-PasswordInput-visibilityToggle {
-        &:hover {
-          background-color: transparent;
-        }
-      }
-
-      &:focus,
-      &:focus-within {
-        border-width: 1px;
-        border-style: solid;
-        border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
-      }
-    }
+    padding: 0.5rem;
   }
-  &-aside {
-    max-width: 30rem;
-    .socials {
-      padding-top: $spacing-sm;
+}
 
-      div {
-        display: flex;
-        justify-content: center;
+.contact-aside {
+  max-width: 30rem;
+  .socials {
+    padding-top: $spacing-sm;
 
-        a:nth-child(even) {
-          padding: 0 0.8rem;
-        }
+    div {
+      display: flex;
+      justify-content: center;
+
+      a:nth-child(even) {
+        padding: 0 0.8rem;
       }
     }
   }
 }
+
 // Contact END
 
 // Dashboard
@@ -457,35 +402,9 @@ body {
       justify-content: center;
       gap: 1rem;
 
-      // .mantine-InputWrapper-label {
-      //   color: $white;
-      // }
-
-      .mantine-InputWrapper-root {
-        width: 100%;
-      }
-
-      .mantine-Input-wrapper {
-        border: 1px solid $dark;
-        background-color: #2e2e2e80;
-
-        input {
-          color: $white;
-          padding: 0.5rem;
-        }
-
-        .mantine-PasswordInput-visibilityToggle {
-          &:hover {
-            background-color: transparent;
-          }
-        }
-
-        &:focus,
-        &:focus-within {
-          border-width: 1px;
-          border-style: solid;
-          border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
-        }
+      input {
+        color: $white;
+        padding: 0.5rem;
       }
     }
     .all-categories {
@@ -818,34 +737,16 @@ p {
         display: flex;
         gap: 2px;
 
-        .mantine-Input-wrapper {
-          border: 1px solid $dark;
-          background-color: #2e2e2e80;
+        input,
+        textarea {
+          width: 10rem;
+          color: $white;
+          padding: 0.5rem;
+        }
 
-          input,
-          textarea {
-            width: 10rem;
-            color: $white;
-            padding: 0.5rem;
-          }
-
-          button {
-            width: 10rem;
-            color: $white;
-          }
-
-          .mantine-PasswordInput-visibilityToggle {
-            &:hover {
-              background-color: transparent;
-            }
-          }
-
-          &:focus,
-          &:focus-within {
-            border-width: 1px;
-            border-style: solid;
-            border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
-          }
+        button {
+          width: 10rem;
+          color: $white;
         }
       }
     }
@@ -867,54 +768,20 @@ p {
 }
 
 .modal {
-  .mantine-Modal-modal {
-    background-color: $black;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  input,
+  textarea {
     color: $white;
+    padding: 0.5rem;
+  }
 
-    .mantine-ActionIcon-root {
-      &:hover {
-        background-color: transparent;
-        color: $white;
-      }
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .mantine-InputWrapper-label {
-      color: $white;
-    }
-
-    .mantine-Input-wrapper {
-      border: 1px solid $dark;
-      background-color: #2e2e2e80;
-
-      input,
-      textarea {
-        color: $white;
-        padding: 0.5rem;
-      }
-
-      button {
-        color: $white;
-      }
-
-      .mantine-PasswordInput-visibilityToggle {
-        &:hover {
-          background-color: transparent;
-        }
-      }
-
-      &:focus,
-      &:focus-within {
-        border-width: 1px;
-        border-style: solid;
-        border-image: linear-gradient(0deg, $primary 0%, $secondary 60%) 1;
-      }
-    }
+  button {
+    color: $white;
   }
 }
 // Utilities END

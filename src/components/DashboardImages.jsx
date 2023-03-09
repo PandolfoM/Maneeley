@@ -24,6 +24,21 @@ const useStyles = createStyles((theme, params, getRef) => ({
       backgroundColor: "#2e2e2e80",
     },
   },
+  wrapper: {
+    border: "1px solid #3c3c3c",
+    backgroundColor: "#2e2e2e80",
+
+    "&:focus": {
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+    },
+    "&:focus-within": {
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+    },
+  },
 }));
 
 function DashboardImages() {
