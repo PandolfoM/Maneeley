@@ -75,7 +75,7 @@ export default function useMenus() {
     });
   };
 
-  const editMenuItem = async ({ name, file }, menu, item) => {
+  const editMenuItem = async (name, file, menu, item) => {
     await updateDoc(doc(db, "menus", menu), {
       items: arrayRemove(item),
     });

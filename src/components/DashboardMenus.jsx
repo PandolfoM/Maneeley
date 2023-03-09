@@ -11,7 +11,8 @@ import SubtleButton from "./SubtleButton";
 function DashboardMenus({ classes, name, data }) {
   const { deleteMenuItem, addMenuItem } = useMenus();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentMenu, setCurrentMenu] = useState({});
+  const [currentMenuName, setCurrentMenuName] = useState("");
+  const [currentMenuItem, setCurrentMenuItem] = useState("");
 
   const form = useForm({
     initialValues: {
@@ -31,7 +32,8 @@ function DashboardMenus({ classes, name, data }) {
         <AppModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          currentMenu={currentMenu}
+          currentMenuName={currentMenuName}
+          currentMenuItem={currentMenuItem}
           title="Edit"
         />
       )}
@@ -78,7 +80,8 @@ function DashboardMenus({ classes, name, data }) {
                     <div className="item-item-func">
                       <SubtleButton
                         onClick={() => {
-                          setCurrentMenu({ menu: name, item: i });
+                          setCurrentMenuName(name);
+                          setCurrentMenuItem(i);
                           setIsModalOpen(true);
                         }}
                         name={"Edit"}
