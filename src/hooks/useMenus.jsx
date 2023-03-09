@@ -24,27 +24,16 @@ import { MenuContext } from "../context/MenuContext";
 export default function useMenus() {
   const { menus, setMenus } = useContext(MenuContext);
 
-  const getMenus = async (category) => {
-    if (category) {
-      const docRef = doc(db, "menus", category);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setMenus(docSnap.data());
-      } else {
-        console.log("No document");
-      }
-    } else {
-      try {
-        setMenus([]);
-        const q = query(collection(db, "menus"));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          setMenus((current) => [...current, doc.data()]);
-        });
-      } catch (error) {
-        console.log(error);
-      }
+  const getMenus = async () => {
+    try {
+      setMenus([]);
+      const q = query(collection(db, "menus"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setMenus((current) => [...current, doc.data()]);
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 
