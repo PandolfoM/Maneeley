@@ -168,7 +168,7 @@ function Contact() {
               <FontAwesomeIcon icon={faFacebookF} size="lg" title="Facebook" />
             </a>
             <a href="https://www.instagram.com/maneeleys/" target="_blank">
-              <FontAwesomeIcon icon={faInstagram} size="lg" title="Facebook" />
+              <FontAwesomeIcon icon={faInstagram} size="lg" title="Instagram" />
             </a>
           </div>
         </div>
