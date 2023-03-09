@@ -52,7 +52,7 @@ export default function useMenus() {
     setMenus(newArr);
   };
 
-  const addMenuItem = async ({ name, file }, category) => {
+  const addMenuItem = async (name, file, category) => {
     const id = uuidv4();
     const storageRef = ref(storage, id);
     await uploadBytes(storageRef, file).then(() => {

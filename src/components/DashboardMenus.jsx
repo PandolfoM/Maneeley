@@ -49,7 +49,7 @@ function DashboardMenus({ classes, name, data }) {
                 <form
                   className="item-controls"
                   onSubmit={form.onSubmit((values) => {
-                    addMenuItem(values, name);
+                    addMenuItem(values.name, values.file, name);
                     form.reset();
                   })}>
                   <div>
