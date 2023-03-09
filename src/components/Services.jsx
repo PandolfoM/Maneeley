@@ -20,7 +20,7 @@ const cardData = [
     id: 1,
     title: "Banquets",
     subtite:
-      "Consider the Grand Lodge for all celebrations: Sweet 16 ~ Quinceanera’s ~ Birthdays ~ Anniversary’s ~ Reunions ~ Showers ~ as well as all Social and Corporate Events.",
+      "Consider the Grand Lodge for all celebrations: Sweet 16 ~ Quinceanera's ~ Birthdays ~ Anniversary's ~ Reunions ~ Showers ~ as well as all Social and Corporate Events.",
     button: "Learn More",
     image: banquet,
     route: "/banquets",
@@ -29,7 +29,7 @@ const cardData = [
     id: 2,
     title: "Catering",
     subtite:
-      "Maneeley’s is dedicated to making your next working breakfast, lunch, dinner or business meeting a success. Our team of sales professionals will assist you in planning your special menu",
+      "Maneeley's is dedicated to making your next working breakfast, lunch, dinner or business meeting a success. Our team of sales professionals will assist you in planning your special menu",
     button: "Learn More",
     image: catering,
     route: "/catering",
