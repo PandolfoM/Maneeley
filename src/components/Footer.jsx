@@ -1,4 +1,4 @@
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faPhone, faPrint } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -15,6 +15,9 @@ function Footer() {
           </a>
           <a href="https://www.facebook.com/Maneeleys" target="_blank">
             <FontAwesomeIcon icon={faFacebookF} size="lg" title="Facebook" />
+          </a>
+          <a href="https://www.instagram.com/maneeleys/" target="_blank">
+            <FontAwesomeIcon icon={faInstagram} size="lg" title="Instagram" />
           </a>
         </div>
         <h6>Helpful Links</h6>
