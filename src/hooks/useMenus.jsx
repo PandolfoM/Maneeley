@@ -81,7 +81,6 @@ export default function useMenus() {
     });
 
     if (file) {
-      console.log(item.id);
       const storageRef = ref(storage, item.id);
 
       // Delete previous file
@@ -127,7 +126,6 @@ export default function useMenus() {
 
       let newArr = [...menus];
       const menuIndex = menus.findIndex((i) => i.id === menu.toLowerCase());
-      console.log(menuIndex);
       const itemIndex = newArr[menuIndex].items.findIndex(
         (i) => i.id === item.id
       );
