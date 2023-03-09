@@ -12,6 +12,8 @@ function ImageGallery() {
   const images = gallery.images;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const get = async () => {
       const docRef = doc(db, "images", "gallery");
       const docSnap = await getDoc(docRef);
