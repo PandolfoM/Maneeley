@@ -41,15 +41,20 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function AppModal({ isModalOpen, setIsModalOpen, title, currentMenu }) {
+function AppModal({
+  isModalOpen,
+  setIsModalOpen,
+  title,
+  currentMenuName,
+  currentMenuItem,
+}) {
   const { classes } = useStyles();
-  const { item, menu } = currentMenu;
   const { editMenuItem } = useMenus();
   const [loading, setLoading] = useState(false);
-  const httpRef = ref(storage, item.file);
+  const httpRef = ref(storage, currentMenuItem.file);
   const form = useForm({
     initialValues: {
-      name: item.name,
+      name: currentMenuItem.name,
       file: null,
     },
 
@@ -58,9 +63,14 @@ function AppModal({ isModalOpen, setIsModalOpen, title, currentMenu }) {
     },
   });
 
-  const handleSubmit = async ({ name, file }) => {
+  const handleSubmit = async (values) => {
     setLoading(true);
-    await editMenuItem({ name, file }, menu, item);
+    await editMenuItem(
+      values.name,
+      values.file,
+      currentMenuName,
+      currentMenuItem
+    );
     setLoading(false);
     setIsModalOpen(false);
   };
