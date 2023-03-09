@@ -27,7 +27,7 @@ function ScrollTop() {
             size={"xl"}
             radius="xl"
             variant="gradient"
-            gradient={{ from: "#b57d09", to: "#fdbb2d", deg: 360 }}
+            gradient={{ from: "#b17900", to: "#fdbb2d", deg: 360 }}
             onClick={() => scrollTo({ y: 0 })}>
             <FontAwesomeIcon icon={faChevronUp} size="xl" color="white" />
           </ActionIcon>

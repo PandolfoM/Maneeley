@@ -1,3 +1,4 @@
+import { Loader } from "@mantine/core";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useContext, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -26,19 +27,25 @@ function ImageGallery() {
   }, []);
 
   return (
-    <Page>
+    <Page id="gallery">
       <Separator title="Gallery" />
-      <ul className="gallery">
-        {images?.map((i) => (
-          <li className="gallery-item" key={i.id}>
-            <LazyLoadImage
-              src={i.file}
-              style={{ maxWidth: "100%" }}
-              alt={i.name}
-            />
-          </li>
-        ))}
-      </ul>
+      {images ? (
+        <ul className="gallery">
+          {images.map((i) => (
+            <li className="gallery-item" key={i.id}>
+              <LazyLoadImage
+                src={i.file}
+                style={{ maxWidth: "100%" }}
+                alt={i.name}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div style={{ margin: "0 auto", width: "fit-content" }}>
+          <Loader size="xl" variant="bars" mx="auto" />
+        </div>
+      )}
     </Page>
   );
 }

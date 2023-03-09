@@ -5,7 +5,7 @@ function AppButton({ name, ...otherProps }) {
   return (
     <Button
       variant="gradient"
-      gradient={{ from: "#b57d09", to: "#fdbb2d", deg: 360 }}
+      gradient={{ from: "#b17900", to: "#fdbb2d", deg: 360 }}
       radius={"xl"}
       uppercase
       {...otherProps}>
