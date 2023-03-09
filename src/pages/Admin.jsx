@@ -1,7 +1,7 @@
 import { PasswordInput, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { AuthContext } from "../auth/context";
@@ -30,6 +30,10 @@ function Admin() {
 
     validate: yupResolver(validationSchema),
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
