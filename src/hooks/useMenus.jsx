@@ -2,8 +2,12 @@ import { uuidv4 } from "@firebase/util";
 import {
   arrayRemove,
   arrayUnion,
+  collection,
   deleteDoc,
   doc,
+  getDoc,
+  getDocs,
+  query,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -20,14 +24,38 @@ import { MenuContext } from "../context/MenuContext";
 export default function useMenus() {
   const { menus, setMenus } = useContext(MenuContext);
 
-  const deleteMenuItem = async (item, menu) => {
+  const getMenus = async (category) => {
+    if (category) {
+      const docRef = doc(db, "menus", category);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setMenus(docSnap.data());
+      } else {
+        console.log("No document");
+      }
+    } else {
+      try {
+        setMenus([]);
+        const q = query(collection(db, "menus"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setMenus((current) => [...current, doc.data()]);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const deleteMenuItem = async (category, item) => {
     await deleteObject(ref(storage, item.id));
-    await updateDoc(doc(db, "menus", menu.name), {
+    await updateDoc(doc(db, "menus", category), {
       items: arrayRemove(item),
     });
 
     let newArr = [...menus];
-    const menuIndex = menus.findIndex((i) => i.id === menu.id);
+    const menuIndex = menus.findIndex((i) => i.id === category.toLowerCase());
     const itemIndex = newArr[menuIndex].items.findIndex(
       (i) => i.id === item.id
     );
@@ -35,28 +63,21 @@ export default function useMenus() {
     setMenus(newArr);
   };
 
-  const deleteCategory = async ({ name, id }) => {
-    await deleteDoc(doc(db, "menus", name));
-
-    const newArr = [...menus];
-    const menuIndex = menus.findIndex((item) => item.id === id);
-    newArr.splice(menuIndex, 1);
-    setMenus(newArr);
-  };
-
-  const addMenuItem = async ({ menu, file }, i) => {
+  const addMenuItem = async ({ name, file }, category) => {
     const id = uuidv4();
     const storageRef = ref(storage, id);
     await uploadBytes(storageRef, file).then(() => {
       getDownloadURL(storageRef).then(async (downloadURL) => {
         try {
-          await updateDoc(doc(db, "menus", i.name), {
-            items: arrayUnion({ name: menu, file: downloadURL, id }),
+          await updateDoc(doc(db, "menus", category), {
+            items: arrayUnion({ name: name, file: downloadURL, id }),
           });
 
           let newArr = [...menus];
-          const menuIndex = menus.findIndex((item) => item.id === i.id);
-          newArr[menuIndex].items.push({ name: menu, file: downloadURL, id });
+          const menuIndex = menus.findIndex(
+            (item) => category.toLowerCase() === item.id
+          );
+          newArr[menuIndex].items.push({ name: name, file: downloadURL, id });
           setMenus(newArr);
         } catch (e) {
           console.log(e);
@@ -65,32 +86,22 @@ export default function useMenus() {
     });
   };
 
-  const addMenuCategory = async ({ name }) => {
-    let id = uuidv4();
-    await setDoc(doc(db, "menus", name), {
-      id,
-      items: [],
-      name,
-    });
-
-    setMenus((current) => [...current, { name, items: [], id }]);
-  };
-
   const editMenuItem = async ({ name, file }, menu, item) => {
-    await updateDoc(doc(db, "menus", menu.name), {
+    await updateDoc(doc(db, "menus", menu), {
       items: arrayRemove(item),
     });
 
     if (file) {
-      const storageRef = ref(storage, file.name);
+      console.log(item.id);
+      const storageRef = ref(storage, item.id);
 
       // Delete previous file
-      await deleteObject(ref(storage, item.file));
+      await deleteObject(ref(storage, item.id));
 
       await uploadBytes(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            await updateDoc(doc(db, "menus", menu.name), {
+            await updateDoc(doc(db, "menus", menu), {
               items: arrayUnion({
                 name: name,
                 file: downloadURL,
@@ -99,7 +110,9 @@ export default function useMenus() {
             });
 
             let newArr = [...menus];
-            const menuIndex = menus.findIndex((i) => i.id === menu.id);
+            const menuIndex = menus.findIndex(
+              (i) => i.id === menu.toLowerCase()
+            );
             const itemIndex = newArr[menuIndex].items.findIndex(
               (i) => i.id === item.id
             );
@@ -110,12 +123,12 @@ export default function useMenus() {
             };
             setMenus(newArr);
           } catch (e) {
-            console.log(e);
+            return e;
           }
         });
       });
     } else {
-      await updateDoc(doc(db, "menus", menu.name), {
+      await updateDoc(doc(db, "menus", menu), {
         items: arrayUnion({
           name: name,
           file: item.file,
@@ -124,7 +137,8 @@ export default function useMenus() {
       });
 
       let newArr = [...menus];
-      const menuIndex = menus.findIndex((i) => i.id === menu.id);
+      const menuIndex = menus.findIndex((i) => i.id === menu.toLowerCase());
+      console.log(menuIndex);
       const itemIndex = newArr[menuIndex].items.findIndex(
         (i) => i.id === item.id
       );
@@ -138,10 +152,9 @@ export default function useMenus() {
   };
 
   return {
+    getMenus,
     deleteMenuItem,
     addMenuItem,
     editMenuItem,
-    addMenuCategory,
-    deleteCategory,
   };
 }

@@ -1,4 +1,4 @@
-import { Accordion, createStyles } from "@mantine/core";
+import { Accordion, createStyles, Loader } from "@mantine/core";
 import React from "react";
 import Separator from "./Separator";
 
@@ -30,13 +30,16 @@ function Menus({ menus }) {
   return (
     <aside className="catering-menus">
       <Separator title={"Menus"} />
-      <Accordion variant="filled" transitionDuration={300} classNames={classes}>
-        {menus.map((m) => (
-          <Accordion.Item value={m.name} key={m.id}>
-            <Accordion.Control>{m.name} Menus</Accordion.Control>
+      {menus.items ? (
+        <Accordion
+          variant="filled"
+          transitionDuration={300}
+          classNames={classes}>
+          <Accordion.Item value={menus.name} key={menus.id}>
+            <Accordion.Control>{menus.name} Menus</Accordion.Control>
             <Accordion.Panel>
               <div className="item">
-                {m.items.map((i) => (
+                {menus.items.map((i) => (
                   <div key={i.file} className="item-item">
                     <a href={i.file} target="_blank" className="activeLink">
                       {i.name}
@@ -46,8 +49,12 @@ function Menus({ menus }) {
               </div>
             </Accordion.Panel>
           </Accordion.Item>
-        ))}
-      </Accordion>
+        </Accordion>
+      ) : (
+        <div style={{ margin: "0 auto", width: "fit-content" }}>
+          <Loader size="xl" variant="bars" mx="auto" />
+        </div>
+      )}
     </aside>
   );
 }

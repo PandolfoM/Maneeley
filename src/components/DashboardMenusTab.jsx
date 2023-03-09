@@ -1,8 +1,16 @@
-import { createStyles } from "@mantine/core";
-import { useContext, useEffect } from "react";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  Accordion,
+  createStyles,
+  FileInput,
+  Table,
+  TextInput,
+} from "@mantine/core";
+import React, { useContext, useEffect } from "react";
 import { MenuContext } from "../context/MenuContext";
-import useImages from "../hooks/useImages";
-import DashboardGallery from "./DashboardGallery";
+import useMenus from "../hooks/useMenus";
+import DashboardMenus from "./DashboardMenus";
 
 const useStyles = createStyles(() => ({
   chevron: {
@@ -24,6 +32,9 @@ const useStyles = createStyles(() => ({
       backgroundColor: "#2e2e2e80",
     },
   },
+  root: {
+    width: "100%",
+  },
   wrapper: {
     border: "1px solid #3c3c3c",
     backgroundColor: "#2e2e2e80",
@@ -41,14 +52,14 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function DashboardImages() {
-  const { images } = useContext(MenuContext);
-  const { getImages } = useImages();
+function DashboardMenusTab() {
+  const { menus } = useContext(MenuContext);
+  const { getMenus } = useMenus();
   const { classes } = useStyles();
 
   useEffect(() => {
     const get = async () => {
-      await getImages();
+      await getMenus();
     };
 
     get();
@@ -56,10 +67,10 @@ function DashboardImages() {
 
   return (
     <>
-      <DashboardGallery classes={classes} name="Gallery" data={images[0]} />
-      <DashboardGallery classes={classes} name="Slideshow" data={images[1]} />
+      <DashboardMenus classes={classes} name="Catering" data={menus[1]} />
+      <DashboardMenus classes={classes} name="Banquets" data={menus[0]} />
     </>
   );
 }
 
-export default DashboardImages;
+export default DashboardMenusTab;
