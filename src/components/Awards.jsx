@@ -62,18 +62,19 @@ const awards = [
 ];
 
 function Awards() {
+  const tablet = useMediaQuery("(max-width: 900px)");
   const mobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <div className="about">
-      {mobile ? (
+    <div className="awards">
+      {tablet ? (
         <Carousel
-          className="awards"
+          className="awards-imgs"
           dragFree
-          slideSize={"25%"}
+          slideSize={"5%"}
           slideGap="sm"
           height={120}
-          initialSlide={3}>
+          initialSlide={0}>
           {awards.map((i) => (
             <Carousel.Slide key={i.image}>
               <a>
@@ -89,7 +90,7 @@ function Awards() {
           ))}
         </Carousel>
       ) : (
-        <div className="awards">
+        <div className="awards-imgs">
           {awards.map((i) => (
             <a
               key={i.image}

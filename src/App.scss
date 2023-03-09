@@ -206,6 +206,20 @@ body {
 }
 // Hero END
 
+// Awards
+.awards {
+  padding-top: $spacing-xl;
+
+  &-imgs {
+    justify-content: center;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+// Awards END
+
 // Services
 .services {
   padding: 0 1rem;
