@@ -1,20 +1,35 @@
-import React from "react";
-import { useContext } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
-import { MenuContext } from "../context/MenuContext";
+import { db } from "../firebase";
 
 function Catering() {
-  const { menus } = useContext(MenuContext);
+  const [menus, setMenus] = useState([]);
+
+  useEffect(() => {
+    const unsub = async () => {
+      const docRef = doc(db, "menus", "Catering");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setMenus(docSnap.data());
+      } else {
+        console.log("No document");
+      }
+    };
+
+    unsub();
+  }, []);
 
   return (
     <Page flex>
       <div>
         <p style={{ whiteSpace: "break-spaces" }}>
-          Whether you’re looking for a full service dinner at an event venue of
+          Whether you're looking for a full service dinner at an event venue of
           your choice, a cocktail party at work, or back yard cook out,
-          Maneeley’s Catering is always ready to assist.
+          Maneeley's Catering is always ready to assist.
         </p>
         <p style={{ whiteSpace: "break-spaces" }}>
           We have a wide variety of menus for every occasion and are happy to
