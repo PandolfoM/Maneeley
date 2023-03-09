@@ -33,6 +33,7 @@ function DashboardGallery({ classes, name, data }) {
                 })}>
                 <div>
                   <FileInput
+                    classNames={classes}
                     variant="unstyled"
                     size="xs"
                     placeholder="Choose image "
