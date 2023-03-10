@@ -1,8 +1,8 @@
 import { createStyles } from "@mantine/core";
 import { useContext, useEffect } from "react";
-import { MenuContext } from "../context/MenuContext";
-import useImages from "../hooks/useImages";
-import DashboardGallery from "./DashboardGallery";
+import { MenuContext } from "../../context/MenuContext";
+import useImages from "../../hooks/useImages";
+import DashboardImages from "./DashboardImages";
 
 const useStyles = createStyles(() => ({
   chevron: {
@@ -41,7 +41,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function DashboardImages() {
+function DashboardImagesTab() {
   const { images } = useContext(MenuContext);
   const { getImages } = useImages();
   const { classes } = useStyles();
@@ -56,10 +56,10 @@ function DashboardImages() {
 
   return (
     <>
-      <DashboardGallery classes={classes} name="Gallery" data={images[0]} />
-      <DashboardGallery classes={classes} name="Slideshow" data={images[1]} />
+      <DashboardImages classes={classes} name="Gallery" data={images[0]} />
+      <DashboardImages classes={classes} name="Slideshow" data={images[1]} />
     </>
   );
 }
 
-export default DashboardImages;
+export default DashboardImagesTab;

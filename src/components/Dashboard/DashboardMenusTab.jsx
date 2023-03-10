@@ -1,15 +1,7 @@
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Accordion,
-  createStyles,
-  FileInput,
-  Table,
-  TextInput,
-} from "@mantine/core";
+import { createStyles } from "@mantine/core";
 import React, { useContext, useEffect } from "react";
-import { MenuContext } from "../context/MenuContext";
-import useMenus from "../hooks/useMenus";
+import { MenuContext } from "../../context/MenuContext";
+import useMenus from "../../hooks/useMenus";
 import DashboardMenus from "./DashboardMenus";
 
 const useStyles = createStyles(() => ({

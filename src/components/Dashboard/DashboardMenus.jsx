@@ -4,9 +4,9 @@ import { Accordion, FileInput, TextInput } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import React from "react";
 import { useState } from "react";
-import useMenus from "../hooks/useMenus";
-import AppModal from "./Modal";
-import SubtleButton from "./SubtleButton";
+import useMenus from "../../hooks/useMenus";
+import AppModal from "../Modal";
+import SubtleButton from "../SubtleButton";
 
 function DashboardMenus({ classes, name, data }) {
   const { deleteMenuItem, addMenuItem } = useMenus();
