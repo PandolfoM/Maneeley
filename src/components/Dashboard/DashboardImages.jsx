@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Accordion, FileInput } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import React from "react";
-import useImages from "../hooks/useImages";
-import SubtleButton from "./SubtleButton";
+import useImages from "../../hooks/useImages";
+import SubtleButton from "../SubtleButton";
 
-function DashboardGallery({ classes, name, data }) {
+function DashboardImages({ classes, name, data }) {
   const { addImage, deleteImage } = useImages();
   const form = useForm({
     initialValues: {
@@ -82,4 +82,4 @@ function DashboardGallery({ classes, name, data }) {
   );
 }
 
-export default DashboardGallery;
+export default DashboardImages;
