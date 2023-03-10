@@ -88,6 +88,7 @@ function AppModal({
           size="xs"
           placeholder="Menu Name"
           withAsterisk
+          classNames={classes}
           {...form.getInputProps("name")}
         />
         <FileInput
@@ -97,6 +98,7 @@ function AppModal({
           accept="application/pdf"
           icon={<FontAwesomeIcon icon={faUpload} />}
           withAsterisk
+          classNames={classes}
           {...form.getInputProps("file")}
         />
         <AppButton type="submit" name={"Save"} loading={loading} />
