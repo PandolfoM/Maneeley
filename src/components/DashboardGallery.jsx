@@ -47,7 +47,11 @@ function DashboardGallery({ classes, name, data }) {
                     {...form.getInputProps("file")}
                   />
                 </div>
-                <SubtleButton type="submit" name="Add" />
+                <SubtleButton
+                  type="submit"
+                  name="Add"
+                  style={{ whiteSpace: "nowrap" }}
+                />
               </form>
               {data?.images?.map((i) => (
                 <div key={i.id} className="item-item">
