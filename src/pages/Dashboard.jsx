@@ -24,26 +24,28 @@ function Dashboard() {
         </div>
       </div>
       <aside className="dashboard-nav">
-        <div className="content">
+        <div>
           <Separator title={"Dashboard"} />
-          <SubtleButton
-            style={{ cursor: "pointer" }}
-            name={"Menus"}
-            className={currentDash === "menus" ? "activeLink" : ""}
-            onClick={() => setCurrentDash("menus")}
-          />
-          <SubtleButton
-            style={{ cursor: "pointer" }}
-            name={"Slideshow / Gallery"}
-            className={currentDash === "images" ? "activeLink" : ""}
-            onClick={() => setCurrentDash("images")}
-          />
-          <SubtleButton
-            style={{ cursor: "pointer" }}
-            name={"Users"}
-            className={currentDash === "users" ? "activeLink" : ""}
-            onClick={() => setCurrentDash("users")}
-          />
+          <div className="content">
+            <SubtleButton
+              style={{ cursor: "pointer" }}
+              name={"Menus"}
+              className={currentDash === "menus" ? "activeLink" : ""}
+              onClick={() => setCurrentDash("menus")}
+            />
+            <SubtleButton
+              style={{ cursor: "pointer" }}
+              name={"Slideshow / Gallery"}
+              className={currentDash === "images" ? "activeLink" : ""}
+              onClick={() => setCurrentDash("images")}
+            />
+            <SubtleButton
+              style={{ cursor: "pointer" }}
+              name={"Users"}
+              className={currentDash === "users" ? "activeLink" : ""}
+              onClick={() => setCurrentDash("users")}
+            />
+          </div>
         </div>
       </aside>
     </Page>
