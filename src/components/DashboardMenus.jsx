@@ -39,6 +39,7 @@ function DashboardMenus({ classes, name, data }) {
       )}
       <div className="catering-menus">
         <Accordion
+          defaultValue={name}
           variant="filled"
           transitionDuration={300}
           classNames={classes}>

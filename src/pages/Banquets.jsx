@@ -1,12 +1,29 @@
-import React from "react";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
 
 import { MenuContext } from "../context/MenuContext";
+import { db } from "../firebase";
 
 function Banquets() {
-  const { menus } = useContext(MenuContext);
+  const [menus, setMenus] = useState([]);
+
+  useEffect(() => {
+    const unsub = async () => {
+      const docRef = doc(db, "menus", "Banquets");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setMenus(docSnap.data());
+      } else {
+        console.log("No document");
+      }
+    };
+
+    unsub();
+  }, []);
 
   return (
     <Page flex>

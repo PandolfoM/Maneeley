@@ -24,6 +24,7 @@ const theme = {
 
   primaryColor: "maneeley",
   primaryShade: 4,
+  colorScheme: "dark",
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(

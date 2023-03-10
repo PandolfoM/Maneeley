@@ -20,7 +20,11 @@ function DashboardGallery({ classes, name, data }) {
 
   return (
     <div className="dashboard-images">
-      <Accordion variant="filled" transitionDuration={300} classNames={classes}>
+      <Accordion
+        defaultValue={name}
+        variant="filled"
+        transitionDuration={300}
+        classNames={classes}>
         <Accordion.Item value={name} key={data?.id}>
           <Accordion.Control>{name}</Accordion.Control>
           <Accordion.Panel>
