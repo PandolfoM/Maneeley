@@ -1,4 +1,4 @@
-import { PasswordInput, TextInput } from "@mantine/core";
+import { createStyles, PasswordInput, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useContext, useEffect } from "react";
@@ -19,7 +19,35 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("Required").label("Password"),
 });
 
+const useStyles = createStyles(() => ({
+  label: {
+    color: "#fffcf1",
+  },
+  wrapper: {
+    border: "1px solid #3c3c3c",
+    backgroundColor: "#2e2e2e80",
+
+    "&:focus": {
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+    },
+    "&:focus-within": {
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+    },
+  },
+
+  visibilityToggle: {
+    "&:hover": {
+      background: "transparent",
+    },
+  },
+}));
+
 function Admin() {
+  const { classes } = useStyles();
   const { setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const form = useForm({
@@ -53,6 +81,7 @@ function Admin() {
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className="contact-form">
         <TextInput
+          classNames={classes}
           variant="unstyled"
           name="email"
           label="Email"
@@ -60,6 +89,7 @@ function Admin() {
           {...form.getInputProps("email")}
         />
         <PasswordInput
+          classNames={classes}
           variant="unstyled"
           name="password"
           label="Password"
