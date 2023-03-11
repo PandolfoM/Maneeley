@@ -1,6 +1,13 @@
-import { createStyles } from "@mantine/core";
+import {
+  Checkbox,
+  createStyles,
+  PasswordInput,
+  TextInput,
+} from "@mantine/core";
+import { isNotEmpty, useForm } from "@mantine/form";
 import React, { useEffect, useState } from "react";
 import useUsers from "../../hooks/useUsers";
+import AppButton from "../Button";
 import DashboardUsers from "./DashboardUsers";
 
 const useStyles = createStyles(() => ({
@@ -38,10 +45,19 @@ const useStyles = createStyles(() => ({
       borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
     },
   },
+  visibilityToggle: {
+    "&:hover": {
+      background: "transparent",
+    },
+  },
+  innerInput: {
+    padding: "1px 2px",
+  },
 }));
 
 function DashboardMenusTab() {
   const [users, setUsers] = useState([]);
+  const [checked, setChecked] = useState(false);
   const { getUsers } = useUsers();
   const { classes } = useStyles();
 
@@ -54,12 +70,66 @@ function DashboardMenusTab() {
     get();
   }, []);
 
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
+  const form = useForm({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+      customPassword: false,
+    },
+
+    validate: {
+      username: isNotEmpty(),
+    },
+  });
 
   return (
     <>
+      <div className="dashboard-accordion">
+        <form
+          className="dashboard-user-form"
+          onSubmit={form.onSubmit((values) => {
+            console.log(values);
+            form.reset();
+          })}>
+          <TextInput
+            classNames={classes}
+            variant="unstyled"
+            size="xs"
+            placeholder="Username"
+            withAsterisk
+            {...form.getInputProps("username")}
+          />
+          <TextInput
+            classNames={classes}
+            variant="unstyled"
+            size="xs"
+            placeholder="Email"
+            withAsterisk
+            {...form.getInputProps("email")}
+          />
+          <PasswordInput
+            disabled={form.values.customPassword}
+            classNames={classes}
+            variant="unstyled"
+            size="xs"
+            placeholder="Password"
+            withAsterisk
+            {...form.getInputProps("password")}
+          />
+          <Checkbox
+            sx={{
+              input: {
+                border: "1px solid #3c3c3c",
+                backgroundColor: "#2e2e2e80",
+              },
+            }}
+            label="Have user create their own password"
+            {...form.getInputProps("customPassword", { type: "checkbox" })}
+          />
+          <AppButton name={"SUBMIT"} type="submit" />
+        </form>
+      </div>
       <DashboardUsers
         classes={classes}
         name="Users"

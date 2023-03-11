@@ -1,20 +1,10 @@
-import { Accordion, createStyles, TextInput } from "@mantine/core";
-import { isNotEmpty, useForm } from "@mantine/form";
+import { Accordion } from "@mantine/core";
 import React from "react";
 import useUsers from "../../hooks/useUsers";
 import SubtleButton from "../SubtleButton";
 
 function DashboardUsers({ classes, name, data, users, setUsers }) {
   const { deleteUserData } = useUsers();
-  // const form = useForm({
-  //   initialValues: {
-  //     file: null,
-  //   },
-
-  //   validate: {
-  //     file: isNotEmpty(),
-  //   },
-  // });
 
   return (
     <div className="dashboard-accordion">
