@@ -791,6 +791,12 @@ p {
   }
 }
 
+.dashboard-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .modal {
   form {
     display: flex;

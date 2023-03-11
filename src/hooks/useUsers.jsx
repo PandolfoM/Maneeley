@@ -1,13 +1,6 @@
-import { deleteUser } from "firebase/auth";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-} from "firebase/firestore";
-import { db, auth } from "../firebase";
+import { collection, deleteDoc, doc, getDocs, query } from "firebase/firestore";
+import { httpsCallable } from "firebase/functions";
+import { db, functions } from "../firebase";
 
 export default function useUsers() {
   const getUsers = async () => {
@@ -21,12 +14,15 @@ export default function useUsers() {
   };
 
   const deleteUserData = async (user, users, setUsers) => {
-    // await deleteUser(user);
-    // await deleteDoc(doc(db, "users", user.uid));
-    // let newArr = [...users];
-    // const userIndex = users.findIndex((i) => i.uid === user.uid);
-    // newArr.splice(userIndex, 1);
-    // setUsers(newArr);
+    const deleteAuth = httpsCallable(functions, "deleteAuth");
+    deleteAuth({ uid: user.uid }).then(() => {
+      deleteDoc(doc(db, "users", user.uid)).then(() => {
+        let newArr = [...users];
+        const userIndex = users.findIndex((i) => i.uid === user.uid);
+        newArr.splice(userIndex, 1);
+        setUsers(newArr);
+      });
+    });
   };
 
   return {
