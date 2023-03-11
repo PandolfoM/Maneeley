@@ -19,7 +19,7 @@ function DashboardImages({ classes, name, data }) {
   });
 
   return (
-    <div className="dashboard-images">
+    <div className="dashboard-accordion">
       <Accordion
         defaultValue={name}
         variant="filled"
