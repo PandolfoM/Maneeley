@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { DashboardImagesTab, DashboardMenusTab } from "../components/Dashboard";
+import {
+  DashboardImagesTab,
+  DashboardMenusTab,
+  DashboardUsersTab,
+} from "../components/Dashboard";
 import Page from "../components/Page";
 import Separator from "../components/Separator";
 import SubtleButton from "../components/SubtleButton";
@@ -16,7 +20,7 @@ function Dashboard() {
               {
                 menus: <DashboardMenusTab />,
                 images: <DashboardImagesTab />,
-                users: "Hello World 2",
+                users: <DashboardUsersTab />,
               }[currentDash]
             }
           </div>

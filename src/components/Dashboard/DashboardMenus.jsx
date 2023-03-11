@@ -55,6 +55,7 @@ function DashboardMenus({ classes, name, data }) {
                   })}>
                   <div>
                     <TextInput
+                      classNames={classes}
                       variant="unstyled"
                       size="xs"
                       placeholder="Menu Name"
@@ -62,6 +63,7 @@ function DashboardMenus({ classes, name, data }) {
                       {...form.getInputProps("name")}
                     />
                     <FileInput
+                      classNames={classes}
                       variant="unstyled"
                       size="xs"
                       placeholder="Choose menu"
