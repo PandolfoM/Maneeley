@@ -18,7 +18,7 @@ function DashboardUsers({ classes, name, data, users, setUsers }) {
           <Accordion.Panel>
             <div className="item">
               {data?.map((i) => (
-                <div key={i.email} className="item-item">
+                <div key={i.uid} className="item-item">
                   <SubtleButton
                     name={i.username}
                     style={{
