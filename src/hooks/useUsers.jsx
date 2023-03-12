@@ -1,4 +1,11 @@
-import { collection, deleteDoc, doc, getDocs, query } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import { db, functions } from "../firebase";
 
@@ -25,8 +32,29 @@ export default function useUsers() {
     });
   };
 
+  const createUser = async (data, users, setUsers) => {
+    const createUserHttp = httpsCallable(functions, "createUser");
+    const createUserData = await createUserHttp(data);
+    if (createUserData.data.errorInfo) {
+      return createUserData.data.errorInfo.message;
+    }
+    await setDoc(doc(db, "users", createUserData.data), {
+      email: data.email,
+      username: data.username,
+      uid: createUserData.data,
+    });
+    let newArr = [...users];
+    newArr.push({
+      email: data.email,
+      username: data.username,
+      uid: createUserData.data,
+    });
+    setUsers(newArr);
+  };
+
   return {
     getUsers,
     deleteUserData,
+    createUser,
   };
 }

@@ -13,3 +13,18 @@ exports.deleteAuth = functions.https.onCall((data, context) => {
       return error;
     });
 });
+
+exports.createUser = functions.https.onCall((data, context) => {
+  return getAuth()
+    .createUser({
+      email: data.email,
+      displayName: data.username,
+      password: data.password,
+    })
+    .then((userRecord) => {
+      return userRecord.uid;
+    })
+    .catch((error) => {
+      return error;
+    });
+});

@@ -8,6 +8,7 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import React, { useEffect, useState } from "react";
 import useUsers from "../../hooks/useUsers";
 import AppButton from "../Button";
+import SubtleButton from "../SubtleButton";
 import DashboardUsers from "./DashboardUsers";
 
 const useStyles = createStyles(() => ({
@@ -57,8 +58,10 @@ const useStyles = createStyles(() => ({
 
 function DashboardMenusTab() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [checked, setChecked] = useState(false);
-  const { getUsers } = useUsers();
+  const { getUsers, createUser } = useUsers();
   const { classes } = useStyles();
 
   useEffect(() => {
@@ -88,9 +91,17 @@ function DashboardMenusTab() {
       <div className="dashboard-accordion">
         <form
           className="dashboard-user-form"
-          onSubmit={form.onSubmit((values) => {
-            console.log(values);
-            form.reset();
+          onSubmit={form.onSubmit(async (values) => {
+            setLoading(true);
+            const createuser = await createUser(values, users, setUsers);
+            if (createuser) {
+              setLoading(false);
+              setError(createuser);
+            } else {
+              setLoading(false);
+              setError("");
+              form.reset();
+            }
           })}>
           <TextInput
             classNames={classes}
@@ -127,7 +138,8 @@ function DashboardMenusTab() {
             label="Have user create their own password"
             {...form.getInputProps("customPassword", { type: "checkbox" })}
           />
-          <AppButton name={"SUBMIT"} type="submit" />
+          <SubtleButton name={error} className="delete" />
+          <AppButton name={"SUBMIT"} type="submit" loading={loading} />
         </form>
       </div>
       <DashboardUsers
