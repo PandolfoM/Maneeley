@@ -61,12 +61,15 @@ function NewPassword() {
         className="contact-form"
         onSubmit={form.onSubmit(async (values) => {
           setLoading(true);
-          const newPassword = resetPassword(values.password, currentUser, true);
-          if (newPassword) {
-            navigate("/dashboard");
-          } else {
-            setError("There has been an error!");
-          }
+          resetPassword(values.password, currentUser, true)
+            .then(() => {
+              setLoading(false);
+              navigate("/dashboard");
+            })
+            .catch(() => {
+              setLoading(false);
+              setError("There has been an error!");
+            });
         })}>
         <PasswordInput
           classNames={classes}
