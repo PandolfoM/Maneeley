@@ -53,19 +53,19 @@ function Dashboard() {
             <SubtleButton
               style={{ cursor: "pointer" }}
               name={"Menus"}
-              className={currentDash === "" ? "activeLink" : ""}
+              className={currentDash === "menus" ? "activeLink" : ""}
               onClick={() => setCurrentDash("menus")}
             />
             <SubtleButton
               style={{ cursor: "pointer" }}
               name={"Slideshow / Gallery"}
-              className={currentDash === "" ? "activeLink" : ""}
+              className={currentDash === "images" ? "activeLink" : ""}
               onClick={() => setCurrentDash("images")}
             />
             <SubtleButton
               style={{ cursor: "pointer" }}
               name={"Users"}
-              className={currentDash === "" ? "activeLink" : ""}
+              className={currentDash === "users" ? "activeLink" : ""}
               onClick={() => setCurrentDash("users")}
             />
             <SubtleButton
