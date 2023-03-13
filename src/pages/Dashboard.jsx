@@ -20,6 +20,7 @@ function Dashboard() {
   const { getUser } = useUsers();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const get = async () => {
       const getUserData = await getUser(currentUser.uid);
       if (getUserData.tempPassword) {

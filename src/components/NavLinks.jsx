@@ -13,13 +13,6 @@ function NavLinks({ currentUser }) {
       </li>
       <li>
         <NavLink
-          to="/catering"
-          className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
-          Catering
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to="/gallery"
           className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
           Gallery
