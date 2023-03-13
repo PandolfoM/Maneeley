@@ -82,7 +82,7 @@ function Contact() {
     <Page flex>
       <form
         onSubmit={form.onSubmit((values) => console.log(values))}
-        className="contact-form newPage-sub">
+        className="contact-form contact-form-100">
         <div className={`form-name ${classes}`}>
           <TextInput
             classNames={classes}
