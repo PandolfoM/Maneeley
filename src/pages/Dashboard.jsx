@@ -1,6 +1,7 @@
 import { signOut } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../auth/context";
 import {
   DashboardImagesTab,
   DashboardMenusTab,
@@ -10,10 +11,25 @@ import Page from "../components/Page";
 import Separator from "../components/Separator";
 import SubtleButton from "../components/SubtleButton";
 import { auth } from "../firebase";
+import useUsers from "../hooks/useUsers";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [currentDash, setCurrentDash] = useState("menus");
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { getUser } = useUsers();
+
+  useEffect(() => {
+    const get = async () => {
+      const getUserData = await getUser(currentUser.uid);
+      if (getUserData.tempPassword) {
+        navigate("/newpassword");
+      } else {
+        return;
+      }
+    };
+    currentUser.uid && get();
+  }, []);
 
   return (
     <Page flex>
@@ -58,6 +74,7 @@ function Dashboard() {
               className="delete"
               onClick={() => {
                 signOut(auth);
+                setCurrentUser(null);
                 navigate("/");
               }}
             />

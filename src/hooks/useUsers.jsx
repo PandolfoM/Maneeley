@@ -85,20 +85,18 @@ export default function useUsers() {
   };
 
   const resetPassword = async (password, user, tempPassword) => {
-    updatePassword(user, password)
+    await updatePassword(user, password)
       .then(() => {
         if (tempPassword) {
-          updateDoc(doc(db, "users", user.uid), {
+          return updateDoc(doc(db, "users", user.uid), {
             tempPassword: false,
-          }).then(() => {
-            return true;
           });
         } else {
-          return true;
+          console.log("not set yet");
         }
       })
       .catch((e) => {
-        return false;
+        return e;
       });
   };
 
