@@ -9,7 +9,6 @@ import { db } from "../firebase";
 
 function ImageGallery() {
   const { gallery, setGallery } = useContext(MenuContext);
-  const images = gallery.images;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,7 +18,7 @@ function ImageGallery() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setGallery(docSnap.data());
+        setGallery(docSnap.data().images);
       } else {
         console.log("No document");
       }
@@ -31,9 +30,9 @@ function ImageGallery() {
   return (
     <Page id="gallery">
       <Separator title="Gallery" />
-      {images ? (
+      {gallery ? (
         <ul className="gallery">
-          {images.map((i) => (
+          {gallery.map((i) => (
             <li className="gallery-item" key={i.id}>
               <LazyLoadImage
                 src={i.file}
