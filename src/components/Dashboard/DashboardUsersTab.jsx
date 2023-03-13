@@ -60,7 +60,6 @@ function DashboardMenusTab() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [checked, setChecked] = useState(false);
   const { getUsers, createUser } = useUsers();
   const { classes } = useStyles();
 
@@ -135,7 +134,7 @@ function DashboardMenusTab() {
                 backgroundColor: "#2e2e2e80",
               },
             }}
-            label="Have user create their own password"
+            label="Have user create their own password next time they login"
             {...form.getInputProps("customPassword", { type: "checkbox" })}
           />
           <SubtleButton name={error} className="delete" />
