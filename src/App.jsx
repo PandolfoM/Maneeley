@@ -21,6 +21,7 @@ import { AuthContext } from "./auth/context";
 import Banquets from "./pages/Banquets";
 import Weddings from "./pages/Weddings";
 import ImageGallery from "./pages/Gallery";
+import NewPassword from "./pages/NewPassword";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -50,6 +51,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/newpassword"
+            element={
+              <ProtectedRoute>
+                <NewPassword />
               </ProtectedRoute>
             }
           />

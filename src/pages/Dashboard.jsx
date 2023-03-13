@@ -1,4 +1,6 @@
+import { signOut } from "firebase/auth";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   DashboardImagesTab,
   DashboardMenusTab,
@@ -7,8 +9,10 @@ import {
 import Page from "../components/Page";
 import Separator from "../components/Separator";
 import SubtleButton from "../components/SubtleButton";
+import { auth } from "../firebase";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [currentDash, setCurrentDash] = useState("menus");
 
   return (
@@ -33,20 +37,29 @@ function Dashboard() {
             <SubtleButton
               style={{ cursor: "pointer" }}
               name={"Menus"}
-              className={currentDash === "menus" ? "activeLink" : ""}
+              className={currentDash === "" ? "activeLink" : ""}
               onClick={() => setCurrentDash("menus")}
             />
             <SubtleButton
               style={{ cursor: "pointer" }}
               name={"Slideshow / Gallery"}
-              className={currentDash === "images" ? "activeLink" : ""}
+              className={currentDash === "" ? "activeLink" : ""}
               onClick={() => setCurrentDash("images")}
             />
             <SubtleButton
               style={{ cursor: "pointer" }}
               name={"Users"}
-              className={currentDash === "users" ? "activeLink" : ""}
+              className={currentDash === "" ? "activeLink" : ""}
               onClick={() => setCurrentDash("users")}
+            />
+            <SubtleButton
+              style={{ cursor: "pointer" }}
+              name={"Logout"}
+              className="delete"
+              onClick={() => {
+                signOut(auth);
+                navigate("/");
+              }}
             />
           </div>
         </div>

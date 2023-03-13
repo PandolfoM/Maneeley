@@ -1,7 +1,7 @@
 import { createStyles, PasswordInput, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { AuthContext } from "../auth/context";
@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import Page from "../components/Page";
 import Separator from "../components/Separator";
 import { auth } from "../firebase";
+import useUsers from "../hooks/useUsers";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -47,8 +48,10 @@ const useStyles = createStyles(() => ({
 }));
 
 function Admin() {
+  const [loading, setLoading] = useState(false);
   const { classes } = useStyles();
-  const { setCurrentUser } = useContext(AuthContext);
+  const { getUser } = useUsers();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const form = useForm({
     initialValues: {
@@ -64,12 +67,21 @@ function Admin() {
   }, []);
 
   const handleSubmit = ({ email, password }) => {
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((user) => {
+      .then(async (user) => {
         setCurrentUser(user.user);
-        navigate("/dashboard");
+        const getUserData = await getUser(user.user.uid);
+        if (getUserData.tempPassword) {
+          setLoading(false);
+          navigate("/newpassword");
+        } else {
+          setLoading(false);
+          navigate("/dashboard");
+        }
       })
       .catch((e) => {
+        setLoading(false);
         console.log(e);
       });
   };
@@ -96,7 +108,7 @@ function Admin() {
           withAsterisk
           {...form.getInputProps("password")}
         />
-        <Button name="Login" type="submit" />
+        <Button name="Login" type="submit" loading={loading} />
       </form>
     </Page>
   );
