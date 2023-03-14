@@ -36,14 +36,12 @@ export default function useUsers() {
 
   const deleteUserData = async (user, users, setUsers) => {
     const deleteAuth = httpsCallable(functions, "deleteAuth");
-    deleteAuth({ uid: user.uid }).then(() => {
-      deleteDoc(doc(db, "users", user.uid)).then(() => {
-        let newArr = [...users];
-        const userIndex = users.findIndex((i) => i.uid === user.uid);
-        newArr.splice(userIndex, 1);
-        setUsers(newArr);
-      });
-    });
+    await deleteAuth({ uid: user.uid });
+    await deleteDoc(doc(db, "users", user.uid));
+    let newArr = [...users];
+    const userIndex = users.findIndex((i) => i.uid === user.uid);
+    newArr.splice(userIndex, 1);
+    setUsers(newArr);
   };
 
   const createUser = async (data, users, setUsers) => {

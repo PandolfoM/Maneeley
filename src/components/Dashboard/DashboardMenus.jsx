@@ -1,6 +1,16 @@
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleExclamation,
+  faUpload,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Accordion, FileInput, TextInput } from "@mantine/core";
+import {
+  Accordion,
+  Alert,
+  createStyles,
+  FileInput,
+  LoadingOverlay,
+  TextInput,
+} from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import React from "react";
 import { useState } from "react";
@@ -13,6 +23,7 @@ function DashboardMenus({ classes, name, data }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentMenuName, setCurrentMenuName] = useState("");
   const [currentMenuItem, setCurrentMenuItem] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const form = useForm({
     initialValues: {
@@ -28,15 +39,13 @@ function DashboardMenus({ classes, name, data }) {
 
   return (
     <>
-      {isModalOpen && (
-        <AppModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          currentMenuName={currentMenuName}
-          currentMenuItem={currentMenuItem}
-          title="Edit"
-        />
-      )}
+      <AppModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        currentMenuName={currentMenuName}
+        currentMenuItem={currentMenuItem}
+        title="Edit"
+      />
       <div className="catering-menus">
         <Accordion
           defaultValue={name}
@@ -44,14 +53,17 @@ function DashboardMenus({ classes, name, data }) {
           transitionDuration={300}
           classNames={classes}>
           <Accordion.Item value={name} key={data?.id}>
+            <LoadingOverlay visible={loading} />
             <Accordion.Control>{name}</Accordion.Control>
             <Accordion.Panel>
               <div className="item">
                 <form
                   className="item-controls"
-                  onSubmit={form.onSubmit((values) => {
-                    addMenuItem(values.name, values.file, name);
+                  onSubmit={form.onSubmit(async (values) => {
+                    setLoading(true);
+                    await addMenuItem(values.name, values.file, name);
                     form.reset();
+                    setLoading(false);
                   })}>
                   <div>
                     <TextInput
@@ -79,28 +91,50 @@ function DashboardMenus({ classes, name, data }) {
                     style={{ whiteSpace: "nowrap" }}
                   />
                 </form>
-                {data?.items?.map((i) => (
-                  <div key={i.id} className="item-item">
-                    <a href={i.file} target="_blank" className="activeLink">
-                      {i.name}
-                    </a>
-                    <div className="item-item-func">
-                      <SubtleButton
-                        onClick={() => {
-                          setCurrentMenuName(name);
-                          setCurrentMenuItem(i);
-                          setIsModalOpen(true);
-                        }}
-                        name={"Edit"}
-                      />
-                      <SubtleButton
-                        className="delete"
-                        onClick={() => deleteMenuItem(name, i)}
-                        name={"Delete"}
-                      />
-                    </div>
-                  </div>
-                ))}
+                {data?.items.length === 0 ? (
+                  <Alert
+                    sx={{
+                      marginTop: "0.5rem",
+                      backgroundColor: "#2e2e2e80",
+                      color: "#f53434",
+                      borderColor: "#f53434",
+                    }}
+                    icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+                    title="No Menus"
+                    color={"red"}
+                    variant="outline">
+                    There are no menus yet
+                  </Alert>
+                ) : (
+                  <>
+                    {data?.items?.map((i) => (
+                      <div key={i.id} className="item-item">
+                        <a href={i.file} target="_blank" className="activeLink">
+                          {i.name}
+                        </a>
+                        <div className="item-item-func">
+                          <SubtleButton
+                            onClick={() => {
+                              setCurrentMenuName(name);
+                              setCurrentMenuItem(i);
+                              setIsModalOpen(true);
+                            }}
+                            name={"Edit"}
+                          />
+                          <SubtleButton
+                            className="delete"
+                            onClick={async () => {
+                              setLoading(true);
+                              await deleteMenuItem(name, i);
+                              setLoading(false);
+                            }}
+                            name={"Delete"}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
             </Accordion.Panel>
           </Accordion.Item>
