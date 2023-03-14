@@ -1,9 +1,10 @@
-import { Accordion } from "@mantine/core";
-import React from "react";
+import { Accordion, LoadingOverlay } from "@mantine/core";
+import React, { useState } from "react";
 import useUsers from "../../hooks/useUsers";
 import SubtleButton from "../SubtleButton";
 
-function DashboardUsers({ classes, name, data, users, setUsers }) {
+function DashboardUsers({ classes, data, users, setUsers }) {
+  const [loading, setLoading] = useState(false);
   const { deleteUserData } = useUsers();
 
   return (
@@ -14,6 +15,7 @@ function DashboardUsers({ classes, name, data, users, setUsers }) {
         transitionDuration={300}
         classNames={classes}>
         <Accordion.Item value={"users"}>
+          <LoadingOverlay visible={loading} />
           <Accordion.Control>Users</Accordion.Control>
           <Accordion.Panel>
             <div className="item">
@@ -34,12 +36,19 @@ function DashboardUsers({ classes, name, data, users, setUsers }) {
                     }}
                   />
                   <div className="item-item-func">
-                    <SubtleButton
-                      style={{ whiteSpace: "nowrap" }}
-                      className="delete"
-                      onClick={() => deleteUserData(i, users, setUsers)}
-                      name={"Delete"}
-                    />
+                    {data.length > 1 && (
+                      <SubtleButton
+                        disabled={true}
+                        style={{ whiteSpace: "nowrap" }}
+                        className="delete"
+                        onClick={async () => {
+                          setLoading(true);
+                          await deleteUserData(i, users, setUsers);
+                          setLoading(false);
+                        }}
+                        name={"Delete"}
+                      />
+                    )}
                   </div>
                 </div>
               ))}

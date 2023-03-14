@@ -20,6 +20,7 @@ const useStyles = createStyles(() => ({
   item: {
     marginBottom: "0.5rem",
     overflow: "hidden",
+    position: "relative",
     "&[data-active]": {
       backgroundColor: "#2e2e2e80",
     },

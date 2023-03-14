@@ -1,13 +1,18 @@
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleExclamation,
+  faUpload,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Accordion, FileInput } from "@mantine/core";
+import { Accordion, Alert, FileInput, LoadingOverlay } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
-import React from "react";
+import React, { useState } from "react";
 import useImages from "../../hooks/useImages";
 import SubtleButton from "../SubtleButton";
 
 function DashboardImages({ classes, name, data }) {
   const { addImage, deleteImage } = useImages();
+  const [loading, setLoading] = useState(false);
+
   const form = useForm({
     initialValues: {
       file: null,
@@ -26,14 +31,17 @@ function DashboardImages({ classes, name, data }) {
         transitionDuration={300}
         classNames={classes}>
         <Accordion.Item value={name} key={data?.id}>
+          <LoadingOverlay visible={loading} />
           <Accordion.Control>{name}</Accordion.Control>
           <Accordion.Panel>
             <div className="item">
               <form
                 className="item-controls"
-                onSubmit={form.onSubmit((values) => {
-                  addImage(values, name);
+                onSubmit={form.onSubmit(async (values) => {
+                  setLoading(true);
+                  await addImage(values, name);
                   form.reset();
+                  setLoading(false);
                 })}>
                 <div>
                   <FileInput
@@ -53,27 +61,49 @@ function DashboardImages({ classes, name, data }) {
                   style={{ whiteSpace: "nowrap" }}
                 />
               </form>
-              {data?.images?.map((i) => (
-                <div key={i.id} className="item-item">
-                  <SubtleButton
-                    href={i.file}
-                    name={i.name}
-                    style={{
-                      whiteSpace: "nowrap",
-                      textOverflow: "clip",
-                      maxWidth: "80%",
-                    }}
-                  />
-                  <div className="item-item-func">
-                    <SubtleButton
-                      style={{ whiteSpace: "nowrap" }}
-                      className="delete"
-                      onClick={() => deleteImage(name, i)}
-                      name={"Delete"}
-                    />
-                  </div>
-                </div>
-              ))}
+              {data?.images?.length === 0 ? (
+                <Alert
+                  sx={{
+                    marginTop: "0.5rem",
+                    backgroundColor: "#2e2e2e80",
+                    color: "#f53434",
+                    borderColor: "#f53434",
+                  }}
+                  icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+                  title="No Images"
+                  color={"red"}
+                  variant="outline">
+                  There are no images yet
+                </Alert>
+              ) : (
+                <>
+                  {data?.images?.map((i) => (
+                    <div key={i.id} className="item-item">
+                      <SubtleButton
+                        href={i.file}
+                        name={i.name}
+                        style={{
+                          whiteSpace: "nowrap",
+                          textOverflow: "clip",
+                          maxWidth: "80%",
+                        }}
+                      />
+                      <div className="item-item-func">
+                        <SubtleButton
+                          style={{ whiteSpace: "nowrap" }}
+                          className="delete"
+                          onClick={async () => {
+                            setLoading(true);
+                            await deleteImage(name, i);
+                            setLoading(false);
+                          }}
+                          name={"Delete"}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </Accordion.Panel>
         </Accordion.Item>

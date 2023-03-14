@@ -20,6 +20,7 @@ const useStyles = createStyles(() => ({
   item: {
     marginBottom: "0.5rem",
     overflow: "hidden",
+    position: "relative",
     "&[data-active]": {
       backgroundColor: "#2e2e2e80",
     },
@@ -38,6 +39,9 @@ const useStyles = createStyles(() => ({
       borderStyle: "solid",
       borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
     },
+  },
+  root: {
+    width: "100%",
   },
 }));
 
