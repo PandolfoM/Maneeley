@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import useUsers from "../../hooks/useUsers";
 import SubtleButton from "../SubtleButton";
 
-function DashboardUsers({ classes, data, users, setUsers }) {
+function DashboardUsers({ classes, data, users, setUsers, form, setEdit }) {
   const [loading, setLoading] = useState(false);
   const { deleteUserData } = useUsers();
 
@@ -36,9 +36,19 @@ function DashboardUsers({ classes, data, users, setUsers }) {
                     }}
                   />
                   <div className="item-item-func">
+                    <SubtleButton
+                      onClick={async () => {
+                        setEdit(true);
+                        form.setValues({
+                          username: i.username,
+                          email: i.email,
+                          oldEmail: i.email,
+                        });
+                      }}
+                      name={"Edit"}
+                    />
                     {data.length > 1 && (
                       <SubtleButton
-                        disabled={true}
                         style={{ whiteSpace: "nowrap" }}
                         className="delete"
                         onClick={async () => {

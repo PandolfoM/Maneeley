@@ -11,7 +11,7 @@ import AppButton from "../Button";
 import SubtleButton from "../SubtleButton";
 import DashboardUsers from "./DashboardUsers";
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme, { edit }) => ({
   chevron: {
     color: "white",
   },
@@ -33,18 +33,20 @@ const useStyles = createStyles(() => ({
     },
   },
   wrapper: {
-    border: "1px solid #3c3c3c",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: edit ? "#5ecd74" : "#3c3c3c",
     backgroundColor: "#2e2e2e80",
 
     "&:focus": {
       borderWidth: "1px",
       borderStyle: "solid",
-      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+      borderImage: !edit && "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
     },
     "&:focus-within": {
       borderWidth: "1px",
       borderStyle: "solid",
-      borderImage: "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
+      borderImage: !edit && "linear-gradient(0deg, #b17900 0%, #fdbb2d 60%) 1",
     },
   },
   visibilityToggle: {
@@ -59,10 +61,11 @@ const useStyles = createStyles(() => ({
 
 function DashboardMenusTab() {
   const [users, setUsers] = useState([]);
+  const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { getUsers, createUser } = useUsers();
-  const { classes } = useStyles();
+  const { getUsers, createUser, updateUser } = useUsers();
+  const { classes } = useStyles({ edit });
 
   useEffect(() => {
     const get = async () => {
@@ -79,10 +82,13 @@ function DashboardMenusTab() {
       email: "",
       password: "",
       customPassword: false,
+      oldEmail: "",
     },
 
     validate: {
       username: isNotEmpty(),
+      email: isNotEmpty(),
+      password: !edit && isNotEmpty(),
     },
   });
 
@@ -93,18 +99,50 @@ function DashboardMenusTab() {
           className="dashboard-user-form"
           onSubmit={form.onSubmit(async (values) => {
             setLoading(true);
-            const createuser = await createUser(values, users, setUsers);
-            if (createuser) {
+            if (edit) {
+              const updateuser = await updateUser(values, users, setUsers);
+              if (updateuser) {
+                setError(updateuser);
+              } else {
+                setEdit(false);
+                setError("");
+                form.reset();
+              }
               setLoading(false);
-              setError(createuser);
             } else {
+              const createuser = await createUser(values, users, setUsers);
+              if (createuser) {
+                setError(createuser);
+              } else {
+                setError("");
+                form.reset();
+              }
               setLoading(false);
-              setError("");
-              form.reset();
             }
           })}>
+          {edit && (
+            <div className="dashboard-editmode">
+              <div className="dashboard-editmode-header">
+                <p>Edit mode enabled</p>
+                <SubtleButton
+                  name={"Disable"}
+                  className="delete"
+                  onClick={() => {
+                    form.setValues({
+                      username: "",
+                      email: "",
+                      oldEmail: "",
+                    });
+                    setEdit(false);
+                  }}
+                />
+              </div>
+            </div>
+          )}
           <TextInput
+            disabled={loading}
             classNames={classes}
+            sx={{ borderColor: "red" }}
             variant="unstyled"
             size="xs"
             placeholder="Username"
@@ -112,6 +150,7 @@ function DashboardMenusTab() {
             {...form.getInputProps("username")}
           />
           <TextInput
+            disabled={loading}
             classNames={classes}
             variant="unstyled"
             size="xs"
@@ -120,7 +159,7 @@ function DashboardMenusTab() {
             {...form.getInputProps("email")}
           />
           <PasswordInput
-            disabled={form.values.customPassword}
+            disabled={form.values.customPassword || loading}
             classNames={classes}
             variant="unstyled"
             size="xs"
@@ -129,6 +168,7 @@ function DashboardMenusTab() {
             {...form.getInputProps("password")}
           />
           <Checkbox
+            disabled={loading}
             sx={{
               input: {
                 border: "1px solid #3c3c3c",
@@ -148,6 +188,8 @@ function DashboardMenusTab() {
         data={users}
         users={users}
         setUsers={setUsers}
+        form={form}
+        setEdit={setEdit}
       />
     </>
   );

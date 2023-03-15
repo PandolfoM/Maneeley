@@ -44,3 +44,26 @@ exports.createUser = functions.https.onCall((data, context) => {
       return error;
     });
 });
+
+exports.updateUser = functions.https.onCall(async (data, context) => {
+  // console.log(data);
+  return getAuth()
+    .getUserByEmail(data.oldEmail)
+    .then((userRecord) => {
+      return getAuth()
+        .updateUser(userRecord.uid, {
+          email: data.email ? data.email : userRecord.email,
+          displayName: data.username ? data.username : userRecord.displayName,
+          password: data.password ? data.password : userRecord.passwordHash,
+        })
+        .then((userRecord) => {
+          return userRecord.uid;
+        })
+        .catch((e) => {
+          return e;
+        });
+    })
+    .catch((e) => {
+      return e;
+    });
+});

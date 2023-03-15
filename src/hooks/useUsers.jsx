@@ -82,6 +82,29 @@ export default function useUsers() {
     setUsers(newArr);
   };
 
+  const updateUser = async (data, users, setUsers) => {
+    const updateUserHttp = httpsCallable(functions, "updateUser");
+    const updateUserData = await updateUserHttp(data);
+    if (updateUserData.data?.errorInfo) {
+      return updateUserData.data.errorInfo.message;
+    }
+
+    await updateDoc(doc(db, "users", updateUserData.data), {
+      email: data.email,
+      username: data.username,
+    });
+
+    let newArr = [...users];
+    const userIndex = users.findIndex((i) => i.uid === updateUserData.data);
+    newArr[userIndex] = {
+      email: data.email && data.email,
+      username: data.username && data.username,
+      uid: updateUserData.data,
+      tempPassword: false,
+    };
+    setUsers(newArr);
+  };
+
   const resetPassword = async (password, user, tempPassword) => {
     await updatePassword(user, password)
       .then(() => {
@@ -104,5 +127,6 @@ export default function useUsers() {
     deleteUserData,
     createUser,
     resetPassword,
+    updateUser,
   };
 }

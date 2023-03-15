@@ -467,6 +467,19 @@ body {
     }
   }
 }
+
+.dashboard-editmode {
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: $success;
+  }
+}
 // Dashboard END
 
 // Footer
@@ -638,6 +651,7 @@ body {
 }
 
 .delete {
+  cursor: pointer;
   background: $danger;
   background: linear-gradient(0deg, $darkDanger 0%, $danger 60%);
   -webkit-background-clip: text;
