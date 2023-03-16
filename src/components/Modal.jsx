@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createStyles, FileInput, Modal, TextInput } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { ref } from "firebase/storage";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { storage } from "../firebase";
 import useMenus from "../hooks/useMenus";
@@ -54,12 +54,17 @@ function AppModal({
   const httpRef = ref(storage, currentMenuItem.file);
   const form = useForm({
     initialValues: {
-      name: currentMenuItem.name,
+      name: "",
       file: null,
     },
 
     validate: {
-      name: isNotEmpty(),
+      name: (value, values) => {
+        !values.file ? isNotEmpty() : null;
+      },
+      file: (value, values) => {
+        !values.name ? isNotEmpty() : null;
+      },
     },
   });
 
@@ -71,6 +76,7 @@ function AppModal({
       currentMenuName,
       currentMenuItem
     );
+    form.reset();
     setLoading(false);
     setIsModalOpen(false);
   };
@@ -86,7 +92,7 @@ function AppModal({
         <TextInput
           variant="unstyled"
           size="xs"
-          placeholder="Menu Name"
+          placeholder={currentMenuItem.name}
           withAsterisk
           classNames={classes}
           {...form.getInputProps("name")}

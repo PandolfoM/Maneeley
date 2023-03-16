@@ -50,7 +50,7 @@ function Weddings() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const get = async () => {
-      const docRef = doc(db, "images", "slideshow");
+      const docRef = doc(db, "images", "Slideshow");
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -78,7 +78,11 @@ function Weddings() {
           <Carousel.Slide key={i.id}>
             <LazyLoadImage
               src={i.file}
-              style={{ maxWidth: "100%" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
               alt={i.name}
             />
           </Carousel.Slide>

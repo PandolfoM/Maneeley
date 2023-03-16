@@ -48,6 +48,7 @@ function DashboardImages({ classes, name, data }) {
                     classNames={classes}
                     variant="unstyled"
                     size="xs"
+                    multiple
                     placeholder="Choose image "
                     accept="image/png,image/jpeg"
                     icon={<FontAwesomeIcon icon={faUpload} />}

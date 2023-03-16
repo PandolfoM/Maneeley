@@ -38,7 +38,7 @@ export default function useMenus() {
   };
 
   const deleteMenuItem = async (category, item) => {
-    await deleteObject(ref(storage, item.id));
+    await deleteObject(ref(storage, `${category}/${item.id}`));
     await updateDoc(doc(db, "menus", category), {
       items: arrayRemove(item),
     });
@@ -54,7 +54,7 @@ export default function useMenus() {
 
   const addMenuItem = async (name, file, category) => {
     const id = uuidv4();
-    const storageRef = ref(storage, id);
+    const storageRef = ref(storage, `${category}/${id}`);
     await uploadBytes(storageRef, file).then(() => {
       getDownloadURL(storageRef).then(async (downloadURL) => {
         try {
@@ -81,17 +81,17 @@ export default function useMenus() {
     });
 
     if (file) {
-      const storageRef = ref(storage, item.id);
+      const storageRef = ref(storage, `${menu}/${item.id}`);
 
       // Delete previous file
-      await deleteObject(ref(storage, item.id));
+      await deleteObject(storageRef);
 
       await uploadBytes(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
             await updateDoc(doc(db, "menus", menu), {
               items: arrayUnion({
-                name: name,
+                name: name ? name : item.name,
                 file: downloadURL,
                 id: item.id,
               }),
@@ -105,7 +105,7 @@ export default function useMenus() {
               (i) => i.id === item.id
             );
             newArr[menuIndex].items[itemIndex] = {
-              name,
+              name: name ? name : item.name,
               file: downloadURL,
               id: item.id,
             };
@@ -118,7 +118,7 @@ export default function useMenus() {
     } else {
       await updateDoc(doc(db, "menus", menu), {
         items: arrayUnion({
-          name: name,
+          name: name ? name : item.name,
           file: item.file,
           id: item.id,
         }),
@@ -130,7 +130,7 @@ export default function useMenus() {
         (i) => i.id === item.id
       );
       newArr[menuIndex].items[itemIndex] = {
-        name,
+        name: name ? name : item.name,
         id: item.id,
         file: item.file,
       };

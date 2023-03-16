@@ -36,8 +36,7 @@ export default function useImages() {
   };
 
   const deleteImage = async (category, item) => {
-    category = category.toLowerCase();
-    await deleteObject(ref(storage, item.id));
+    await deleteObject(ref(storage, `${category}/${item.id}`));
     await updateDoc(doc(db, "images", category), {
       images: arrayRemove(item),
     });
@@ -52,33 +51,34 @@ export default function useImages() {
   };
 
   const addImage = async ({ file }, category) => {
-    category = category.toLowerCase();
-    const id = uuidv4();
-    const storageRef = ref(storage, id);
-    await uploadBytes(storageRef, file).then(() => {
-      getDownloadURL(storageRef).then(async (downloadURL) => {
-        try {
-          await updateDoc(doc(db, "images", category), {
-            images: arrayUnion({
-              file: downloadURL,
-              name: file.name.replace(/\.[^.]+/, ""),
-              id,
-            }),
-          });
+    for (let i = 0; i < file.length; i++) {
+      const id = uuidv4();
+      const storageRef = ref(storage, `${category}/${id}`);
+      await uploadBytes(storageRef, file[i]).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            await updateDoc(doc(db, "images", category), {
+              images: arrayUnion({
+                file: downloadURL,
+                name: file[i].name.replace(/\.[^.]+/, ""),
+                id,
+              }),
+            });
 
-          let newArr = [...images];
-          const imageIndex = images.findIndex((i) => category === i.id);
-          newArr[imageIndex].images.push({
-            name: file.name.replace(/\.[^.]+/, ""),
-            file: downloadURL,
-            id,
-          });
-          setImages(newArr);
-        } catch (e) {
-          console.log(e);
-        }
+            let newArr = [...images];
+            const imageIndex = images.findIndex((i) => category === i.id);
+            newArr[imageIndex].images.push({
+              name: file[i].name.replace(/\.[^.]+/, ""),
+              file: downloadURL,
+              id,
+            });
+            setImages(newArr);
+          } catch (e) {
+            console.log(e);
+          }
+        });
       });
-    });
+    }
   };
 
   return {

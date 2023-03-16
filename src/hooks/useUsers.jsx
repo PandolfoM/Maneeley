@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/context";
 import { auth, db, functions } from "../firebase";
 
-const ADMINLOGIN = "https://pandolfom.github.io/Maneeley/admin";
+const ADMINLOGIN = "https://pandolfom.github.io/Maneeley/";
 
 export default function useUsers() {
   const navigate = useNavigate();

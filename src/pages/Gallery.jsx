@@ -14,7 +14,7 @@ function ImageGallery() {
     window.scrollTo(0, 0);
 
     const get = async () => {
-      const docRef = doc(db, "images", "gallery");
+      const docRef = doc(db, "images", "Gallery");
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
