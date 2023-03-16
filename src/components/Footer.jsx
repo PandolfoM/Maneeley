@@ -23,6 +23,7 @@ function Footer() {
         <h6>Helpful Links</h6>
         <p>
           <Link to={"catering"}>Catering</Link> |{" "}
+          <Link to={"banquets"}>Banquets</Link> |{" "}
           <Link to={"contact"}>Contact</Link> | <Link to={"admin"}>Admin</Link>
         </p>
         <p className="copyright">

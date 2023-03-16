@@ -13,14 +13,14 @@ function NavLinks({ currentUser }) {
       </li>
       <li>
         <NavLink
-          to="/gallery"
+          to="gallery"
           className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
           Gallery
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/contact"
+          to="contact"
           className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
           Contact
         </NavLink>
@@ -28,7 +28,7 @@ function NavLinks({ currentUser }) {
       {currentUser && (
         <li>
           <NavLink
-            to="/dashboard"
+            to="dashboard"
             className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
             Dashboard
           </NavLink>
