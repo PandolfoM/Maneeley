@@ -46,7 +46,6 @@ exports.createUser = functions.https.onCall((data, context) => {
 });
 
 exports.updateUser = functions.https.onCall(async (data, context) => {
-  // console.log(data);
   return getAuth()
     .getUserByEmail(data.oldEmail)
     .then((userRecord) => {

@@ -11,9 +11,15 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
+import { useContext } from "react";
+import { AuthContext } from "../auth/context";
 import { db, functions } from "../firebase";
 
+const ADMINLOGIN = "https://pandolfom.github.io/Maneeley/admin";
+
 export default function useUsers() {
+  const { currentUser } = useContext(AuthContext);
+
   const getUsers = async () => {
     let users = [];
     const q = query(collection(db, "users"));
@@ -56,10 +62,10 @@ export default function useUsers() {
         to: data.email,
         message: {
           subject: "Account Activated",
-          text: `Your account is waiting to for you! Login at http://localhost:5173/Maneeley/admin with your temporary password "${createUserData.data.tempPass}" `,
+          text: `Your account is waiting to for you! Login at ${ADMINLOGIN} with your temporary password "${createUserData.data.tempPass}" `,
           html: `
           <h1>Your account is waiting for you!</h1>
-          <p>Log into the <a href="http://localhost:5173/Maneeley/admin">dashboard</a> with your temporary password "${createUserData.data.tempPass}"</p>
+          <p>Log into the <a href="${ADMINLOGIN}">dashboard</a> with your temporary password "${createUserData.data.tempPass}"</p>
           `,
         },
       });
