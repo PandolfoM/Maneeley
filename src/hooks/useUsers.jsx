@@ -78,7 +78,7 @@ export default function useUsers() {
         to: data.email,
         message: {
           subject: "Account Activated",
-          text: `Your account is waiting to for you! Login at ${ADMINLOGIN} with your temporary password "${createUserData.data.tempPass}" `,
+          text: `Your account is waiting to for you! Login at ${ADMINLOGIN} with your temporary password "${createUserData.data.tempPass}"`,
           html: `
           <h1>Your account is waiting for you!</h1>
           <p>Log into the <a href="${ADMINLOGIN}">dashboard</a> with your temporary password "${createUserData.data.tempPass}"</p>
@@ -111,18 +111,33 @@ export default function useUsers() {
       return updateUserData.data.errorInfo.message;
     }
 
-    await updateDoc(doc(db, "users", updateUserData.data), {
+    if (data.customPassword) {
+      await addDoc(collection(db, "mail"), {
+        to: data.email,
+        message: {
+          subject: "Password Reset",
+          text: `Your password has been reset! Login at ${ADMINLOGIN} with your temporary password '${updateUserData.data.tempPass}' to create a new one.`,
+          html: `
+          <h1>Your password has been reset!</h1>
+          <p>Log into the <a href="${ADMINLOGIN}">dashboard</a> with your temporary password "${updateUserData.data.tempPass}" to create a new one.</p>
+          `,
+        },
+      });
+    }
+
+    await updateDoc(doc(db, "users", updateUserData.data.uid), {
       email: data.email,
       username: data.username,
+      tempPassword: data.customPassword,
     });
 
     let newArr = [...users];
-    const userIndex = users.findIndex((i) => i.uid === updateUserData.data);
+    const userIndex = users.findIndex((i) => i.uid === updateUserData.data.uid);
     newArr[userIndex] = {
       email: data.email && data.email,
       username: data.username && data.username,
-      uid: updateUserData.data,
-      tempPassword: false,
+      uid: updateUserData.data.uid,
+      tempPassword: data.customPassword,
     };
     setUsers(newArr);
   };

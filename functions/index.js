@@ -8,7 +8,7 @@ function randomPass() {
   var str =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789@#$";
 
-  for (let i = 1; i <= 16; i++) {
+  for (let i = 1; i <= 10; i++) {
     var char = Math.floor(Math.random() * str.length + 1);
 
     pass += str.charAt(char);
@@ -53,10 +53,17 @@ exports.updateUser = functions.https.onCall(async (data, context) => {
         .updateUser(userRecord.uid, {
           email: data.email ? data.email : userRecord.email,
           displayName: data.username ? data.username : userRecord.displayName,
-          password: data.password ? data.password : userRecord.passwordHash,
+          password: data.password
+            ? data.password
+            : data.customPassword
+            ? randomPass()
+            : userRecord.passwordHash,
         })
         .then((userRecord) => {
-          return userRecord.uid;
+          return {
+            uid: userRecord.uid,
+            tempPass: pass,
+          };
         })
         .catch((e) => {
           return e;

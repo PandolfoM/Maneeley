@@ -88,7 +88,13 @@ function DashboardMenusTab() {
     validate: {
       username: isNotEmpty(),
       email: isNotEmpty(),
-      password: !edit && isNotEmpty(),
+      password: (value, values) => {
+        edit
+          ? null
+          : isNotEmpty() || values.customPassword
+          ? null
+          : isNotEmpty();
+      },
     },
   });
 
