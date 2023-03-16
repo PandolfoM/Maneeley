@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { createStyles } from "@mantine/core";
+import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
 import { doc, getDoc } from "firebase/firestore";
@@ -10,7 +10,7 @@ import Separator from "../components/Separator";
 import { MenuContext } from "../context/MenuContext";
 import { db } from "../firebase";
 
-const useStyles = createStyles((theme, params, getRef) => ({
+const useStyles = createStyles((theme, params) => ({
   indicator: {
     width: "2rem",
     transition: "width 250ms ease",
@@ -26,13 +26,13 @@ const useStyles = createStyles((theme, params, getRef) => ({
     },
   },
   controls: {
-    ref: getRef("controls"),
+    ref: getStylesRef("controls"),
     transition: "opacity 150ms ease",
     opacity: 0,
   },
   root: {
     "&:hover": {
-      [`& .${getRef("controls")}`]: {
+      [`& .${getStylesRef("controls")}`]: {
         opacity: 1,
       },
     },

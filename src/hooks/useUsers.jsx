@@ -1,4 +1,5 @@
-import { updatePassword } from "firebase/auth";
+import { modals } from "@mantine/modals";
+import { signOut, updatePassword } from "firebase/auth";
 import {
   addDoc,
   collection,
@@ -12,13 +13,15 @@ import {
 } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/context";
-import { db, functions } from "../firebase";
+import { auth, db, functions } from "../firebase";
 
 const ADMINLOGIN = "https://pandolfom.github.io/Maneeley/admin";
 
 export default function useUsers() {
-  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   const getUsers = async () => {
     let users = [];
@@ -41,13 +44,26 @@ export default function useUsers() {
   };
 
   const deleteUserData = async (user, users, setUsers) => {
-    const deleteAuth = httpsCallable(functions, "deleteAuth");
-    await deleteAuth({ uid: user.uid });
-    await deleteDoc(doc(db, "users", user.uid));
-    let newArr = [...users];
-    const userIndex = users.findIndex((i) => i.uid === user.uid);
-    newArr.splice(userIndex, 1);
-    setUsers(newArr);
+    if (currentUser.uid === user.uid) {
+      modals.openConfirmModal({
+        title: "Continue?",
+        children: (
+          <p>Are you sure you would like to remove yourself as admin?</p>
+        ),
+        labels: { confirm: "Confirm", cancel: "Cancel" },
+        onCancel: () => {
+          return;
+        },
+        onConfirm: async () => {
+          await confirmDelete(user, users, setUsers);
+          signOut(auth);
+          setCurrentUser(null);
+          navigate("/");
+        },
+      });
+    } else {
+      await confirmDelete(user, users, setUsers);
+    }
   };
 
   const createUser = async (data, users, setUsers) => {
@@ -125,6 +141,16 @@ export default function useUsers() {
       .catch((e) => {
         return e;
       });
+  };
+
+  const confirmDelete = async (user, users, setUsers) => {
+    const deleteAuth = httpsCallable(functions, "deleteAuth");
+    await deleteAuth({ uid: user.uid });
+    await deleteDoc(doc(db, "users", user.uid));
+    let newArr = [...users];
+    const userIndex = users.findIndex((i) => i.uid === user.uid);
+    newArr.splice(userIndex, 1);
+    setUsers(newArr);
   };
 
   return {

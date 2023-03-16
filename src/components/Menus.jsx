@@ -4,7 +4,7 @@ import { Accordion, Alert, createStyles, Loader } from "@mantine/core";
 import React from "react";
 import Separator from "./Separator";
 
-const useStyles = createStyles((theme, params, getRef) => ({
+const useStyles = createStyles((theme, params) => ({
   chevron: {
     color: "white",
   },
