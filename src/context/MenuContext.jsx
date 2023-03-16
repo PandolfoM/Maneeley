@@ -12,19 +12,6 @@ export const MenuContextProvider = ({ children }) => {
   const [slideshow, setSlideshow] = useState([]);
   const [gallery, setGallery] = useState([]);
 
-  useEffect(() => {
-    const unsub = async () => {
-      const q = query(collection(db, "menus"));
-      const querySnapshot = await getDocs(q);
-
-      querySnapshot.forEach((doc) => {
-        setMenus((current) => [...current, doc.data()]);
-      });
-    };
-
-    unsub();
-  }, []);
-
   return (
     <MenuContext.Provider
       value={{

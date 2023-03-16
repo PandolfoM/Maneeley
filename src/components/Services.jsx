@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "../components/Card";
-import wedding from "../assets/wedding.jpg";
-import banquet from "../assets/banquet.jpg";
-import catering from "../assets/catering.jpg";
-import brochure from "../assets/brochure.jpg";
+import wedding from "../assets/wedding.webp";
+import banquet from "../assets/banquet.webp";
+import catering from "../assets/catering.webp";
+import brochure from "../assets/brochure.webp";
 import Separator from "./Separator";
 
 const cardData = [

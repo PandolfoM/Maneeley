@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
-import logo from "../assets/maneeley-logo.png";
+import logo from "../assets/maneeley-logo.webp";
 import { AuthContext } from "../auth/context";
 import Drawer from "./Drawer";
 import NavLinks from "./NavLinks";

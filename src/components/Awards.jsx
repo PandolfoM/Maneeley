@@ -1,7 +1,7 @@
 import { Carousel } from "@mantine/carousel";
-import { Image } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const awards = [
   {
@@ -63,7 +63,6 @@ const awards = [
 
 function Awards() {
   const tablet = useMediaQuery("(max-width: 900px)");
-  const mobile = useMediaQuery("(max-width: 600px)");
 
   return (
     <div className="awards">
@@ -78,12 +77,11 @@ function Awards() {
           {awards.map((i) => (
             <Carousel.Slide key={i.image}>
               <a>
-                <Image
+                <LazyLoadImage
                   width={120}
                   height={120}
                   src={i.image}
                   alt={i.title}
-                  withPlaceholder
                 />
               </a>
             </Carousel.Slide>
@@ -96,12 +94,11 @@ function Awards() {
               key={i.image}
               href="https://www.weddingwire.com/reviews/maneeleys-banquet-catering-and-the-lodge-at-maneeleys-south-windsor/d05508869673e0e2.html"
               target="_blank">
-              <Image
+              <LazyLoadImage
                 width={100}
                 height={100}
                 src={i.image}
                 alt={i.title}
-                withPlaceholder
               />
             </a>
           ))}
