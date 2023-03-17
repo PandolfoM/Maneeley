@@ -4,6 +4,8 @@ import { getFirestore } from "firebase/firestore";
 import { getFunctions } from "firebase/functions";
 import { getStorage } from "firebase/storage";
 
+console.log(import.meta.env.APIKEY);
+
 const firebaseConfig = {
   apiKey: import.meta.env.APIKEY,
   authDomain: import.meta.env.AUTHDOMAIN,

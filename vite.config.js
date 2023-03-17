@@ -7,11 +7,13 @@ export default defineConfig({
   plugins: [react()],
   base: "/Maneeley/",
   define: {
-    "import.meta.env.APIKEY": JSON.stringify(process.env.APIKEY),
-    "import.meta.env.AUTHDOMAIN": JSON.stringify(process.env.AUTHDOMAIN),
-    "import.meta.env.PROJECTID": JSON.stringify(process.env.PROJECTID),
-    "import.meta.env.STORAGEBUCKET": JSON.stringify(process.env.STORAGEBUCKET),
-    "import.meta.env.MESSAGINGSENDERID": JSON.stringify(
+    "import.meta.env.VITE_APIKEY": JSON.stringify(process.env.APIKEY),
+    "import.meta.env.VITE_AUTHDOMAIN": JSON.stringify(process.env.AUTHDOMAIN),
+    "import.meta.env.VITE_PROJECTID": JSON.stringify(process.env.PROJECTID),
+    "import.meta.env.VITE_STORAGEBUCKET": JSON.stringify(
+      process.env.STORAGEBUCKET
+    ),
+    "import.meta.env.VITE_MESSAGINGSENDERID": JSON.stringify(
       process.env.MESSAGINGSENDERID
     ),
     "import.meta.env.APPID": JSON.stringify(process.env.APPID),
