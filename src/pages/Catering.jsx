@@ -9,6 +9,7 @@ function Catering() {
   const [menus, setMenus] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const unsub = async () => {
       const docRef = doc(db, "menus", "Catering");
       const docSnap = await getDoc(docRef);

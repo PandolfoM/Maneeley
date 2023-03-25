@@ -1,16 +1,14 @@
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useContext } from "react";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
-
-import { MenuContext } from "../context/MenuContext";
 import { db } from "../firebase";
 
 function Banquets() {
   const [menus, setMenus] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const unsub = async () => {
       const docRef = doc(db, "menus", "Banquets");
       const docSnap = await getDoc(docRef);

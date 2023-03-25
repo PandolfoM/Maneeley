@@ -32,11 +32,12 @@ const useStyles = createStyles((theme, params) => ({
 }));
 
 function Menus({ menus }) {
+  console.log(menus);
   const { classes } = useStyles();
 
   return (
     <aside className="catering-menus">
-      <Separator title={"Menus"} />
+      <Separator title={menus.name + " Menus"} />
       {menus.items ? (
         <>
           {menus.items.length === 0 ? (
