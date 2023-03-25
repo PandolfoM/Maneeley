@@ -159,8 +159,8 @@ function Contact() {
           <p>
             Office:{" "}
             <SubtleButton
-              name="65 Rye Street, South Windsor, CT 06074"
-              href="https://goo.gl/maps/MdJ6XHXDynkjjzQj9"
+              name="136 Commerce Way, South Windsor, CT 06074"
+              href="https://goo.gl/maps/69M4YL9UkVaJhY4c6"
             />
           </p>
           <div className="dark">
