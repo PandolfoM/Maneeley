@@ -33,7 +33,7 @@ export default function useMenus() {
         setMenus((current) => [...current, doc.data()]);
       });
     } catch (error) {
-      console.log(error);
+      return;
     }
   };
 
@@ -69,7 +69,7 @@ export default function useMenus() {
           newArr[menuIndex].items.push({ name: name, file: downloadURL, id });
           setMenus(newArr);
         } catch (e) {
-          console.log(e);
+          return;
         }
       });
     });

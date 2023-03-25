@@ -16,7 +16,7 @@ function Catering() {
       if (docSnap.exists()) {
         setMenus(docSnap.data());
       } else {
-        console.log("No document");
+        return;
       }
     };
 

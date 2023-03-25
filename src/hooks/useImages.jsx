@@ -31,7 +31,7 @@ export default function useImages() {
         setImages((current) => [...current, doc.data()]);
       });
     } catch (error) {
-      console.log(error);
+      return;
     }
   };
 
@@ -74,7 +74,7 @@ export default function useImages() {
             });
             setImages(newArr);
           } catch (e) {
-            console.log(e);
+            return;
           }
         });
       });

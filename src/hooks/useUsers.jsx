@@ -150,7 +150,7 @@ export default function useUsers() {
             tempPassword: false,
           });
         } else {
-          console.log("not set yet");
+          return;
         }
       })
       .catch((e) => {

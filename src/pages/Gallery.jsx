@@ -14,14 +14,13 @@ function ImageGallery() {
     window.scrollTo(0, 0);
 
     const get = async () => {
-      console.log("ran get");
       const docRef = doc(db, "images", "Gallery");
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         setGallery(docSnap.data().images);
       } else {
-        console.log("No document");
+        return;
       }
     };
 

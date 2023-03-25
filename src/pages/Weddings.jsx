@@ -56,7 +56,7 @@ function Weddings() {
       if (docSnap.exists()) {
         setSlideshow(docSnap.data());
       } else {
-        console.log("No document");
+        return
       }
     };
 

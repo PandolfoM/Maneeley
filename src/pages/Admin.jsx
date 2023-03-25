@@ -82,7 +82,6 @@ function Admin() {
       })
       .catch((e) => {
         setLoading(false);
-        console.log(e);
       });
   };
 
