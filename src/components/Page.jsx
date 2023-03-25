@@ -1,10 +1,13 @@
 import React from "react";
 
-function Page({ children, flex = false, ...props }) {
+function Page({ children, flex = false, fullHeight = false, ...props }) {
   return (
     <div
       className="newPage"
-      style={flex ? { display: "flex" } : { display: "block" }}
+      style={{
+        display: flex ? "flex" : "block",
+        height: fullHeight ? "100vh" : "auto",
+      }}
       {...props}>
       {children}
     </div>

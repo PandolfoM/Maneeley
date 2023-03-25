@@ -26,7 +26,7 @@ function Banquets() {
   }, []);
 
   return (
-    <Page flex>
+    <Page flex fullHeight>
       <div>
         <p style={{ whiteSpace: "break-spaces" }}>
           Planning an event - whether it's a birthday gathering or an elaborate
