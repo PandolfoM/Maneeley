@@ -1,14 +1,12 @@
-import { Loader } from "@mantine/core";
 import { doc, getDoc } from "firebase/firestore";
-import React, { useContext, useEffect } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import React, { useEffect, useState } from "react";
 import Page from "../components/Page";
 import Separator from "../components/Separator";
-import { MenuContext } from "../context/MenuContext";
 import { db } from "../firebase";
+import LazyImage from "../components/LazyImage";
 
 function ImageGallery() {
-  const { gallery, setGallery } = useContext(MenuContext);
+  const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,34 +17,28 @@ function ImageGallery() {
 
       if (docSnap.exists()) {
         setGallery(docSnap.data().images);
-      } else {
-        return;
       }
     };
 
-    !gallery.length > 0 && get();
+    return () => {
+      get();
+    };
   }, []);
 
   return (
     <Page id="gallery">
       <Separator title="Gallery" />
-      {gallery ? (
-        <ul className="gallery">
-          {gallery.map((i) => (
-            <li className="gallery-item" key={i.id}>
-              <LazyLoadImage
-                src={i.file}
-                style={{ maxWidth: "100%" }}
-                alt={i.name}
-              />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div style={{ margin: "0 auto", width: "fit-content" }}>
-          <Loader size="xl" variant="bars" mx="auto" />
-        </div>
-      )}
+      <ul className="gallery">
+        {gallery.map((i) => (
+          <LazyImage
+            src={i.file}
+            alt={i.name}
+            id={i.id}
+            style={{ maxWidth: "100%" }}
+            key={i.id}
+          />
+        ))}
+      </ul>
     </Page>
   );
 }
