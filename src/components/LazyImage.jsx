@@ -26,13 +26,9 @@ function LazyImage(props) {
   }, []);
 
   return inView ? (
-    <li ref={ref} className="gallery-item">
-      <img {...props} />
-    </li>
+    <img ref={ref} {...props} />
   ) : (
-    <li ref={ref} className="gallery-item">
-      <LoadingOverlay visible={true} />
-    </li>
+    <LoadingOverlay ref={ref} visible={true} />
   );
 }
 

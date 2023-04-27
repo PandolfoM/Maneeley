@@ -1,7 +1,7 @@
 import { Carousel } from "@mantine/carousel";
 import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import LazyImage from "./LazyImage";
 
 const awards = [
   {
@@ -72,12 +72,15 @@ function Awards() {
           dragFree
           slideSize={"5%"}
           slideGap="sm"
-          height={120}
+          height="100%"
           initialSlide={0}>
           {awards.map((i) => (
             <Carousel.Slide key={i.image}>
-              <a>
-                <LazyLoadImage
+              <a
+                key={i.image}
+                href="https://www.weddingwire.com/reviews/maneeleys-banquet-catering-and-the-lodge-at-maneeleys-south-windsor/d05508869673e0e2.html"
+                target="_blank">
+                <LazyImage
                   width={120}
                   height={120}
                   src={i.image}
@@ -94,12 +97,7 @@ function Awards() {
               key={i.image}
               href="https://www.weddingwire.com/reviews/maneeleys-banquet-catering-and-the-lodge-at-maneeleys-south-windsor/d05508869673e0e2.html"
               target="_blank">
-              <LazyLoadImage
-                width={100}
-                height={100}
-                src={i.image}
-                alt={i.title}
-              />
+              <LazyImage width={100} height={100} src={i.image} alt={i.title} />
             </a>
           ))}
         </div>

@@ -30,13 +30,14 @@ function ImageGallery() {
       <Separator title="Gallery" />
       <ul className="gallery">
         {gallery.map((i) => (
-          <LazyImage
-            src={i.file}
-            alt={i.name}
-            id={i.id}
-            style={{ maxWidth: "100%" }}
-            key={i.id}
-          />
+          <li className="gallery-item" key={i.id}>
+            <LazyImage
+              src={i.file}
+              alt={i.name}
+              id={i.id}
+              style={{ maxWidth: "100%" }}
+            />
+          </li>
         ))}
       </ul>
     </Page>

@@ -4,11 +4,11 @@ import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useRef } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import Page from "../components/Page";
 import Separator from "../components/Separator";
 import { MenuContext } from "../context/MenuContext";
 import { db } from "../firebase";
+import LazyImage from "../components/LazyImage";
 
 const useStyles = createStyles((theme, params) => ({
   indicator: {
@@ -56,11 +56,13 @@ function Weddings() {
       if (docSnap.exists()) {
         setSlideshow(docSnap.data());
       } else {
-        return
+        return;
       }
     };
 
-    !slideshow.id && get();
+    return () => {
+      !slideshow.id && get();
+    };
   }, []);
 
   return (
@@ -76,7 +78,7 @@ function Weddings() {
         classNames={classes}>
         {slideshow.images?.map((i) => (
           <Carousel.Slide key={i.id}>
-            <LazyLoadImage
+            <LazyImage
               src={i.file}
               style={{
                 width: "100%",
