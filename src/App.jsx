@@ -1,27 +1,24 @@
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { Navigate, Routes, Route, BrowserRouter } from "react-router-dom";
 
 import "./App.scss";
-import Contact from "./pages/Contact";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import ScrollTop from "./components/ScrollTop";
-import NoMatch from "./pages/NoMatch";
-import Catering from "./pages/Catering";
-import Admin from "./pages/Admin";
-import Dashboard from "./pages/Dashboard";
+import Footer from "./components/Footer";
 
-import { useContext } from "react";
+import { Suspense, lazy, useContext } from "react";
 import { AuthContext } from "./auth/context";
-import Banquets from "./pages/Banquets";
-import Weddings from "./pages/Weddings";
-import ImageGallery from "./pages/Gallery";
-import NewPassword from "./pages/NewPassword";
+import { LoadingOverlay } from "@mantine/core";
+
+const Contact = lazy(() => import("./pages/Contact"));
+const Home = lazy(() => import("./pages/Home"));
+const NoMatch = lazy(() => import("./pages/NoMatch"));
+const Catering = lazy(() => import("./pages/Catering"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Banquets = lazy(() => import("./pages/Banquets"));
+const Weddings = lazy(() => import("./pages/Weddings"));
+const ImageGallery = lazy(() => import("./pages/Gallery"));
+const NewPassword = lazy(() => import("./pages/NewPassword"));
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -35,22 +32,83 @@ function App() {
   };
 
   return (
-    <Router basename="/Maneeley/">
+    <BrowserRouter basename="/Maneeley/">
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/catering" element={<Catering />} />
-          <Route path="/banquets" element={<Banquets />} />
-          <Route path="/weddings" element={<Weddings />} />
-          <Route path="/gallery" element={<ImageGallery />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Contact />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/catering"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Catering />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/banquets"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Banquets />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/weddings"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Weddings />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/gallery"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <ImageGallery />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Admin />
+              </Suspense>
+            }
+          />
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Suspense
+                  fallback={
+                    <LoadingOverlay visible={true} overlayOpacity={1} />
+                  }>
+                  <Dashboard />
+                </Suspense>
               </ProtectedRoute>
             }
           />
@@ -58,16 +116,29 @@ function App() {
             path="/newpassword"
             element={
               <ProtectedRoute>
-                <NewPassword />
+                <Suspense
+                  fallback={
+                    <LoadingOverlay visible={true} overlayOpacity={1} />
+                  }>
+                  <NewPassword />
+                </Suspense>
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<NoMatch />} />
+          <Route
+            path="*"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <NoMatch />
+              </Suspense>
+            }
+          />
         </Routes>
         <Footer />
         <ScrollTop />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
