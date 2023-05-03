@@ -7,6 +7,7 @@ export const MenuContextProvider = ({ children }) => {
   const [menus, setMenus] = useState([]);
   const [images, setImages] = useState([]);
   const [slideshow, setSlideshow] = useState([]);
+  const [gallery, setGallery] = useState([]);
 
   return (
     <MenuContext.Provider
@@ -17,6 +18,8 @@ export const MenuContextProvider = ({ children }) => {
         setImages,
         slideshow,
         setSlideshow,
+        gallery,
+        setGallery,
       }}>
       {children}
     </MenuContext.Provider>

@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { createStyles, getStylesRef } from "@mantine/core";
+import { Text, createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
 import { doc, getDoc } from "firebase/firestore";
@@ -90,6 +90,9 @@ function Weddings() {
           </Carousel.Slide>
         ))}
       </Carousel>
+      <Text color="#bbb" fw="lighter" size="sm" align="center">
+        Photos were provided by Jennifer Cardinal Photography
+      </Text>
       <Separator title="Weddings" style={{ marginTop: "4rem" }} />
       <p>
         The Grand Lodge at Maneeley's is a full service wedding & event venue in
