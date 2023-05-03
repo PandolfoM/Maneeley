@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
 import { db } from "../firebase";
+import banquetHero from "../assets/banquetsHero.webp";
 
 function Banquets() {
   const [menus, setMenus] = useState([]);
@@ -24,8 +25,9 @@ function Banquets() {
   }, []);
 
   return (
-    <Page flex fullHeight>
+    <Page flex>
       <div>
+        <div className="banquet-hero" />
         <p style={{ whiteSpace: "break-spaces" }}>
           Planning an event - whether it's a birthday gathering or an elaborate
           corporate event - is not an easy task.

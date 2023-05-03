@@ -370,6 +370,21 @@ body {
 
 // Contact END
 
+// Banquet
+.banquet-hero {
+  width: 100%;
+  height: 10rem;
+  background-image: linear-gradient(to bottom, #2a2a2a85, #000000ba),
+    url("./assets/banquetsHero.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (min-width: $tablet) {
+    height: 25rem;
+  }
+}
+// Banquet END
+
 // Dashboard
 
 .dashboard-notavailable {
