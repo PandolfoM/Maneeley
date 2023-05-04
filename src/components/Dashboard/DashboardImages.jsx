@@ -11,7 +11,7 @@ import SubtleButton from "../SubtleButton";
 
 function DashboardImages({ classes, name, data }) {
   const { addImage, deleteImage } = useImages();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const form = useForm({
     initialValues: {
