@@ -828,13 +828,13 @@ p {
       a {
         cursor: pointer;
         white-space: nowrap;
-        max-width: 80%;
         text-overflow: clip;
       }
 
       &-func {
         display: flex;
         gap: 1rem;
+        width: fit-content;
       }
     }
   }
