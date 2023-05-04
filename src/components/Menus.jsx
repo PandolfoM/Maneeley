@@ -36,7 +36,7 @@ function Menus({ menus }) {
 
   return (
     <aside className="catering-menus">
-      <Separator title={menus.name + " Menus"} />
+      <Separator title={menus.name ? `${menus.name} Menus` : " Menus"} />
       {menus.items ? (
         <>
           {menus.items.length === 0 ? (
