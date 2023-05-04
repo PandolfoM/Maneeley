@@ -386,10 +386,6 @@ body {
 
 // Dashboard
 
-.dashboard-notavailable {
-  text-align: center;
-}
-
 .dashboard-nav {
   position: relative;
   width: 100%;
@@ -414,19 +410,24 @@ body {
 }
 
 .dashboard-content {
-  margin-top: 2rem;
+  // margin-top: 2rem;
   display: flex;
   justify-content: center;
   flex: 1;
+  width: 100%;
+  @media screen and (min-width: $tablet) {
+    margin-top: 2rem;
+  }
 
   .dashboard-display {
     display: flex;
     flex: 1;
     align-items: center;
     flex-direction: column;
+    width: 100%;
 
     &-inner {
-      height: 100vh;
+      // height: 100vh;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -770,6 +771,7 @@ p {
   color: $white;
   font-weight: bold;
   box-sizing: border-box;
+  overflow: hidden;
 
   @media screen and (min-width: $tablet) {
     flex-wrap: nowrap;
@@ -825,6 +827,9 @@ p {
       line-height: 2rem;
       a {
         cursor: pointer;
+        white-space: nowrap;
+        max-width: 80%;
+        text-overflow: clip;
       }
 
       &-func {

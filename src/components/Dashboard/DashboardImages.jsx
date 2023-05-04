@@ -81,18 +81,13 @@ function DashboardImages({ classes, name, data }) {
                   <>
                     {data?.images?.map((i) => (
                       <div key={i.id} className="item-item">
-                        <SubtleButton
-                          href={i.file}
-                          name={i.name}
-                          style={{
-                            whiteSpace: "nowrap",
-                            textOverflow: "clip",
-                            maxWidth: "80%",
-                          }}
-                        />
+                        <SubtleButton href={i.file} name={i.name} />
                         <div className="item-item-func">
                           <SubtleButton
-                            style={{ whiteSpace: "nowrap" }}
+                            style={{
+                              whiteSpace: "nowrap",
+                              maxWidth: "fit-content",
+                            }}
                             className="delete"
                             onClick={async () => {
                               setLoading(true);

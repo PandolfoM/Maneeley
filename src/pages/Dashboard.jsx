@@ -59,7 +59,7 @@ function Dashboard() {
             />
             <SubtleButton
               style={{ cursor: "pointer" }}
-              name={"Slideshow / Gallery"}
+              name={"Images"}
               className={currentDash === "images" ? "activeLink" : ""}
               onClick={() => setCurrentDash("images")}
             />
