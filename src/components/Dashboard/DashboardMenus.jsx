@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Accordion,
   Alert,
-  createStyles,
   FileInput,
   LoadingOverlay,
   TextInput,
@@ -91,50 +90,55 @@ function DashboardMenus({ classes, name, data }) {
                     style={{ whiteSpace: "nowrap" }}
                   />
                 </form>
-                {data?.items.length === 0 ? (
-                  <Alert
-                    sx={{
-                      marginTop: "0.5rem",
-                      backgroundColor: "#2e2e2e80",
-                      color: "#f53434",
-                      borderColor: "#f53434",
-                    }}
-                    icon={<FontAwesomeIcon icon={faCircleExclamation} />}
-                    title="No Menus"
-                    color={"red"}
-                    variant="outline">
-                    There are no menus yet
-                  </Alert>
-                ) : (
-                  <>
-                    {data?.items?.map((i) => (
-                      <div key={i.id} className="item-item">
-                        <a href={i.file} target="_blank" className="activeLink">
-                          {i.name}
-                        </a>
-                        <div className="item-item-func">
-                          <SubtleButton
-                            onClick={() => {
-                              setCurrentMenuName(name);
-                              setCurrentMenuItem(i);
-                              setIsModalOpen(true);
-                            }}
-                            name={"Edit"}
-                          />
-                          <SubtleButton
-                            className="delete"
-                            onClick={async () => {
-                              setLoading(true);
-                              await deleteMenuItem(name, i);
-                              setLoading(false);
-                            }}
-                            name={"Delete"}
-                          />
+                <div className="item-content">
+                  {data?.items.length === 0 ? (
+                    <Alert
+                      sx={{
+                        marginTop: "0.5rem",
+                        backgroundColor: "#2e2e2e80",
+                        color: "#f53434",
+                        borderColor: "#f53434",
+                      }}
+                      icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+                      title="No Menus"
+                      color={"red"}
+                      variant="outline">
+                      There are no menus yet
+                    </Alert>
+                  ) : (
+                    <>
+                      {data?.items?.map((i) => (
+                        <div key={i.id} className="item-item">
+                          <a
+                            href={i.file}
+                            target="_blank"
+                            className="activeLink">
+                            {i.name}
+                          </a>
+                          <div className="item-item-func">
+                            <SubtleButton
+                              onClick={() => {
+                                setCurrentMenuName(name);
+                                setCurrentMenuItem(i);
+                                setIsModalOpen(true);
+                              }}
+                              name={"Edit"}
+                            />
+                            <SubtleButton
+                              className="delete"
+                              onClick={async () => {
+                                setLoading(true);
+                                await deleteMenuItem(name, i);
+                                setLoading(false);
+                              }}
+                              name={"Delete"}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </>
-                )}
+                      ))}
+                    </>
+                  )}
+                </div>
               </div>
             </Accordion.Panel>
           </Accordion.Item>

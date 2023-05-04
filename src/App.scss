@@ -53,7 +53,7 @@ body {
 
 // Navigation
 .navbar {
-  z-index: 10;
+  z-index: 99999;
   background-color: $black;
   color: $white;
   overflow: hidden;
@@ -809,6 +809,14 @@ p {
           width: 10rem;
           color: $white;
         }
+      }
+    }
+
+    &-content {
+      overflow-y: auto;
+      max-height: 35rem;
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
 
