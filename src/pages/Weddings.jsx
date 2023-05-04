@@ -50,7 +50,6 @@ function Weddings() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const get = async () => {
-      console.log("ran");
       const docRef = doc(db, "images", "Slideshow");
       const docSnap = await getDoc(docRef);
 

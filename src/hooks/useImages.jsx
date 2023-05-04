@@ -4,7 +4,6 @@ import {
   arrayUnion,
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
   updateDoc,
@@ -16,8 +15,15 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { useContext } from "react";
+import imageCompression from "browser-image-compression";
 import { db, storage } from "../firebase";
 import { MenuContext } from "../context/MenuContext";
+
+const compressionOptions = {
+  maxSizeMB: 1,
+  maxWidthOrHeight: 1920,
+  useWebWorker: true,
+};
 
 export default function useImages() {
   const { images, setImages } = useContext(MenuContext);
@@ -54,7 +60,11 @@ export default function useImages() {
     for (let i = 0; i < file.length; i++) {
       const id = uuidv4();
       const storageRef = ref(storage, `${category}/${id}`);
-      await uploadBytes(storageRef, file[i]).then(() => {
+      const compressedFile = await imageCompression(
+        file[i],
+        compressionOptions
+      );
+      await uploadBytes(storageRef, compressedFile).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
             await updateDoc(doc(db, "images", category), {
