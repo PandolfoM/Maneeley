@@ -38,7 +38,9 @@ function Navbar() {
         opened={isOpened}
         setIsOpened={setIsOpened}
         title="Maneeley's"
-        padding="xs">
+        padding="xs"
+        size={"10rem"}
+        zIndex={500}>
         <NavLinks currentUser={currentUser} />
       </Drawer>
     </>
