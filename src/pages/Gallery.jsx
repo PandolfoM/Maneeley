@@ -29,7 +29,7 @@ function ImageGallery() {
     <Page id="gallery">
       <Separator title="Gallery" />
       <Text color="#bbb" fw="lighter" size="sm" align="center">
-        Photos were provided by Nick Rezendez
+        Photos were provided by Nick Rezendez Photography
       </Text>
       {gallery && (
         <ul className="gallery">
