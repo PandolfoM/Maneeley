@@ -51,7 +51,7 @@ function Admin() {
   const [loading, setLoading] = useState(false);
   const { classes } = useStyles();
   const { getUser } = useUsers();
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const form = useForm({
     initialValues: {

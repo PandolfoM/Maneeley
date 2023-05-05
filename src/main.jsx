@@ -6,6 +6,7 @@ import App from "./App";
 import { AuthContextProvider } from "./auth/context";
 import { MenuContextProvider } from "./context/MenuContext";
 import "./index.css";
+import { Notifications } from "@mantine/notifications";
 
 const theme = {
   colors: {
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <React.StrictMode>
         <MantineProvider withNormalizeCSS theme={theme}>
           <ModalsProvider>
+            <Notifications />
             <App />
           </ModalsProvider>
         </MantineProvider>

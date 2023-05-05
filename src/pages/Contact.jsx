@@ -1,7 +1,7 @@
 import * as Yup from "yup";
-import { createStyles, Textarea, TextInput } from "@mantine/core";
+import { createStyles, Text, Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "../components/Button";
 import Separator from "../components/Separator";
@@ -9,6 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import SubtleButton from "../components/SubtleButton";
 import Page from "../components/Page";
+import useUsers from "../hooks/useUsers";
+import { notifications } from "@mantine/notifications";
+import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -61,6 +64,7 @@ const useStyles = createStyles(() => ({
 
 function Contact() {
   const { classes } = useStyles();
+  const { contactForm } = useUsers();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -78,10 +82,40 @@ function Contact() {
     validate: yupResolver(validationSchema),
   });
 
+  const handleSubmit = async (values) => {
+    notifications.show({
+      id: "submit-noti",
+      title: "Sending",
+      message: "Please wait while we send your message.",
+      loading: true,
+      autoClose: false,
+      withCloseButton: false,
+    });
+
+    await contactForm(values)
+      .then(() => {
+        notifications.update({
+          id: "submit-noti",
+          color: "green",
+          icon: <FontAwesomeIcon icon={faCheck} />,
+          title: "Sent!",
+          message: "Your message has been sent!",
+        });
+      })
+      .catch((e) => {
+        notifications.show({
+          title: "Error",
+          message: "There has been an error!",
+          color: "red",
+          icon: <FontAwesomeIcon icon={faX} />,
+        });
+      });
+  };
+
   return (
     <Page flex>
       <form
-        onSubmit={form.onSubmit((values) => console.log(values))}
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className="contact-form contact-form-100">
         <div className={`form-name ${classes}`}>
           <TextInput
