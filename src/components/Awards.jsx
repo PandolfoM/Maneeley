@@ -68,11 +68,10 @@ function Awards() {
     <div className="awards">
       {tablet ? (
         <Carousel
-          className="awards-imgs"
+          mx="auto"
+          slideSize={"150px"}
           dragFree
-          slideSize={"5%"}
           slideGap="sm"
-          height="100%"
           initialSlide={0}>
           {awards.map((i) => (
             <Carousel.Slide key={i.image}>
@@ -81,8 +80,8 @@ function Awards() {
                 href="https://www.weddingwire.com/reviews/maneeleys-banquet-catering-and-the-lodge-at-maneeleys-south-windsor/d05508869673e0e2.html"
                 target="_blank">
                 <LazyImage
-                  width={120}
-                  height={120}
+                  width={"100%"}
+                  height={"100%"}
                   src={i.image}
                   alt={i.title}
                 />
