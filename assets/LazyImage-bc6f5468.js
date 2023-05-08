@@ -1,1 +1,0 @@
-import{r as t,d as s,V as u}from"./index-4773cb83.js";function b(n){const[i,a]=t.useState(!1),e=t.useRef();let c=(r,f)=>{r.forEach(o=>{o.isIntersecting&&a(!0)})};return t.useEffect(()=>{let r=new IntersectionObserver(c);return e!=null&&e.current&&r.observe(e.current),()=>{r.disconnect()}},[]),i?s("img",{ref:e,...n}):s(u,{ref:e,visible:!0})}export{b as L};
