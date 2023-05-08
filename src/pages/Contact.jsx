@@ -100,6 +100,7 @@ function Contact() {
 
     await contactForm(values)
       .then(() => {
+        form.reset();
         notifications.update({
           id: "submit-noti",
           color: "green",
