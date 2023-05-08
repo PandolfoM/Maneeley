@@ -171,7 +171,7 @@ export default function useUsers() {
   const contactForm = async ({ first, last, email, phone, message }) => {
     try {
       await addDoc(collection(db, "mail"), {
-        to: "pandolfomatthew@gmail.com",
+        to: "matt@pandolfo.com",
         message: {
           subject: "Maneeley's Contact Form",
           text: `
@@ -181,10 +181,10 @@ export default function useUsers() {
               - Message: ${message}
             `,
           html: `
-            <h3>Contact Info</h3>
+            <h2>Contact Form</h2>
             <p>Name: ${first} ${last}</p>
             <p>Email: ${email}</p>
-            <p>Phone: ${phone}</p>
+            <p>Phone: ${phone ? phone : "N/A"}</p>
             <p>Message: ${message}</p>
             `,
         },

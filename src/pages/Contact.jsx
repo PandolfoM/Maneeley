@@ -28,7 +28,13 @@ const validationSchema = Yup.object().shape({
     .email("Invalid email")
     .required("Required")
     .label("Email"),
-  phone: Yup.number().typeError("Invalid number").label("Phone Number"),
+  phone: Yup.number()
+    .notRequired()
+    .nullable()
+    .typeError("Invalid phone number")
+    .label("Phone Number")
+    .transform((_, val) => (val !== "" ? Number(val) : null)),
+
   message: Yup.string()
     .min(10, "Too Short")
     .required("Required")
