@@ -1,7 +1,8 @@
 import * as Yup from "yup";
-import { createStyles, Text, Textarea, TextInput } from "@mantine/core";
+import { createStyles, Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Reaptcha from "reaptcha";
 
 import Button from "../components/Button";
 import Separator from "../components/Separator";
@@ -71,6 +72,7 @@ const useStyles = createStyles(() => ({
 function Contact() {
   const { classes } = useStyles();
   const { contactForm } = useUsers();
+  const captchaRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -88,7 +90,15 @@ function Contact() {
     validate: yupResolver(validationSchema),
   });
 
-  const handleSubmit = async (values) => {
+  const verify = () => {
+    captchaRef.current.getResponse().then((res) => {
+      if (res) {
+        handleSubmit();
+      }
+    });
+  };
+
+  const handleSubmit = async () => {
     notifications.show({
       id: "submit-noti",
       title: "Sending",
@@ -98,7 +108,7 @@ function Contact() {
       withCloseButton: false,
     });
 
-    await contactForm(values)
+    await contactForm(form.values)
       .then(() => {
         form.reset();
         notifications.update({
@@ -117,12 +127,17 @@ function Contact() {
           icon: <FontAwesomeIcon icon={faX} />,
         });
       });
+
+    captchaRef.current.reset();
   };
 
   return (
     <Page flex>
       <form
-        onSubmit={form.onSubmit((values) => handleSubmit(values))}
+        onSubmit={(e) => {
+          e.preventDefault();
+          captchaRef.current.execute();
+        }}
         className="contact-form contact-form-100">
         <div className={`form-name ${classes}`}>
           <TextInput
@@ -166,6 +181,13 @@ function Contact() {
           minRows={5}
           maxRows={5}
           {...form.getInputProps("message")}
+        />
+        <Reaptcha
+          sitekey={import.meta.env.VITE_SITEKEY}
+          ref={captchaRef}
+          onVerify={verify}
+          size="invisible"
+          theme="dark"
         />
         <Button name={"Submit"} type="submit" />
       </form>
