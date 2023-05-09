@@ -1,1 +1,0 @@
-import{r as s,d as e,j as a,L as c}from"./index-eba705f5.js";function i(){return s.useEffect(()=>{window.scrollTo(0,0)},[]),e("div",{className:"NoMatch",children:a("div",{className:"NoMatch-content",children:[e("h1",{children:"404"}),e("h2",{children:"Doesn't seem like this a page"}),e(c,{to:"/",className:"activeLink",children:"HOME"})]})})}export{i as default};
