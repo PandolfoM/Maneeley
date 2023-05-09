@@ -40,7 +40,7 @@ function Navbar() {
         title="Maneeley's"
         padding="xs"
         size={"10rem"}
-        zIndex={500}>
+        zIndex={910}>
         <NavLinks currentUser={currentUser} />
       </Drawer>
     </>
