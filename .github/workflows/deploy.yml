@@ -12,6 +12,7 @@ env:
   VITE_STORAGEBUCKET: ${{ secrets.VITE_STORAGEBUCKET }}
   VITE_MESSAGINGSENDERID: ${{ secrets.VITE_MESSAGINGSENDERID }}
   VITE_APPID: ${{ secrets.VITE_APPID }}
+  VITE_SITEKEY: ${{ secrets.SITEKEY }}
 
 jobs:
   build:
