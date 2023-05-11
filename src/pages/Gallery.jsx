@@ -39,7 +39,9 @@ function ImageGallery() {
                 src={i.file}
                 alt={i.name}
                 id={i.id}
-                style={{ maxWidth: "100%" }}
+                width={i.width}
+                height={i.height}
+                // style={{ maxWidth: "100%" }}
               />
             </li>
           ))}
