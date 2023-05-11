@@ -1,1 +1,0 @@
-import{d as a,ag as e}from"./index-d603ee2c.js";function d({name:r,...t}){return a(e,{variant:"gradient",gradient:{from:"#b17900",to:"#fdbb2d",deg:360},radius:"xl",uppercase:!0,...t,children:r})}export{d as A};
