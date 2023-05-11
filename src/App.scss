@@ -73,6 +73,7 @@ body {
     }
     img {
       width: 5rem;
+      height: auto;
       @media screen and (min-width: $mobile) {
         width: 10rem;
       }
