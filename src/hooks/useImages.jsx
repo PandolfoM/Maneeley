@@ -20,7 +20,7 @@ import { db, storage } from "../firebase";
 import { MenuContext } from "../context/MenuContext";
 
 const compressionOptions = {
-  maxSizeMB: 1,
+  maxSizeMB: 0.3,
   maxWidthOrHeight: 1920,
   useWebWorker: true,
 };
@@ -66,26 +66,33 @@ export default function useImages() {
       );
       await uploadBytes(storageRef, compressedFile).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
-          try {
-            await updateDoc(doc(db, "images", category), {
-              images: arrayUnion({
-                file: downloadURL,
-                name: file[i].name.replace(/\.[^.]+/, ""),
-                id,
-              }),
-            });
+          const img = new Image();
+          img.src = downloadURL;
 
-            let newArr = [...images];
-            const imageIndex = images.findIndex((i) => category === i.id);
-            newArr[imageIndex].images.push({
-              name: file[i].name.replace(/\.[^.]+/, ""),
-              file: downloadURL,
-              id,
-            });
-            setImages(newArr);
-          } catch (e) {
-            return;
-          }
+          img.onload = async () => {
+            try {
+              await updateDoc(doc(db, "images", category), {
+                images: arrayUnion({
+                  file: downloadURL,
+                  name: file[i].name.replace(/\.[^.]+/, ""),
+                  height: img.height,
+                  width: img.width,
+                  id,
+                }),
+              });
+
+              let newArr = [...images];
+              const imageIndex = images.findIndex((i) => category === i.id);
+              newArr[imageIndex].images.push({
+                name: file[i].name.replace(/\.[^.]+/, ""),
+                file: downloadURL,
+                id,
+              });
+              setImages(newArr);
+            } catch (e) {
+              return;
+            }
+          };
         });
       });
     }
