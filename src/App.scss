@@ -833,13 +833,14 @@ p {
       a {
         cursor: pointer;
         white-space: nowrap;
-        text-overflow: clip;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
       }
 
       &-func {
-        display: flex;
         gap: 1rem;
         width: fit-content;
+        padding-left: 1rem;
       }
     }
   }
