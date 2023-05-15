@@ -41,7 +41,10 @@ function Navbar() {
         padding="xs"
         size={"10rem"}
         zIndex={910}>
-        <NavLinks currentUser={currentUser} />
+        <NavLinks
+          currentUser={currentUser}
+          onClick={() => setIsOpened(false)}
+        />
       </Drawer>
     </>
   );
