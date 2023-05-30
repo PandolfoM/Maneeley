@@ -28,12 +28,10 @@ function DashboardMenus({ classes, name, data }) {
 
   const form = useForm({
     initialValues: {
-      name: "",
       file: null,
     },
 
     validate: {
-      name: isNotEmpty(),
       file: isNotEmpty(),
     },
   });
@@ -62,7 +60,7 @@ function DashboardMenus({ classes, name, data }) {
                   className="item-controls"
                   onSubmit={form.onSubmit(async (values) => {
                     setLoading(true);
-                    await addMenuItem(values.name, values.file, name);
+                    await addMenuItem(values, name);
                     form.reset();
                     setLoading(false);
                   })}>
@@ -76,7 +74,7 @@ function DashboardMenus({ classes, name, data }) {
                           }
                         : {}
                     }>
-                    <TextInput
+                    {/* <TextInput
                       sx={
                         mobile
                           ? {
@@ -92,7 +90,7 @@ function DashboardMenus({ classes, name, data }) {
                       placeholder="Menu Name"
                       withAsterisk
                       {...form.getInputProps("name")}
-                    />
+                    /> */}
                     <FileInput
                       sx={
                         mobile
@@ -103,6 +101,7 @@ function DashboardMenus({ classes, name, data }) {
                             }
                           : {}
                       }
+                      multiple
                       classNames={classes}
                       variant="unstyled"
                       size="xs"
