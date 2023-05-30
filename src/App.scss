@@ -389,6 +389,26 @@ body {
 }
 // Banquet END
 
+// Wedding
+.wedding-content {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  @media screen and (min-width: $tablet) {
+    flex-wrap: nowrap;
+  }
+
+  aside {
+    width: 100%;
+
+    @media screen and (min-width: $tablet) {
+      min-width: 30rem;
+    }
+  }
+}
+// Wedding END
+
 // Dashboard
 
 .dashboard-nav {

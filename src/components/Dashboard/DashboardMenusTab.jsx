@@ -60,6 +60,7 @@ function DashboardMenusTab() {
 
   return (
     <>
+      <DashboardMenus classes={classes} name="Wedding" data={menus[2]} />
       <DashboardMenus classes={classes} name="Catering" data={menus[1]} />
       <DashboardMenus classes={classes} name="Banquets" data={menus[0]} />
     </>

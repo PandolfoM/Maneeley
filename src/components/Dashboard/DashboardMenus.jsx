@@ -74,23 +74,6 @@ function DashboardMenus({ classes, name, data }) {
                           }
                         : {}
                     }>
-                    {/* <TextInput
-                      sx={
-                        mobile
-                          ? {
-                              display: "block !important",
-                              paddingBottom: "2px",
-                              width: "100%",
-                            }
-                          : {}
-                      }
-                      classNames={classes}
-                      variant="unstyled"
-                      size="xs"
-                      placeholder="Menu Name"
-                      withAsterisk
-                      {...form.getInputProps("name")}
-                    /> */}
                     <FileInput
                       sx={
                         mobile

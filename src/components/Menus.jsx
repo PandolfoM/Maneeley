@@ -31,12 +31,14 @@ const useStyles = createStyles((theme, params) => ({
   },
 }));
 
-function Menus({ menus }) {
+function Menus({ menus, separator = true }) {
   const { classes } = useStyles();
 
   return (
     <aside className="catering-menus">
-      <Separator title={menus.name ? `${menus.name} Menus` : " Menus"} />
+      {separator && (
+        <Separator title={menus.name ? `${menus.name} Menus` : " Menus"} />
+      )}
       {menus.items ? (
         <>
           {menus.items.length === 0 ? (
