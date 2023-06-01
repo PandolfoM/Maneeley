@@ -35,7 +35,7 @@ function DashboardUsers({ classes, data, users, setUsers, form, setEdit }) {
                       maxWidth: "50%",
                     }}
                   />
-                  <div className="item-item-func">
+                  <div className="item-item-func" style={{ display: "flex" }}>
                     <SubtleButton
                       onClick={async () => {
                         setEdit(true);

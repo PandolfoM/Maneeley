@@ -168,6 +168,33 @@ export default function useUsers() {
     setUsers(newArr);
   };
 
+  const contactForm = async ({ first, last, email, phone, message }) => {
+    try {
+      await addDoc(collection(db, "mail"), {
+        to: "sandy@maneeleys.com",
+        message: {
+          subject: "Maneeley's Contact Form",
+          text: `
+              - Name: ${first} ${last}
+              - Email: ${email}
+              - Phone: ${phone}
+              - Message: ${message}
+            `,
+          html: `
+            <h2>Contact Form</h2>
+            <p>Name: ${first} ${last}</p>
+            <p>Email: ${email}</p>
+            <p>Phone: ${phone ? phone : "N/A"}</p>
+            <p>Message: ${message}</p>
+            `,
+        },
+      });
+      return;
+    } catch (e) {
+      return e;
+    }
+  };
+
   return {
     getUsers,
     getUser,
@@ -175,5 +202,6 @@ export default function useUsers() {
     createUser,
     resetPassword,
     updateUser,
+    contactForm,
   };
 }

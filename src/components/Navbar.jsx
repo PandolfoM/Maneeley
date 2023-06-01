@@ -40,8 +40,11 @@ function Navbar() {
         title="Maneeley's"
         padding="xs"
         size={"10rem"}
-        zIndex={500}>
-        <NavLinks currentUser={currentUser} />
+        zIndex={910}>
+        <NavLinks
+          currentUser={currentUser}
+          onClick={() => setIsOpened(false)}
+        />
       </Drawer>
     </>
   );

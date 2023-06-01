@@ -53,7 +53,7 @@ body {
 
 // Navigation
 .navbar {
-  z-index: 99999;
+  z-index: 900;
   background-color: $black;
   color: $white;
   overflow: hidden;
@@ -73,6 +73,7 @@ body {
     }
     img {
       width: 5rem;
+      height: 100%;
       @media screen and (min-width: $mobile) {
         width: 10rem;
       }
@@ -125,7 +126,6 @@ body {
     min-height: 300px;
     background-image: linear-gradient(to bottom, #2a2a2a85, #000000ba),
       url("./assets/hero.webp");
-    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -133,6 +133,11 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
+
+    @media screen and (min-width: 1200px) {
+      background-attachment: fixed;
+    }
+
     .landing {
       display: flex;
       justify-content: center;
@@ -383,6 +388,26 @@ body {
   }
 }
 // Banquet END
+
+// Wedding
+.wedding-content {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  @media screen and (min-width: $tablet) {
+    flex-wrap: nowrap;
+  }
+
+  aside {
+    width: 100%;
+
+    @media screen and (min-width: $tablet) {
+      min-width: 30rem;
+    }
+  }
+}
+// Wedding END
 
 // Dashboard
 
@@ -828,13 +853,15 @@ p {
       a {
         cursor: pointer;
         white-space: nowrap;
-        text-overflow: clip;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
       }
 
       &-func {
-        display: flex;
-        gap: 1rem;
+        gap: 0.5rem;
         width: fit-content;
+        display: flex;
+        padding-left: 1rem;
       }
     }
   }

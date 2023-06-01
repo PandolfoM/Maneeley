@@ -29,7 +29,7 @@ function ImageGallery() {
     <Page id="gallery">
       <Separator title="Gallery" />
       <Text color="#bbb" fw="lighter" size="sm" align="center">
-        Photos were provided by Nick Rezendez
+        Photos were provided by Nick Rezendez Photography
       </Text>
       {gallery && (
         <ul className="gallery">
@@ -39,7 +39,9 @@ function ImageGallery() {
                 src={i.file}
                 alt={i.name}
                 id={i.id}
-                style={{ maxWidth: "100%" }}
+                width={i.width}
+                height={i.height}
+                // style={{ maxWidth: "100%" }}
               />
             </li>
           ))}

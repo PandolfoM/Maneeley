@@ -16,6 +16,7 @@ import { useState } from "react";
 import useMenus from "../../hooks/useMenus";
 import AppModal from "../Modal";
 import SubtleButton from "../SubtleButton";
+import { useMediaQuery } from "@mantine/hooks";
 
 function DashboardMenus({ classes, name, data }) {
   const { deleteMenuItem, addMenuItem } = useMenus();
@@ -23,15 +24,14 @@ function DashboardMenus({ classes, name, data }) {
   const [currentMenuName, setCurrentMenuName] = useState("");
   const [currentMenuItem, setCurrentMenuItem] = useState("");
   const [loading, setLoading] = useState(false);
+  const mobile = useMediaQuery("(max-width: 600px)");
 
   const form = useForm({
     initialValues: {
-      name: "",
       file: null,
     },
 
     validate: {
-      name: isNotEmpty(),
       file: isNotEmpty(),
     },
   });
@@ -60,20 +60,31 @@ function DashboardMenus({ classes, name, data }) {
                   className="item-controls"
                   onSubmit={form.onSubmit(async (values) => {
                     setLoading(true);
-                    await addMenuItem(values.name, values.file, name);
+                    await addMenuItem(values, name);
                     form.reset();
                     setLoading(false);
                   })}>
-                  <div>
-                    <TextInput
-                      classNames={classes}
-                      variant="unstyled"
-                      size="xs"
-                      placeholder="Menu Name"
-                      withAsterisk
-                      {...form.getInputProps("name")}
-                    />
+                  <div
+                    style={
+                      mobile
+                        ? {
+                            flexDirection: "column",
+                            gap: "0.5rem",
+                            width: "80%",
+                          }
+                        : {}
+                    }>
                     <FileInput
+                      sx={
+                        mobile
+                          ? {
+                              display: "block !important",
+                              paddingBottom: "2px",
+                              width: "100%",
+                            }
+                          : {}
+                      }
+                      multiple
                       classNames={classes}
                       variant="unstyled"
                       size="xs"

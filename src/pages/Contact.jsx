@@ -1,7 +1,8 @@
 import * as Yup from "yup";
 import { createStyles, Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Reaptcha from "reaptcha";
 
 import Button from "../components/Button";
 import Separator from "../components/Separator";
@@ -9,6 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import SubtleButton from "../components/SubtleButton";
 import Page from "../components/Page";
+import useUsers from "../hooks/useUsers";
+import { notifications } from "@mantine/notifications";
+import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -25,7 +29,13 @@ const validationSchema = Yup.object().shape({
     .email("Invalid email")
     .required("Required")
     .label("Email"),
-  phone: Yup.number().typeError("Invalid number").label("Phone Number"),
+  phone: Yup.number()
+    .notRequired()
+    .nullable()
+    .typeError("Invalid phone number")
+    .label("Phone Number")
+    .transform((_, val) => (val !== "" ? Number(val) : null)),
+
   message: Yup.string()
     .min(10, "Too Short")
     .required("Required")
@@ -61,6 +71,8 @@ const useStyles = createStyles(() => ({
 
 function Contact() {
   const { classes } = useStyles();
+  const { contactForm } = useUsers();
+  const captchaRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -78,10 +90,54 @@ function Contact() {
     validate: yupResolver(validationSchema),
   });
 
+  const verify = () => {
+    captchaRef.current.getResponse().then((res) => {
+      if (res) {
+        handleSubmit();
+      }
+    });
+  };
+
+  const handleSubmit = async () => {
+    notifications.show({
+      id: "submit-noti",
+      title: "Sending",
+      message: "Please wait while we send your message.",
+      loading: true,
+      autoClose: false,
+      withCloseButton: false,
+    });
+
+    await contactForm(form.values)
+      .then(() => {
+        form.reset();
+        notifications.update({
+          id: "submit-noti",
+          color: "green",
+          icon: <FontAwesomeIcon icon={faCheck} />,
+          title: "Sent!",
+          message: "Your message has been sent!",
+        });
+      })
+      .catch((e) => {
+        notifications.show({
+          title: "Error",
+          message: "There has been an error!",
+          color: "red",
+          icon: <FontAwesomeIcon icon={faX} />,
+        });
+      });
+
+    captchaRef.current.reset();
+  };
+
   return (
     <Page flex>
       <form
-        onSubmit={form.onSubmit((values) => console.log(values))}
+        onSubmit={(e) => {
+          e.preventDefault();
+          captchaRef.current.execute();
+        }}
         className="contact-form contact-form-100">
         <div className={`form-name ${classes}`}>
           <TextInput
@@ -125,6 +181,13 @@ function Contact() {
           minRows={5}
           maxRows={5}
           {...form.getInputProps("message")}
+        />
+        <Reaptcha
+          sitekey={import.meta.env.VITE_SITEKEY}
+          ref={captchaRef}
+          onVerify={verify}
+          size="invisible"
+          theme="dark"
         />
         <Button name={"Submit"} type="submit" />
       </form>

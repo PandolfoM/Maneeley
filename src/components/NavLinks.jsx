@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function NavLinks({ currentUser }) {
+function NavLinks({ currentUser, onClick }) {
   return (
     <ul>
       <li>
         <NavLink
           to="/"
+          onClick={onClick}
           className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
           Home
         </NavLink>
@@ -14,6 +15,7 @@ function NavLinks({ currentUser }) {
       <li>
         <NavLink
           to="gallery"
+          onClick={onClick}
           className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
           Gallery
         </NavLink>
@@ -21,6 +23,7 @@ function NavLinks({ currentUser }) {
       <li>
         <NavLink
           to="contact"
+          onClick={onClick}
           className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
           Contact
         </NavLink>
@@ -29,6 +32,7 @@ function NavLinks({ currentUser }) {
         <li>
           <NavLink
             to="dashboard"
+            onClick={onClick}
             className={({ isActive }) => (isActive ? "activeLink" : undefined)}>
             Dashboard
           </NavLink>

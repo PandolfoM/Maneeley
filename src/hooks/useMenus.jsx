@@ -52,27 +52,34 @@ export default function useMenus() {
     setMenus(newArr);
   };
 
-  const addMenuItem = async (name, file, category) => {
-    const id = uuidv4();
-    const storageRef = ref(storage, `${category}/${id}`);
-    await uploadBytes(storageRef, file).then(() => {
-      getDownloadURL(storageRef).then(async (downloadURL) => {
-        try {
-          await updateDoc(doc(db, "menus", category), {
-            items: arrayUnion({ name: name, file: downloadURL, id }),
-          });
+  const addMenuItem = async ({ file }, category) => {
+    for (let i = 0; i < file.length; i++) {
+      const id = uuidv4();
+      const storageRef = ref(storage, `${category}/${id}`);
 
-          let newArr = [...menus];
-          const menuIndex = menus.findIndex(
-            (item) => category.toLowerCase() === item.id
-          );
-          newArr[menuIndex].items.push({ name: name, file: downloadURL, id });
-          setMenus(newArr);
-        } catch (e) {
-          return;
-        }
+      await uploadBytes(storageRef, file[i]).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            await updateDoc(doc(db, "menus", category), {
+              items: arrayUnion({ name: file[i].name, file: downloadURL, id }),
+            });
+
+            let newArr = [...menus];
+            const menuIndex = menus.findIndex(
+              (item) => category.toLowerCase() === item.id
+            );
+            newArr[menuIndex].items.push({
+              name: file[i].name,
+              file: downloadURL,
+              id,
+            });
+            setMenus(newArr);
+          } catch (e) {
+            return;
+          }
+        });
       });
-    });
+    }
   };
 
   const editMenuItem = async (name, file, menu, item) => {
