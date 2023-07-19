@@ -32,7 +32,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/Maneeley/">
+    <BrowserRouter>
       <div>
         <Navbar />
         <Routes>
