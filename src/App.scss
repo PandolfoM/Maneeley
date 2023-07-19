@@ -890,4 +890,17 @@ p {
     color: $white;
   }
 }
+
+.mantine-Modal-inner {
+  width: fit-content !important;
+
+  @media only screen and (min-width: $mobile) {
+    width: 100% !important;
+  }
+  .mantine-Modal-header {
+    @media only screen and (min-width: $mobile) {
+      padding-top: 3rem !important;
+    }
+  }
+}
 // Utilities END
