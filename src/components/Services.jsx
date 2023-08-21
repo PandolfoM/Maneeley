@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import wedding from "../assets/wedding.webp";
 import banquet from "../assets/banquet.webp";
 import catering from "../assets/catering.webp";
-import brochure from "../assets/brochure.webp";
+import holiday from "../assets/holiday.webp";
 import Separator from "./Separator";
 
 const cardData = [
@@ -36,12 +36,12 @@ const cardData = [
   },
   {
     id: 3,
-    title: "Brochure",
-    subtite:
-      "Our 2020 Bridal Brochure showcases photos of our facility, wedding package details, a list of our preferred vendors and much more!",
+    title: "Holidays",
+    subtite: "",
     button: "View Now",
-    image: brochure,
-    route: "http://custompromotionsinc.com/flipbooks/Maneeleys/html5/#",
+    image: holiday,
+    route:
+      "https://firebasestorage.googleapis.com/v0/b/maneeley.appspot.com/o/Holiday%2FHoliday_menu.pdf?alt=media&token=2a66eda8-5c42-4010-8c94-359833fc7ae5",
   },
 ];
 
