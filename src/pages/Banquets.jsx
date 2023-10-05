@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
 import { db } from "../firebase";
-import banquetHero from "../assets/banquetsHero.webp";
 
 function Banquets() {
   const [menus, setMenus] = useState([]);
