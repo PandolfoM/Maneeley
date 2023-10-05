@@ -40,8 +40,9 @@ const cardData = [
     subtite: "",
     button: "View Now",
     image: holiday,
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/maneeley.appspot.com/o/Holiday%2FHoliday_menu.pdf?alt=media&token=2a66eda8-5c42-4010-8c94-359833fc7ae5",
+    // route:
+    //   "https://firebasestorage.googleapis.com/v0/b/maneeley.appspot.com/o/Holiday%2FHoliday_menu.pdf?alt=media&token=2a66eda8-5c42-4010-8c94-359833fc7ae5",
+    route: "/holiday",
   },
 ];
 
