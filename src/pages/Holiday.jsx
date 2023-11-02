@@ -24,25 +24,25 @@ function Holiday() {
   }, []);
 
   return (
-    <Page flex fullHeight>
+    <Page flex>
       <div>
         <p style={{ whiteSpace: "break-spaces" }}>
           This holiday season, we are excited to offer convenient pick-up and
           drop-off options for your festivities.
         </p>
-        <p style={{ whiteSpace: "break-spaces" }}> 
+        <p style={{ whiteSpace: "break-spaces" }}>
           For Thanksgiving, indulge in a stress-free celebration with our full
           meal pick-up service. From succulent roasted turkey to savory sides
           like creamy mashed potatoes and buttery stuffing, our Thanksgiving
           spread is a feast to remember.
         </p>
-        <p style={{ whiteSpace: "break-spaces" }}> 
+        <p style={{ whiteSpace: "break-spaces" }}>
           And for those seeking a memorable Christmas dining experience, host an
           event in our space, or we will bring the food to you. Our spacious and
           elegantly decorated venue provides the perfect ambiance for a festive
           gathering.
         </p>
-        <p style={{ whiteSpace: "break-spaces" }}> 
+        <p style={{ whiteSpace: "break-spaces" }}>
           Have a small group you want to celebrate with here at our location?
           Join us at our Small Company Holiday Celebration on December 8th. Want
           to celebrate in the office? The corporate holiday selections will have
@@ -50,7 +50,7 @@ function Holiday() {
           preferences, our culinary team will ensure your guests savor the
           flavors of the season.
         </p>
-        <p style={{ whiteSpace: "break-spaces" }}> 
+        <p style={{ whiteSpace: "break-spaces" }}>
           Whether you choose to pick up a Thanksgiving meal to enjoy at home or
           host a corporate Christmas dinner, our commitment to exceptional
           service and delicious cuisine will make your holiday celebrations
