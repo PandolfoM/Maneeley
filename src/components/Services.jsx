@@ -48,7 +48,7 @@ const cardData = [
 
 function Services() {
   return (
-    <section className="services">
+    <section className="services" id="services">
       <Separator title={"Services"} />
       <div className="services-cards">
         {cardData.map((i) => (
