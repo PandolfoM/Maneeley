@@ -8,10 +8,9 @@ function NavLinks({ currentUser, onClick }) {
     e.preventDefault();
     navigate("/");
     setTimeout(() => {
-      scroll.scrollTo(document.getElementById("services").offsetTop, {
-        duration: 500,
-        smooth: true,
-      });
+      document
+        .getElementById("services")
+        .scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
 
@@ -45,8 +44,8 @@ function NavLinks({ currentUser, onClick }) {
         <a
           href="/#services"
           onClick={(e) => {
+            onClick && onClick();
             handleServicesClick(e);
-            onClick();
           }}>
           Services
         </a>
