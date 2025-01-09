@@ -84,8 +84,10 @@ export default function useImages() {
               let newArr = [...images];
               const imageIndex = images.findIndex((i) => category === i.id);
               newArr[imageIndex].images.push({
-                name: file[i].name.replace(/\.[^.]+/, ""),
                 file: downloadURL,
+                name: file[i].name.replace(/\.[^.]+/, ""),
+                height: img.height,
+                width: img.width,
                 id,
               });
               setImages(newArr);

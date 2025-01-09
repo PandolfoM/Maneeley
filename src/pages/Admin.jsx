@@ -11,6 +11,7 @@ import Page from "../components/Page";
 import Separator from "../components/Separator";
 import { auth } from "../firebase";
 import useUsers from "../hooks/useUsers";
+import SubtleButton from "../components/SubtleButton";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -49,6 +50,7 @@ const useStyles = createStyles(() => ({
 
 function Admin() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const { classes } = useStyles();
   const { getUser } = useUsers();
   const { setCurrentUser } = useContext(AuthContext);
@@ -71,6 +73,7 @@ function Admin() {
     signInWithEmailAndPassword(auth, email, password)
       .then(async (user) => {
         setCurrentUser(user.user);
+        setError("");
         const getUserData = await getUser(user.user.uid);
         if (getUserData.tempPassword) {
           setLoading(false);
@@ -81,6 +84,7 @@ function Admin() {
         }
       })
       .catch((e) => {
+        setError("Incorrect email or password!");
         setLoading(false);
       });
   };
@@ -107,6 +111,7 @@ function Admin() {
           withAsterisk
           {...form.getInputProps("password")}
         />
+        <SubtleButton name={error} className="delete" />
         <Button name="Login" type="submit" loading={loading} />
       </form>
     </Page>

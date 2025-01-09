@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import { Suspense, lazy, useContext } from "react";
 import { AuthContext } from "./auth/context";
 import { LoadingOverlay } from "@mantine/core";
+import Holiday from "./pages/Holiday";
 
 const Contact = lazy(() => import("./pages/Contact"));
 const Home = lazy(() => import("./pages/Home"));
@@ -32,7 +33,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/Maneeley/">
+    <BrowserRouter>
       <div>
         <Navbar />
         <Routes>
@@ -60,6 +61,15 @@ function App() {
               <Suspense
                 fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
                 <Catering />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/holiday"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Holiday />
               </Suspense>
             }
           />

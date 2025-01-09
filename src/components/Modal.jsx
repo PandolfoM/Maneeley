@@ -89,14 +89,6 @@ function AppModal({
       title={title}
       onClose={() => setIsModalOpen(false)}>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-        <TextInput
-          variant="unstyled"
-          size="xs"
-          placeholder={currentMenuItem.name}
-          withAsterisk
-          classNames={classes}
-          {...form.getInputProps("name")}
-        />
         <FileInput
           variant="unstyled"
           size="xs"

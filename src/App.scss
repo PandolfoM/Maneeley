@@ -681,6 +681,7 @@ body {
 }
 
 .activeLink {
+  font-weight: 700;
   border: 0;
   outline: 0;
   cursor: pointer;
@@ -839,10 +840,23 @@ p {
     }
 
     &-content {
-      overflow-y: auto;
+      overflow-y: scroll;
       max-height: 35rem;
+      scrollbar-width: thin;
+      scrollbar-color: #2e2e2e transparent;
+
       &::-webkit-scrollbar {
-        display: none;
+        width: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        background: #2e2e2e00;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #2e2e2e80;
+        border-radius: 0px;
+        margin: 1rem;
+        padding: 1rem;
       }
     }
 
@@ -850,6 +864,7 @@ p {
       display: flex;
       justify-content: space-between;
       line-height: 2rem;
+      padding-right: 5px;
       a {
         cursor: pointer;
         white-space: nowrap;
@@ -890,4 +905,19 @@ p {
     color: $white;
   }
 }
+
+.mantine-Modal-inner {
+  width: fit-content !important;
+
+  @media only screen and (min-width: $mobile) {
+    width: 100% !important;
+  }
+  .mantine-Modal-header {
+    @media only screen and (min-width: $mobile) {
+      padding-top: 3rem !important;
+    }
+  }
+}
 // Utilities END
+
+// Scrollbar

@@ -25,7 +25,7 @@ function Catering() {
   }, []);
 
   return (
-    <Page flex fullHeight>
+    <Page flex>
       <div>
         <p style={{ whiteSpace: "break-spaces" }}>
           Whether you're looking for a full service dinner at an event venue of
