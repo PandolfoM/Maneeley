@@ -17,6 +17,7 @@ const Catering = lazy(() => import("./pages/Catering"));
 const Admin = lazy(() => import("./pages/Admin"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Banquets = lazy(() => import("./pages/Banquets"));
+const Corporate = lazy(() => import("./pages/Corporate"));
 const Weddings = lazy(() => import("./pages/Weddings"));
 const ImageGallery = lazy(() => import("./pages/Gallery"));
 const NewPassword = lazy(() => import("./pages/NewPassword"));
@@ -79,6 +80,15 @@ function App() {
               <Suspense
                 fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
                 <Banquets />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/corporate"
+            element={
+              <Suspense
+                fallback={<LoadingOverlay visible={true} overlayOpacity={1} />}>
+                <Corporate />
               </Suspense>
             }
           />

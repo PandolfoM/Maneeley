@@ -58,12 +58,35 @@ function DashboardMenusTab() {
     get();
   }, []);
 
+  const getMenuById = (id) => menus.find((menu) => menu.id === id);
+
   return (
     <>
-      <DashboardMenus classes={classes} name="Catering" data={menus[1]} />
-      <DashboardMenus classes={classes} name="Banquets" data={menus[0]} />
-      <DashboardMenus classes={classes} name="Wedding" data={menus[3]} />
-      <DashboardMenus classes={classes} name="Holiday" data={menus[2]} />
+      <DashboardMenus
+        classes={classes}
+        name="Catering"
+        data={getMenuById("catering")}
+      />
+      <DashboardMenus
+        classes={classes}
+        name="Banquets"
+        data={getMenuById("banquets")}
+      />
+      <DashboardMenus
+        classes={classes}
+        name="Wedding"
+        data={getMenuById("wedding")}
+      />
+      <DashboardMenus
+        classes={classes}
+        name="Holiday"
+        data={getMenuById("holiday")}
+      />
+      <DashboardMenus
+        classes={classes}
+        name="Corporate"
+        data={getMenuById("corporate")}
+      />
     </>
   );
 }
