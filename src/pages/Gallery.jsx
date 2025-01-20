@@ -29,7 +29,8 @@ function ImageGallery() {
     <Page id="gallery">
       <Separator title="Gallery" />
       <Text color="#bbb" fw="lighter" size="sm" align="center">
-        Photos were provided by Nick Rezendez Photography
+        Photos were provided by Jennifer Cardinal, All Star Weddings, Luke Wayne
+        & Nick Rezendez
       </Text>
       {gallery && (
         <ul className="gallery">

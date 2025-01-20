@@ -27,21 +27,24 @@ function Corporate() {
     <Page flex>
       <div>
         <p style={{ whiteSpace: "break-spaces" }}>
-          Planning an event - whether it's a birthday gathering or an elaborate
-          corporate event - is not an easy task.
+          Whether you're planning an office breakfast, a business lunch, or need
+          regular weekly corporate catering, Maneeley's is here to assist. We
+          are equipped to handle any size of event, from a small meeting of your
+          employees or clients to a customer or employee appreciation even with
+          hundreds of attendees. With a focus on freshness and creativity, we
+          are more than happy to customize a menu to fit your specific style,
+          needs, and budget.
         </p>
         <p>
-          Our team of planning experts is here to guide you through the process
-          of turning your vision into reality. Our attention to detail will
-          ensure that your social celebration will run smoothly and
-          successfully.
-        </p>
-        <p>
-          Our skilled, experienced chefs offer a wide variety of menus that
-          feature exquisite dishes for all occasions, and we are happy to
-          accommodate any dietary restrictions you or your guests may have. To
-          learn more about our fabulous food, we invite you to view our menu
-          selections.{" "}
+          We work closely with our clients to produce the best possible event
+          time and time again. Our client base for all day Corporate catering
+          clients continues to expand as we constantly raise our level of
+          service. Our relationships are built on trust, excellent service and
+          of course, amazing food. From continental breakfasts to hot breakfast
+          buffet, to hot and cold standard and gourmet lunch options, our
+          all-day corporate catering menus are sure to please. Our goal is to
+          assist your business in whatever capacity we can. Contact us today to
+          learn more.
         </p>
       </div>
       <Menus menus={menus} />

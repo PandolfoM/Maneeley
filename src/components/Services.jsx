@@ -47,7 +47,7 @@ const cardData = [
   },
   {
     id: 4,
-    title: "Corporate",
+    title: "Corporate Catering",
     subtite: "",
     button: "View Now",
     image: corporate,
