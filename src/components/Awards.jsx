@@ -5,49 +5,19 @@ import LazyImage from "./LazyImage";
 
 const awards = [
   {
-    title: "2013 Wedding Wire Couples' Choice Award",
+    title: "2025 Wedding Wire Couples' Choice Award",
     image:
-      "https://cdn1.weddingwire.com/img/badges/2013/badge-weddingawards_en_US.png",
+      "https://cdn1.weddingwire.com/img/badges/2025/badge-weddingawards_en_US.png",
   },
   {
-    title: "2014 Wedding Wire Couples' Choice Award",
+    title: "2024 Wedding Wire Couples' Choice Award",
     image:
-      "https://cdn1.weddingwire.com/img/badges/2014/badge-weddingawards_en_US.png",
+      "https://cdn1.weddingwire.com/img/badges/2024/badge-weddingawards_en_US.png",
   },
   {
-    title: "2015 Wedding Wire Couples' Choice Award",
+    title: "2023 Wedding Wire Couples' Choice Award",
     image:
-      "https://cdn1.weddingwire.com/img/badges/2015/badge-weddingawards_en_US.png",
-  },
-  {
-    title: "2016 Wedding Wire Couples' Choice Award",
-    image:
-      "https://cdn1.weddingwire.com/img/badges/2016/badge-weddingawards_en_US.png",
-  },
-  {
-    title: "2017 Wedding Wire Couples' Choice Award",
-    image:
-      "https://cdn1.weddingwire.com/img/badges/2017/badge-weddingawards_en_US.png",
-  },
-  {
-    title: "2018 Wedding Wire Couples' Choice Award",
-    image:
-      "https://cdn1.weddingwire.com/img/badges/2018/badge-weddingawards_en_US.png",
-  },
-  {
-    title: "2019 Wedding Wire Couples' Choice Award",
-    image:
-      "https://cdn1.weddingwire.com/img/badges/2019/badge-weddingawards_en_US.png",
-  },
-  {
-    title: "2020 Wedding Wire Couples' Choice Award",
-    image:
-      "https://cdn1.weddingwire.com/img/badges/2020/badge-weddingawards_en_US.png",
-  },
-  {
-    title: "2021 Wedding Wire Couples' Choice Award",
-    image:
-      "https://cdn1.weddingwire.com/img/badges/2021/badge-weddingawards_en_US.png",
+      "https://cdn1.weddingwire.com/img/badges/2023/badge-weddingawards_en_US.png",
   },
   {
     title: "2022 Wedding Wire Couples' Choice Award",
@@ -55,9 +25,49 @@ const awards = [
       "https://cdn1.weddingwire.com/img/badges/2022/badge-weddingawards_en_US.png",
   },
   {
-    title: "2023 Wedding Wire Couples' Choice Award",
+    title: "2021 Wedding Wire Couples' Choice Award",
     image:
-      "https://cdn1.weddingwire.com/img/badges/2023/badge-weddingawards_en_US.png",
+      "https://cdn1.weddingwire.com/img/badges/2021/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2020 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2020/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2019 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2019/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2018 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2018/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2017 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2017/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2016 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2016/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2015 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2015/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2014 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2014/badge-weddingawards_en_US.png",
+  },
+  {
+    title: "2013 Wedding Wire Couples' Choice Award",
+    image:
+      "https://cdn1.weddingwire.com/img/badges/2013/badge-weddingawards_en_US.png",
   },
 ];
 

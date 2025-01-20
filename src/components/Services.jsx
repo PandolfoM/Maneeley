@@ -4,6 +4,7 @@ import wedding from "../assets/wedding.webp";
 import banquet from "../assets/banquet.webp";
 import catering from "../assets/catering.webp";
 import holiday from "../assets/holiday.webp";
+import corporate from "../assets/corporate.webp";
 import Separator from "./Separator";
 
 const cardData = [
@@ -43,6 +44,14 @@ const cardData = [
     // route:
     //   "https://firebasestorage.googleapis.com/v0/b/maneeley.appspot.com/o/Holiday%2FHoliday_menu.pdf?alt=media&token=2a66eda8-5c42-4010-8c94-359833fc7ae5",
     route: "/holiday",
+  },
+  {
+    id: 4,
+    title: "Corporate Catering",
+    subtite: "",
+    button: "View Now",
+    image: corporate,
+    route: "/corporate",
   },
 ];
 

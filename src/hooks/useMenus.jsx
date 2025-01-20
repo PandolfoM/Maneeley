@@ -30,6 +30,7 @@ export default function useMenus() {
       const q = query(collection(db, "menus"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
+        console.log(doc.data());
         setMenus((current) => [...current, doc.data()]);
       });
     } catch (error) {

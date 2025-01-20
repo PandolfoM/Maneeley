@@ -217,7 +217,6 @@ body {
   &-imgs {
     justify-content: center;
     display: flex;
-    flex-direction: row-reverse;
     gap: 1rem;
     flex-wrap: wrap;
   }
@@ -798,6 +797,8 @@ p {
   font-weight: bold;
   box-sizing: border-box;
   overflow: hidden;
+  max-width: 1920px;
+  margin: auto;
 
   @media screen and (min-width: $tablet) {
     flex-wrap: nowrap;
