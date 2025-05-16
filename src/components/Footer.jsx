@@ -5,6 +5,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Footer() {
+  const year = new Date().getFullYear();
   return (
     <div className="footer">
       <hr />
@@ -28,7 +29,7 @@ function Footer() {
           {/* <Link to={"admin"}>Admin</Link> */}
         </p>
         <p className="copyright">
-          Copyright &copy; 2023 Maneeley's Banquet & Catering
+          Copyright &copy; {year} Maneeley's Banquet & Catering
         </p>
       </div>
     </div>
