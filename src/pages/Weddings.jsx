@@ -113,7 +113,7 @@ function Weddings() {
         <Separator title="Weddings" />
         <div className="wedding-content">
           <div>
-            <p style={{ marginTop: 0 }}>
+            {/* <p style={{ marginTop: 0 }}>
               The Grand Lodge at Maneeley's is a full service wedding & event
               venue in South Windsor, CT. Five acres of manicured grounds are a
               picture-perfect backdrop for your celebration. Maneeley's
@@ -131,6 +131,39 @@ function Weddings() {
               attention. Our team of expert chefs, lead by our Executive Chef
               Edgardo, will prepare a custom, mouthwatering menu for you and
               your guests to experience.
+            </p> */}
+            <p>
+              <b>Maneeley's Rustic Romantic Lodge</b> - The Perfect Setting for
+              Your Love Story
+            </p>
+            <p>
+              Nestled in the heart of South Windsor, Connecticut, Maneeley's
+              Rustic Romantic Lodge is a breathtaking venue designed to bring
+              your wedding dreams to life. With its warm and inviting
+              atmosphere, this picturesque lodge offers the perfect blend of
+              rustic charm and romantic elegance, creating unforgettable moments
+              for you and your guests.
+            </p>
+            <p>
+              Whether you're planning an intimate gathering or a grand
+              celebration, our venue is designed to accommodate weddings from
+              100 to 225 guests, ensuring the perfect space for your special
+              day. Surrounded by serene landscapes and timeless beauty, the
+              lodge features stunning wood-beam interiors, cozy fire pit , and
+              an enchanting ambiance that sets the stage for heartfelt
+              celebrations.
+            </p>
+            <p>
+              At Maneeley's, we offer exceptional service, delicious catering,
+              and a setting that feels like home—so you can relax and enjoy
+              every moment. Your wedding deserves a venue as special as your
+              love story, and we're honored to be part of it.{" "}
+            </p>
+            <p>
+              <b>
+                Maneeley's Rustic Romantic Lodge: Where memories are made and
+                forever begins.
+              </b>
             </p>
           </div>
           <aside>

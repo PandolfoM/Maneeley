@@ -214,12 +214,20 @@ body {
 // Awards
 .awards {
   padding-top: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
   &-imgs {
     justify-content: center;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+  }
+
+  img {
+    margin: auto;
+    display: flex;
   }
 }
 // Awards END

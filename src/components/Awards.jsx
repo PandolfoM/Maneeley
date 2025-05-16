@@ -2,6 +2,7 @@ import { Carousel } from "@mantine/carousel";
 import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
 import LazyImage from "./LazyImage";
+import bestOfHartford2025 from "../assets/bestOfHartford2025.webp";
 
 const awards = [
   {
@@ -76,6 +77,12 @@ function Awards() {
 
   return (
     <div className="awards">
+      <img
+        src={bestOfHartford2025}
+        alt="best of hartford 2025"
+        width={tablet ? "150px" : "100px"}
+        height={tablet ? "150px" : "100px"}
+      />
       {tablet ? (
         <Carousel
           mx="auto"
