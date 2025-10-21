@@ -60,7 +60,7 @@ function Services() {
   return (
     <section className="services" id="services">
       <Separator title={"Services"} />
-      {/* <Card
+      <Card
         title="Holiday Banquet Menu"
         subtitle="View our holiday banquet menu for this season's celebrations."
         button="View Now"
@@ -70,7 +70,7 @@ function Services() {
         route={
           "https://firebasestorage.googleapis.com/v0/b/maneeley.appspot.com/o/Holiday%2F283d5b80-86ca-47dc-aa6f-58f31b490d8d?alt=media&token=697d67a1-d5bd-4275-88ce-514830e3da16"
         }
-      /> */}
+      />
       <div className="services-cards">
         {cardData.map((i) => (
           <Card
