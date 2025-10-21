@@ -31,6 +31,13 @@ function Footer() {
         <p className="copyright">
           Copyright &copy; {year} Maneeley's Banquet & Catering
         </p>
+        <a
+          className="built-by"
+          href="https://mjpwebsolutions.com"
+          target="_blank"
+        >
+          Built by MJP Web Solutions
+        </a>
       </div>
     </div>
   );

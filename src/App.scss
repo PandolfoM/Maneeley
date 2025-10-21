@@ -585,14 +585,24 @@ body {
       margin-bottom: 0;
     }
 
-    p {
+    p,
+    a {
       font-size: 0.95rem;
       margin-top: 0.8rem;
       margin-bottom: 0;
     }
 
-    .copyright {
+    .copyright,
+    .built-by {
       font-size: 0.7rem;
+    }
+
+    .built-by {
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 }
