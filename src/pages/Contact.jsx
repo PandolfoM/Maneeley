@@ -111,7 +111,7 @@ function Contact() {
     try {
       const { first, last, email, phone, message } = form.values;
 
-      const res = await axios.post("http://localhost:3000/api/emails/send", {
+      const res = await axios.post("https://mjphub.com/api/emails/send", {
         from: "Maneeley's Contact Form",
         to: import.meta.env.VITE_SENDEMAIL,
         subject: "Maneeley's Contact Form",
