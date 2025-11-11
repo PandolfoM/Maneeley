@@ -113,7 +113,7 @@ function Contact() {
 
       const res = await axios.post("http://localhost:3000/api/emails/send", {
         from: "Maneeley's Contact Form",
-        to: "matt@pandolfo.com",
+        to: import.meta.env.VITE_SENDEMAIL,
         subject: "Maneeley's Contact Form",
         emailProps: {
           Name: `${first} ${last}`,
