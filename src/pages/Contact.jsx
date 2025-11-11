@@ -10,10 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import SubtleButton from "../components/SubtleButton";
 import Page from "../components/Page";
-import useUsers from "../hooks/useUsers";
 import { notifications } from "@mantine/notifications";
 import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 import { Body, Heading, Html, Text } from "@react-email/components";
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -72,7 +72,6 @@ const useStyles = createStyles(() => ({
 
 function Contact() {
   const { classes } = useStyles();
-  const { contactForm } = useUsers();
   const captchaRef = useRef(null);
 
   useEffect(() => {
@@ -111,24 +110,35 @@ function Contact() {
 
     try {
       const { first, last, email, phone, message } = form.values;
-      const res = await fetch("https://mjphub.mjphub.com/api/emails/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+
+      const res = await axios.post("http://localhost:3000/api/emails/send", {
+        from: "Maneeley's Contact Form",
+        to: "matt@pandolfo.com",
+        subject: "Maneeley's Contact Form",
+        emailProps: {
+          Name: `${first} ${last}`,
+          Email: email,
+          Phone: phone ? phone : "N/A",
+          Message: message,
         },
-        body: JSON.stringify({
-          from: "Maneeley's Contact Form",
-          to: "matt@pandolfo.com",
-          subject: "Maneeley's Contact Form",
-          react: ContactEmail(form.values),
-          text: `
-              - Name: ${first} ${last}
-              - Email: ${email}
-              - Phone: ${phone}
+        text: `
+            - Name: ${first} ${last}
+            - Email: ${email}
+            - Phone: ${phone}
               - Message: ${message}
             `,
-        }),
       });
+
+      if (res.status !== 200) {
+        return notifications.update({
+          id: "submit-noti",
+          title: "Error",
+          message: "There has been an error!",
+          color: "red",
+          icon: <FontAwesomeIcon icon={faX} />,
+        });
+      }
+
       form.reset();
       notifications.update({
         id: "submit-noti",
@@ -137,37 +147,17 @@ function Contact() {
         title: "Sent!",
         message: "Your message has been sent!",
       });
-      console.log(res);
     } catch (e) {
-      console.log(e);
       notifications.update({
+        id: "submit-noti",
         title: "Error",
         message: "There has been an error!",
         color: "red",
         icon: <FontAwesomeIcon icon={faX} />,
       });
+    } finally {
+      captchaRef.current.reset();
     }
-    // await contactForm(form.values)
-    //   .then(() => {
-    //     form.reset();
-    //     notifications.update({
-    //       id: "submit-noti",
-    //       color: "green",
-    //       icon: <FontAwesomeIcon icon={faCheck} />,
-    //       title: "Sent!",
-    //       message: "Your message has been sent!",
-    //     });
-    //   })
-    //   .catch((e) => {
-    //     notifications.show({
-    //       title: "Error",
-    //       message: "There has been an error!",
-    //       color: "red",
-    //       icon: <FontAwesomeIcon icon={faX} />,
-    //     });
-    //   });
-
-    captchaRef.current.reset();
   };
 
   return (
@@ -294,6 +284,15 @@ const ContactEmail = (data) => {
         <Text>Message: {message}</Text>
       </Body>
     </Html>
+    // <div>
+    //   <h2>Contact Form Submission</h2>
+    //   <p>
+    //     Name: {first} {last}
+    //   </p>
+    //   <p>Email: {email}</p>
+    //   <p>Phone: {phone ? phone : "N/A"}</p>
+    //   <p>Message: {message}</p>
+    // </div>
   );
 };
 

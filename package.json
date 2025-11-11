@@ -23,6 +23,7 @@
     "@mantine/modals": "^6.0.2",
     "@mantine/notifications": "^6.0.10",
     "@react-email/components": "0.5.7",
+    "axios": "^1.13.2",
     "browser-image-compression": "^2.0.2",
     "embla-carousel-autoplay": "^7.0.9",
     "embla-carousel-react": "^7.0.5",
