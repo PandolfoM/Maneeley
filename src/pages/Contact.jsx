@@ -114,7 +114,7 @@ function Contact() {
 
       const res = await axios.post("https://mjphub.com/api/emails/send", {
         from: "Maneeley's Contact Form",
-        to: `${import.meta.env.VITE_SENDEMAIL}`,
+        to: "sandy@maneeleys.com",
         subject: "Maneeley's Contact Form",
         emailProps: {
           Name: `${first} ${last}`,
