@@ -1,8 +1,7 @@
 import * as Yup from "yup";
 import { createStyles, Textarea, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import React, { useEffect, useRef, useState } from "react";
-import Reaptcha from "reaptcha";
+import React, { useEffect, useState } from "react";
 
 import Button from "../components/Button";
 import Separator from "../components/Separator";
@@ -12,8 +11,8 @@ import SubtleButton from "../components/SubtleButton";
 import Page from "../components/Page";
 import { notifications } from "@mantine/notifications";
 import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
-import { Body, Heading, Html, Text } from "@react-email/components";
 import axios from "axios";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -72,7 +71,7 @@ const useStyles = createStyles(() => ({
 
 function Contact() {
   const { classes } = useStyles();
-  const captchaRef = useRef(null);
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -90,15 +89,18 @@ function Contact() {
     validate: yupResolver(validationSchema),
   });
 
-  const verify = () => {
-    captchaRef.current.getResponse().then((res) => {
-      if (res) {
-        handleSubmit();
-      }
-    });
-  };
-
   const handleSubmit = async () => {
+    if (!captchaToken) {
+      notifications.show({
+        id: "captcha-noti",
+        title: "Captcha Required",
+        message: "Please enter the captcha to proceed.",
+        loading: false,
+        autoClose: false,
+      });
+      return;
+    }
+
     notifications.show({
       id: "submit-noti",
       title: "Sending",
@@ -110,11 +112,11 @@ function Contact() {
 
     try {
       const { first, last, email, phone, message } = form.values;
-      console.log(import.meta.env.VITE_SENDEMAIL);
 
-      const res = await axios.post("https://mjphub.com/api/emails/send", {
+      const res = await axios.post("http://localhost:3000/api/emails/send", {
         from: "Maneeley's Contact Form",
-        to: "sandy@maneeleys.com",
+        // to: "sandy@maneeleys.com",
+        to: "matt@pandolfo.com",
         subject: "Maneeley's Contact Form",
         emailProps: {
           Name: `${first} ${last}`,
@@ -128,6 +130,7 @@ function Contact() {
             - Phone: ${phone}
               - Message: ${message}
             `,
+        captchaToken,
       });
 
       if (res.status !== 200) {
@@ -156,8 +159,6 @@ function Contact() {
         color: "red",
         icon: <FontAwesomeIcon icon={faX} />,
       });
-    } finally {
-      captchaRef.current.reset();
     }
   };
 
@@ -166,7 +167,7 @@ function Contact() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          captchaRef.current.execute();
+          handleSubmit();
         }}
         className="contact-form contact-form-100"
       >
@@ -213,12 +214,9 @@ function Contact() {
           maxRows={5}
           {...form.getInputProps("message")}
         />
-        <Reaptcha
-          sitekey={import.meta.env.VITE_SITEKEY}
-          ref={captchaRef}
-          onVerify={verify}
-          size="invisible"
-          theme="dark"
+        <Turnstile
+          siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+          onSuccess={(token) => setCaptchaToken(token)}
         />
         <Button name={"Submit"} type="submit" />
       </form>
@@ -270,31 +268,5 @@ function Contact() {
     </Page>
   );
 }
-
-const ContactEmail = (data) => {
-  const { first, last, email, phone, message } = data;
-  return (
-    <Html>
-      <Body>
-        <Heading as="h2">Contact Form Submission</Heading>
-        <Text>
-          Name: {first} {last}
-        </Text>
-        <Text>Email: {email}</Text>
-        <Text>Phone: {phone ? phone : "N/A"}</Text>
-        <Text>Message: {message}</Text>
-      </Body>
-    </Html>
-    // <div>
-    //   <h2>Contact Form Submission</h2>
-    //   <p>
-    //     Name: {first} {last}
-    //   </p>
-    //   <p>Email: {email}</p>
-    //   <p>Phone: {phone ? phone : "N/A"}</p>
-    //   <p>Message: {message}</p>
-    // </div>
-  );
-};
 
 export default Contact;
