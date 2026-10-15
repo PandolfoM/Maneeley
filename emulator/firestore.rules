@@ -1,0 +1,9 @@
+rules_version = '2';
+// Emulator only: wide open for local testing. Never deploy this file.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

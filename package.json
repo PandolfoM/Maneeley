@@ -7,7 +7,10 @@
   "scripts": {
     "dev": "vite  --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:emulator": "vite --mode emulator --port 5174 --strictPort",
+    "emulators": "npx firebase-tools@15 --config emulator/firebase.json emulators:start --project demo-maneeley",
+    "emulators:seed": "node emulator/seed.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

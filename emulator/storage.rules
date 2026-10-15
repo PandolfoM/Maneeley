@@ -1,0 +1,9 @@
+rules_version = '2';
+// Emulator only: wide open for local testing. Never deploy this file.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if true;
+    }
+  }
+}
