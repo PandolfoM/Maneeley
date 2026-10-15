@@ -1,0 +1,14 @@
+{
+  "name": "backfill-gallery",
+  "private": true,
+  "type": "module",
+  "description": "One-off: add thumbnails and cache headers to existing gallery images",
+  "scripts": {
+    "dry-run": "node index.mjs --dry-run",
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.5.0",
+    "sharp": "^0.34.4"
+  }
+}

@@ -36,11 +36,12 @@ function ImageGallery() {
           {gallery.map((i) => (
             <li className="gallery-item" key={i.id}>
               <LazyImage
-                src={i.file}
+                src={i.thumb || i.file}
                 alt={i.name}
                 id={i.id}
                 width={i.width}
                 height={i.height}
+                reserveSpace
                 // style={{ maxWidth: "100%" }}
               />
             </li>
