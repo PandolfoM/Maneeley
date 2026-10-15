@@ -19,7 +19,7 @@ import { db } from "../firebase/db";
 import { functions } from "../firebase/functions";
 import sendEmail from "../utils/sendEmail";
 
-const ADMINLOGIN = "https://pandolfom.github.io/Maneeley/";
+const ADMINLOGIN = "https://maneeleys.com/admin";
 
 export default function useUsers() {
   const navigate = useNavigate();
