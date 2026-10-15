@@ -5,7 +5,8 @@ import {
   TextInput,
 } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
-import React, { useEffect, useState } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
+import React, { useEffect, useRef, useState } from "react";
 import useUsers from "../../hooks/useUsers";
 import AppButton from "../Button";
 import SubtleButton from "../SubtleButton";
@@ -64,6 +65,8 @@ function DashboardMenusTab() {
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const turnstileRef = useRef();
   const { getUsers, createUser, updateUser } = useUsers();
   const { classes } = useStyles({ edit });
 
@@ -104,9 +107,20 @@ function DashboardMenusTab() {
         <form
           className="dashboard-user-form"
           onSubmit={form.onSubmit(async (values) => {
+            // Sending the temporary-password email requires a captcha token.
+            if (values.customPassword && !captchaToken) {
+              setError("Please complete the captcha.");
+              return;
+            }
+
             setLoading(true);
             if (edit) {
-              const updateuser = await updateUser(values, users, setUsers);
+              const updateuser = await updateUser(
+                values,
+                users,
+                setUsers,
+                captchaToken
+              );
               if (updateuser) {
                 setError(updateuser);
               } else {
@@ -116,7 +130,12 @@ function DashboardMenusTab() {
               }
               setLoading(false);
             } else {
-              const createuser = await createUser(values, users, setUsers);
+              const createuser = await createUser(
+                values,
+                users,
+                setUsers,
+                captchaToken
+              );
               if (createuser) {
                 setError(createuser);
               } else {
@@ -125,6 +144,10 @@ function DashboardMenusTab() {
               }
               setLoading(false);
             }
+
+            // Tokens are single-use; get a fresh one for the next submit.
+            setCaptchaToken(null);
+            turnstileRef.current?.reset();
           })}>
           {edit && (
             <div className="dashboard-editmode">
@@ -184,6 +207,14 @@ function DashboardMenusTab() {
             label="Have user create their own password next time they login"
             {...form.getInputProps("customPassword", { type: "checkbox" })}
           />
+          {form.values.customPassword && (
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+              onSuccess={(token) => setCaptchaToken(token)}
+              onExpire={() => setCaptchaToken(null)}
+            />
+          )}
           <SubtleButton name={error} className="delete" />
           <AppButton name={"SUBMIT"} type="submit" loading={loading} />
         </form>

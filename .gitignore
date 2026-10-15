@@ -24,3 +24,6 @@ build
 *.njsproj
 *.sln
 *.sw?
+
+# Firebase admin credentials (used by scripts/)
+*service-account*.json

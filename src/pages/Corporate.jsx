@@ -1,27 +1,10 @@
-import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
-import { db } from "../firebase";
+import useMenuDoc from "../hooks/useMenuDoc";
 
 function Corporate() {
-  const [menus, setMenus] = useState([]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const unsub = async () => {
-      const docRef = doc(db, "menus", "Corporate");
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setMenus(docSnap.data());
-      } else {
-        return;
-      }
-    };
-
-    unsub();
-  }, []);
+  const menus = useMenuDoc("Corporate");
 
   return (
     <Page flex>

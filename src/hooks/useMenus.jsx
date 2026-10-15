@@ -1,4 +1,3 @@
-import { uuidv4 } from "@firebase/util";
 import {
   arrayRemove,
   arrayUnion,
@@ -18,7 +17,8 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { useContext } from "react";
-import { db, storage } from "../firebase";
+import { db } from "../firebase/db";
+import { storage } from "../firebase/storage";
 import { MenuContext } from "../context/MenuContext";
 
 export default function useMenus() {
@@ -30,7 +30,6 @@ export default function useMenus() {
       const q = query(collection(db, "menus"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        console.log(doc.data());
         setMenus((current) => [...current, doc.data()]);
       });
     } catch (error) {
@@ -55,7 +54,7 @@ export default function useMenus() {
 
   const addMenuItem = async ({ file }, category) => {
     for (let i = 0; i < file.length; i++) {
-      const id = uuidv4();
+      const id = crypto.randomUUID();
       const storageRef = ref(storage, `${category}/${id}`);
 
       await uploadBytes(storageRef, file[i]).then(() => {

@@ -1,4 +1,3 @@
-import { uuidv4 } from "@firebase/util";
 import {
   arrayRemove,
   arrayUnion,
@@ -16,7 +15,8 @@ import {
 } from "firebase/storage";
 import { useContext } from "react";
 import imageCompression from "browser-image-compression";
-import { db, storage } from "../firebase";
+import { db } from "../firebase/db";
+import { storage } from "../firebase/storage";
 import { MenuContext } from "../context/MenuContext";
 
 const compressionOptions = {
@@ -25,8 +25,39 @@ const compressionOptions = {
   useWebWorker: true,
 };
 
+// Smaller copy shown in the public gallery grid.
+const thumbnailOptions = {
+  maxSizeMB: 0.1,
+  maxWidthOrHeight: 800,
+  useWebWorker: true,
+};
+
+// Image paths are unique per upload and never overwritten, so browsers can
+// cache them indefinitely.
+const uploadMetadata = {
+  cacheControl: "public, max-age=31536000, immutable",
+};
+
+const uploadImage = async (path, file) => {
+  const storageRef = ref(storage, path);
+  await uploadBytes(storageRef, file, uploadMetadata);
+  return getDownloadURL(storageRef);
+};
+
+const getDimensions = (file) =>
+  new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve({ width: img.width, height: img.height });
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+
 export default function useImages() {
-  const { images, setImages } = useContext(MenuContext);
+  const { setImages } = useContext(MenuContext);
 
   const getImages = async () => {
     try {
@@ -43,60 +74,60 @@ export default function useImages() {
 
   const deleteImage = async (category, item) => {
     await deleteObject(ref(storage, `${category}/${item.id}`));
+    if (item.thumb) {
+      await deleteObject(ref(storage, `${category}/thumbs/${item.id}`)).catch(
+        () => {}
+      );
+    }
     await updateDoc(doc(db, "images", category), {
       images: arrayRemove(item),
     });
 
-    let newArr = [...images];
-    const categoryIndex = images.findIndex((i) => i.id === category);
-    const imageIndex = newArr[categoryIndex].images.findIndex(
-      (i) => i.id === item.id
+    setImages((current) =>
+      current.map((c) =>
+        c.id === category
+          ? { ...c, images: c.images.filter((i) => i.id !== item.id) }
+          : c
+      )
     );
-    newArr[categoryIndex].images.splice(imageIndex, 1);
-    setImages(newArr);
   };
 
   const addImage = async ({ file }, category) => {
     for (let i = 0; i < file.length; i++) {
-      const id = uuidv4();
-      const storageRef = ref(storage, `${category}/${id}`);
+      const id = crypto.randomUUID();
       const compressedFile = await imageCompression(
         file[i],
         compressionOptions
       );
-      await uploadBytes(storageRef, compressedFile).then(() => {
-        getDownloadURL(storageRef).then(async (downloadURL) => {
-          const img = new Image();
-          img.src = downloadURL;
+      const downloadURL = await uploadImage(`${category}/${id}`, compressedFile);
+      const { width, height } = await getDimensions(compressedFile);
 
-          img.onload = async () => {
-            try {
-              await updateDoc(doc(db, "images", category), {
-                images: arrayUnion({
-                  file: downloadURL,
-                  name: file[i].name.replace(/\.[^.]+/, ""),
-                  height: img.height,
-                  width: img.width,
-                  id,
-                }),
-              });
+      const item = {
+        file: downloadURL,
+        name: file[i].name.replace(/\.[^.]+/, ""),
+        height,
+        width,
+        id,
+      };
 
-              let newArr = [...images];
-              const imageIndex = images.findIndex((i) => category === i.id);
-              newArr[imageIndex].images.push({
-                file: downloadURL,
-                name: file[i].name.replace(/\.[^.]+/, ""),
-                height: img.height,
-                width: img.width,
-                id,
-              });
-              setImages(newArr);
-            } catch (e) {
-              return;
-            }
-          };
+      if (category === "Gallery") {
+        const thumbFile = await imageCompression(file[i], thumbnailOptions);
+        item.thumb = await uploadImage(`${category}/thumbs/${id}`, thumbFile);
+      }
+
+      try {
+        await updateDoc(doc(db, "images", category), {
+          images: arrayUnion(item),
         });
-      });
+
+        setImages((current) =>
+          current.map((c) =>
+            c.id === category ? { ...c, images: [...c.images, item] } : c
+          )
+        );
+      } catch (e) {
+        return;
+      }
     }
   };
 

@@ -5,7 +5,7 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import { ref } from "firebase/storage";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { storage } from "../firebase";
+import { storage } from "../firebase/storage";
 import useMenus from "../hooks/useMenus";
 import AppButton from "./Button";
 

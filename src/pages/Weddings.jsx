@@ -2,12 +2,12 @@ import { Carousel } from "@mantine/carousel";
 import { Text, createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
-import { doc, getDoc } from "firebase/firestore";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Page from "../components/Page";
 import Separator from "../components/Separator";
 import { MenuContext } from "../context/MenuContext";
-import { db } from "../firebase";
+import { dbLite, doc, getDoc } from "../firebase/dbLite";
+import useMenuDoc from "../hooks/useMenuDoc";
 import LazyImage from "../components/LazyImage";
 import Menus from "../components/Menus";
 
@@ -41,7 +41,7 @@ const useStyles = createStyles((theme, params) => ({
 }));
 
 function Weddings() {
-  const [menus, setMenus] = useState([]);
+  const menus = useMenuDoc("Wedding");
   const { slideshow, setSlideshow } = useContext(MenuContext);
   const { classes } = useStyles();
   const autoplay = useRef(Autoplay({ delay: 5000 }));
@@ -50,9 +50,8 @@ function Weddings() {
   const mobile = useMediaQuery("(min-width: 600px)");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const get = async () => {
-      const docRef = doc(db, "images", "Slideshow");
+      const docRef = doc(dbLite, "images", "Slideshow");
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -65,21 +64,6 @@ function Weddings() {
     !slideshow.id && get();
   }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const unsub = async () => {
-      const docRef = doc(db, "menus", "Wedding");
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setMenus(docSnap.data());
-      } else {
-        return;
-      }
-    };
-
-    unsub();
-  }, []);
 
   return (
     <Page>

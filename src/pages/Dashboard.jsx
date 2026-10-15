@@ -10,7 +10,7 @@ import {
 import Page from "../components/Page";
 import Separator from "../components/Separator";
 import SubtleButton from "../components/SubtleButton";
-import { auth } from "../firebase";
+import { auth } from "../firebase/auth";
 import useUsers from "../hooks/useUsers";
 
 function Dashboard() {
