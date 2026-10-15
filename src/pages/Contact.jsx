@@ -12,6 +12,7 @@ import Page from "../components/Page";
 import { notifications } from "@mantine/notifications";
 import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 import { Turnstile } from "@marsidev/react-turnstile";
+import sendEmail from "../utils/sendEmail";
 
 const validationSchema = Yup.object().shape({
   first: Yup.string()
@@ -112,27 +113,23 @@ function Contact() {
     try {
       const { first, last, email, phone, message } = form.values;
 
-      const res = await fetch("https://mjphub.com/api/emails/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          from: "Maneeley's Contact Form",
-          to: "sandy@maneeleys.com",
-          subject: "Maneeley's Contact Form",
-          emailProps: {
-            Name: `${first} ${last}`,
-            Email: email,
-            Phone: phone ? phone : "N/A",
-            Message: message,
-          },
-          text: `
+      const res = await sendEmail({
+        from: "Maneeley's Contact Form",
+        to: "sandy@maneeleys.com",
+        subject: "Maneeley's Contact Form",
+        emailProps: {
+          Name: `${first} ${last}`,
+          Email: email,
+          Phone: phone ? phone : "N/A",
+          Message: message,
+        },
+        text: `
             - Name: ${first} ${last}
             - Email: ${email}
             - Phone: ${phone}
               - Message: ${message}
             `,
-          captchaToken,
-        }),
+        captchaToken,
       });
 
       if (res.status !== 200) {

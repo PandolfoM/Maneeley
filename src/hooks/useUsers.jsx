@@ -1,7 +1,6 @@
 import { modals } from "@mantine/modals";
 import { signOut, updatePassword } from "firebase/auth";
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -18,6 +17,7 @@ import { AuthContext } from "../auth/context";
 import { auth } from "../firebase/auth";
 import { db } from "../firebase/db";
 import { functions } from "../firebase/functions";
+import sendEmail from "../utils/sendEmail";
 
 const ADMINLOGIN = "https://pandolfom.github.io/Maneeley/";
 
@@ -68,25 +68,34 @@ export default function useUsers() {
     }
   };
 
-  const createUser = async (data, users, setUsers) => {
+  // Emails the user their temporary password. Returns true if it was sent.
+  const sendTempPasswordEmail = async (
+    to,
+    subject,
+    text,
+    emailProps,
+    captchaToken
+  ) => {
+    try {
+      const res = await sendEmail({
+        from: "Maneeley's Banquet & Catering",
+        to,
+        subject,
+        emailProps,
+        text,
+        captchaToken,
+      });
+      return res.ok;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  const createUser = async (data, users, setUsers, captchaToken) => {
     const createUserHttp = httpsCallable(functions, "createUser");
     const createUserData = await createUserHttp(data);
     if (createUserData.data?.errorInfo) {
       return createUserData.data.errorInfo.message;
-    }
-
-    if (data.customPassword) {
-      await addDoc(collection(db, "mail"), {
-        to: data.email,
-        message: {
-          subject: "Account Activated",
-          text: `Your account is waiting to for you! Login at ${ADMINLOGIN} with your temporary password "${createUserData.data.tempPass}"`,
-          html: `
-          <h1>Your account is waiting for you!</h1>
-          <p>Log into the <a href="${ADMINLOGIN}">dashboard</a> with your temporary password "${createUserData.data.tempPass}"</p>
-          `,
-        },
-      });
     }
 
     await setDoc(doc(db, "users", createUserData.data.uid), {
@@ -104,27 +113,29 @@ export default function useUsers() {
       tempPassword: data.customPassword,
     });
     setUsers(newArr);
+
+    if (data.customPassword) {
+      const sent = await sendTempPasswordEmail(
+        data.email,
+        "Account Activated",
+        `Your account is waiting to for you! Login at ${ADMINLOGIN} with your temporary password "${createUserData.data.tempPass}"`,
+        {
+          "Your account is waiting for you": `Log into the dashboard at ${ADMINLOGIN}`,
+          "Temporary password": createUserData.data.tempPass,
+        },
+        captchaToken
+      );
+      if (!sent) {
+        return "User created, but the login email could not be sent.";
+      }
+    }
   };
 
-  const updateUser = async (data, users, setUsers) => {
+  const updateUser = async (data, users, setUsers, captchaToken) => {
     const updateUserHttp = httpsCallable(functions, "updateUser");
     const updateUserData = await updateUserHttp(data);
     if (updateUserData.data?.errorInfo) {
       return updateUserData.data.errorInfo.message;
-    }
-
-    if (data.customPassword) {
-      await addDoc(collection(db, "mail"), {
-        to: data.email,
-        message: {
-          subject: "Password Reset",
-          text: `Your password has been reset! Login at ${ADMINLOGIN} with your temporary password '${updateUserData.data.tempPass}' to create a new one.`,
-          html: `
-          <h1>Your password has been reset!</h1>
-          <p>Log into the <a href="${ADMINLOGIN}">dashboard</a> with your temporary password "${updateUserData.data.tempPass}" to create a new one.</p>
-          `,
-        },
-      });
     }
 
     await updateDoc(doc(db, "users", updateUserData.data.uid), {
@@ -142,6 +153,22 @@ export default function useUsers() {
       tempPassword: data.customPassword,
     };
     setUsers(newArr);
+
+    if (data.customPassword) {
+      const sent = await sendTempPasswordEmail(
+        data.email,
+        "Password Reset",
+        `Your password has been reset! Login at ${ADMINLOGIN} with your temporary password '${updateUserData.data.tempPass}' to create a new one.`,
+        {
+          "Your password has been reset": `Log into the dashboard at ${ADMINLOGIN}`,
+          "Temporary password": `${updateUserData.data.tempPass} (you'll be asked to create a new one)`,
+        },
+        captchaToken
+      );
+      if (!sent) {
+        return "Password reset, but the email could not be sent.";
+      }
+    }
   };
 
   const resetPassword = async (password, user, tempPassword) => {
