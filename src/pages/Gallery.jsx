@@ -1,8 +1,7 @@
-import { doc, getDoc } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Page from "../components/Page";
 import Separator from "../components/Separator";
-import { db } from "../firebase";
+import { dbLite, doc, getDoc } from "../firebase/dbLite";
 import LazyImage from "../components/LazyImage";
 import { MenuContext } from "../context/MenuContext";
 import { Text } from "@mantine/core";
@@ -14,7 +13,7 @@ function ImageGallery() {
     window.scrollTo(0, 0);
 
     const get = async () => {
-      const docRef = doc(db, "images", "Gallery");
+      const docRef = doc(dbLite, "images", "Gallery");
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {

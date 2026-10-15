@@ -9,7 +9,7 @@ import { AuthContext } from "../auth/context";
 import Button from "../components/Button";
 import Page from "../components/Page";
 import Separator from "../components/Separator";
-import { auth } from "../firebase";
+import { auth } from "../firebase/auth";
 import useUsers from "../hooks/useUsers";
 import SubtleButton from "../components/SubtleButton";
 

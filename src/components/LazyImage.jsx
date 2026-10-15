@@ -1,34 +1,30 @@
 import { LoadingOverlay } from "@mantine/core";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function LazyImage(props) {
   const [inView, setInView] = useState(false);
-  const ref = useRef();
+  // Callback ref: the overlay's DOM node may mount after the first effect runs.
+  const [node, setNode] = useState(null);
 
-  let callback = (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+  useEffect(() => {
+    if (!node || inView) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
         setInView(true);
       }
     });
-  };
-
-  useEffect(() => {
-    let observer = new IntersectionObserver(callback);
-
-    if (ref?.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(node);
 
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [node, inView]);
 
   return inView ? (
-    <img ref={ref} {...props} />
+    <img decoding="async" {...props} />
   ) : (
-    <LoadingOverlay ref={ref} visible={true} />
+    <LoadingOverlay ref={setNode} visible={true} />
   );
 }
 

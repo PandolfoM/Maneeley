@@ -15,7 +15,9 @@ import { httpsCallable } from "firebase/functions";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/context";
-import { auth, db, functions } from "../firebase";
+import { auth } from "../firebase/auth";
+import { db } from "../firebase/db";
+import { functions } from "../firebase/functions";
 
 const ADMINLOGIN = "https://pandolfom.github.io/Maneeley/";
 

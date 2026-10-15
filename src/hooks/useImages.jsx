@@ -1,4 +1,3 @@
-import { uuidv4 } from "@firebase/util";
 import {
   arrayRemove,
   arrayUnion,
@@ -16,7 +15,8 @@ import {
 } from "firebase/storage";
 import { useContext } from "react";
 import imageCompression from "browser-image-compression";
-import { db, storage } from "../firebase";
+import { db } from "../firebase/db";
+import { storage } from "../firebase/storage";
 import { MenuContext } from "../context/MenuContext";
 
 const compressionOptions = {
@@ -58,7 +58,7 @@ export default function useImages() {
 
   const addImage = async ({ file }, category) => {
     for (let i = 0; i < file.length; i++) {
-      const id = uuidv4();
+      const id = crypto.randomUUID();
       const storageRef = ref(storage, `${category}/${id}`);
       const compressedFile = await imageCompression(
         file[i],

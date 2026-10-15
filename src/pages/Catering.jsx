@@ -1,28 +1,11 @@
-import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Menus from "../components/Menus";
 import Page from "../components/Page";
-import { db } from "../firebase";
+import useMenuDoc from "../hooks/useMenuDoc";
 
 function Catering() {
-  const [menus, setMenus] = useState([]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const unsub = async () => {
-      const docRef = doc(db, "menus", "Catering");
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setMenus(docSnap.data());
-      } else {
-        return;
-      }
-    };
-
-    unsub();
-  }, []);
+  const menus = useMenuDoc("Catering");
 
   return (
     <Page flex>
