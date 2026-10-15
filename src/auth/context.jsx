@@ -4,6 +4,8 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
+  // False until any persisted session has been restored.
+  const [authReady, setAuthReady] = useState(false);
 
   useEffect(() => {
     // Load Firebase Auth after first paint so it stays out of the main bundle,
@@ -11,9 +13,11 @@ export const AuthContextProvider = ({ children }) => {
     let cancelled = false;
     import("../firebase/auth").then(async ({ auth }) => {
       await auth.authStateReady();
-      if (!cancelled && auth.currentUser) {
+      if (cancelled) return;
+      if (auth.currentUser) {
         setCurrentUser(auth.currentUser);
       }
+      setAuthReady(true);
     });
 
     return () => {
@@ -22,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, authReady }}>
       {children}
     </AuthContext.Provider>
   );

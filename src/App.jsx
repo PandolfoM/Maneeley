@@ -23,7 +23,11 @@ const ImageGallery = lazy(() => import("./pages/Gallery"));
 const NewPassword = lazy(() => import("./pages/NewPassword"));
 
 const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, authReady } = useContext(AuthContext);
+
+  if (!currentUser && !authReady) {
+    return <LoadingOverlay visible={true} overlayOpacity={1} />;
+  }
 
   if (!currentUser) {
     return <Navigate to="/" />;
